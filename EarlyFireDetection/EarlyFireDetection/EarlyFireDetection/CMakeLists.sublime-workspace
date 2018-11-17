@@ -1,0 +1,321 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"oen",
+				"OpenCV"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				":comp",
+				"GitGutter: Compare Against Origin"
+			],
+			[
+				":time",
+				"Snippet: time"
+			],
+			[
+				":code",
+				"Snippet: codeJamStarter"
+			],
+			[
+				":codec",
+				"Snippet: codeChefStarter"
+			],
+			[
+				":insta",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: List Packages"
+			],
+			[
+				"pa",
+				"Package Control: Discover Packages"
+			],
+			[
+				"cmake",
+				"CMakeBuilder: New Project"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Build With: C++ Single File - Run"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 137.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/kspark/.cache/nvim/dein/repos/github.com/autozimu/LanguageClient-neovim/INSTALL.md",
+		"/Users/kspark/.vimrc",
+		"/Users/kspark/.vimrc_backup_",
+		"/Users/kspark/Documents/GitHub/opencv-haar-classifier-fire-detection/README.md",
+		"/Users/kspark/Desktop/opencv_compile.txt",
+		"/Users/kspark/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/kspark/Library/Application Support/Sublime Text 3/Packages/C++YouCompleteMe/C++YouCompleteMe.sublime-settings",
+		"/Users/kspark/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/kspark/Documents/GitHub/range-v3/example/.clang-format",
+		"/Volumes/[C] Windows 10.hidden/temp/Remove-Horizon/CMakeLists.txt",
+		"/Users/kspark/Documents/GitHub/Remove-Horizon/CMakeLists.txt",
+		"/Users/kspark/Desktop/mycompile.txt",
+		"/Volumes/[C] Windows 10.hidden/Users/kspark/openblas_prebuilt/quickbuild.win64",
+		"/Users/kspark/Documents/GitHub/vcpkg/ports/openblas/CONTROL",
+		"/Users/kspark/Documents/GitHub/vcpkg/ports/openblas/port.cmake",
+		"/Users/kspark/Documents/GitHub/openblas-prebuilt/README.md",
+		"/Volumes/[C] Windows 10.hidden/Windows/System32/OpenSSH/sshd_config_default",
+		"/Users/kspark/Documents/GitHub/vcpkg/openblas_prebuilt/port.cmake",
+		"/Users/kspark/Library/Application Support/Sublime Text 3/Packages/User/C++YouCompleteMe.sublime-settings",
+		"/Users/kspark/Library/Application Support/Sublime Text 3/Packages/User/sublime-ycmd.sublime-settings",
+		"/Users/kspark/Documents/GitHub/opencv/mycompile.txt",
+		"/Users/kspark/Downloads/xianyi-OpenBLAS-fd8d186/README.md",
+		"/Users/kspark/Documents/Projects/QL-EOSS3-SW/App/ArduCAM-Example/GCC_Project_eclipse/CMakeLists.txt",
+		"/Users/kspark/Documents/GitHub/Remove-Horizon/remove_horizon.cpp"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.CppYCM.10":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.11":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.15":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.16":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.18":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.2":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.20":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.21":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.22":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.3":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.4":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.5":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.6":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.7":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.8":
+	{
+		"height": 0.0
+	},
+	"output.CppYCM.9":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 108.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 214.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "CMakeLists.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 281.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

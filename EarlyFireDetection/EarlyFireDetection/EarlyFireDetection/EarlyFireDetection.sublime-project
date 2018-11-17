@@ -1,0 +1,18 @@
+{
+    "build_systems":
+    [
+    ],
+    "folders":
+    [
+        {
+            "path": "."
+        }
+    ],
+    "settings":
+    {
+        "cmake":
+        {
+            "build_folder": "${project_path}/build"
+        }
+    }
+}

@@ -2,6 +2,7 @@
 #define MOTIONDETECTION_H
 
 #include "opencv/cv.h"
+#include "opencv2/videoio.hpp"
 #include "opencv/highgui.h"
 
 /* Motion Detection
@@ -13,63 +14,45 @@
 */
 class motionDetection {
 private:
-	IplImage** mpFrame;
-	IplImage* m_imgBackgroundModel;    // background model
-	IplImage* m_imgStandardDeviation;  // standard deviation
-	IplImage* m_imgThreshold;
-
-	IplImage* mSum;
-	IplImage* mTmp;
-	IplImage* mTmp8U;
-	IplImage* mFrame;
-	const int mFrameNumber;            // the number of frame for calculate background model
-	int mCount;
-	CvSize mSize;                      // image size
+  std::vector<cv::Mat> _vec_frame;
+  cv::Mat m_imgBackgroundModel;    // background model
 
 
-	/* avoid copy & assignment */
-	motionDetection(const motionDetection & bgs);
-	void operator = (const motionDetection & bgs);
+  const int frameNumber;            // the number of frame for calculate background model
+  int _count;
+  CvSize _size;                      // image size
 
-	/* tool function */
-	void accFrameFromVideo(CvCapture* capture);
-	void averageFrame(void);
+
+  /* avoid copy & assignment */
+  motionDetection(const motionDetection &bgs);
+  void operator=(const motionDetection &bgs);
 
 public:
 
-	/*
-	* constructor
-	* frameNumber: the number of frame that want to be processing as background model
-	* frameSize: the size o frame
-	*/
-	motionDetection(const int frameNumber, const CvSize frameSize);
+  /*
+  * constructor
+  * frameNumber: the number of frame that want to be processing as background model
+  * frameSize: the size o frame
+  */
+  motionDetection(const int frame_count, const CvSize frameSize);
 
-	/* destructor */
-	~motionDetection();
+  /* destructor */
+  ~motionDetection();
 
-	/* Need pass capture  ptr */
-	IplImage* getBackgroundModel(CvCapture* capture);
+  /* Need pass capture  ptr */
+  void getBackgroundModel(cv::VideoCapture &capture, cv::Mat &ret);
 
-	IplImage* getStandardDeviationFrame(void);
-	IplImage* getThreshold(void);
+  void getStandardDeviationFrame(cv::Mat &ret);
 
-	/* one channel & uchar only => imgDiff, imgThreshold, mask
-	* the mask always needed to be reflash( cvZero(mask) ) first!!
-	*/
-	void backgroundSubtraction(const IplImage* imgDiff, const IplImage* imgThreshold, IplImage* mask);
-	/* th = th * coefficient */
-	void coefficientThreshold(IplImage* imgThreshold, const int coef);
-	/* Negative processing, convert darkest areas to lightest and lightest to darkest */
-	void maskNegative(IplImage* img);
+  /* one channel & uchar only => imgDiff, imgThreshold, mask
+  * the mask always needed to be reflash( cvZero(mask) ) first!!
+  */
+  void backgroundSubtraction(const cv::Mat &imgDiff, const cv::Mat &imgThreshold, cv::Mat &mask);
+  /* th = th * coefficient */
+  void coefficientThreshold(cv::Mat &imgThreshold, int coef);
+  /* Negative processing, convert darkest areas to lightest and lightest to darkest */
+  void maskNegative(cv::Mat &img);
 
-
-
-	/* compare with cvAbsDiff()
-	* Result: the result is as same as the cvAbsDiff()
-	* one channel & 8U(unsigned char) only
-	*/
-	void tcAbsDiff(const IplImage* imgGray, const IplImage* imgBackgroundModel, IplImage* imgDiff);
 };
-
 
 #endif
