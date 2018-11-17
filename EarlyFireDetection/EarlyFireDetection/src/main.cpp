@@ -9,28 +9,19 @@
 
 /* OpenCV Library */
 #include <opencv/cv.hpp>
-#include <opencv2/core.hpp>     // Basic OpenCV structures (cv::Mat, Scalar)
-#include <opencv2/highgui.hpp>  // OpenCV window I/O
-#include <opencv2/imgproc.hpp>
-#include <opencv2/objdetect.hpp>
-#include <opencv2/videoio.hpp>
 
 /* Self-Developed Library */
-#include "colorModel.h"
 #include "ds.h"
 //#include "fileStream.h"
-#include "fireBehaviorAnalysis.h"
 #include "motionDetection.h"
 #include "opticalFlowTool.h"
+#include "colorModel.h"
+#include "fireBehaviorAnalysis.h"
 
 /* C-PlusPlus Library */
-#include <iostream>
 
 /* STL Library */
-#include <deque>
 #include <list>
-#include <map>
-#include <vector>
 
 /* Switch */
 #define ON (-1)
@@ -95,8 +86,8 @@ namespace {
 std::string mat2str(cv::Mat &mat) {
   std::string r;
   int type = mat.type();
-  uchar depth = type & CV_MAT_DEPTH_MASK;
-  uchar chans = 1 + (type >> CV_CN_SHIFT);
+  auto depth = static_cast<uchar>(type & CV_MAT_DEPTH_MASK);
+  auto chans = static_cast<uchar>(1 + (type >> CV_CN_SHIFT));
 
   switch (depth) {
   case CV_8U:r = "8U";
@@ -324,13 +315,13 @@ void matchCentroid(cv::Mat &imgCentriod,
                    int currentFrame,
                    const int thrdcp,
                    const unsigned int pwindows) {
-  static CvRect rectFire = cvRect(0, 0, 0, 0);
+  static cv::Rect rectFire = cvRect(0, 0, 0, 0);
 
   listCentroid.remove_if([&mulMapOFRect, &pwindows, &thrdcp, &imgFireAlarm, &currentFrame](Centroid &centre) {
     bool out = false;
     /* visit mulMapOFRect between range [itlow,itup) */
     for (auto &aRect : mulMapOFRect) {
-      const CvRect &rect = (aRect).second.rect;
+      const cv::Rect &rect = (aRect).second.rect;
       /* matched */
       if (centre.centroid.y >= rect.y && (rect.x + rect.width) >= centre.centroid.x
           && (rect.y + rect.height) >= centre.centroid.y) {

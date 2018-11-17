@@ -34,7 +34,7 @@ public:
   * frameNumber: the number of frame that want to be processing as background model
   * frameSize: the size o frame
   */
-  motionDetection(const int frame_count, const CvSize frameSize);
+  motionDetection(const int &frame_count, const cv::Size &frameSize);
 
   /* destructor */
   ~motionDetection();

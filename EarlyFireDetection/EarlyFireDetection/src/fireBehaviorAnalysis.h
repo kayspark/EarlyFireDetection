@@ -8,9 +8,9 @@
 #include "opencv/cv.h"
 
 /* Counting the foldback point at each directions */
-void foldbackPoint(const std::vector<CvRect> &vecRect, DirectionsCount &count);
+void foldbackPoint(const std::vector<cv::Rect> &vecRect, DirectionsCount &count);
 
 /* Analysis the rect information */
-bool judgeDirectionsMotion(const std::vector<CvRect> &vecRect, CvRect &rectFire);
+bool judgeDirectionsMotion(const std::vector<cv::Rect> &vecRect, cv::Rect &rectFire);
 
 #endif

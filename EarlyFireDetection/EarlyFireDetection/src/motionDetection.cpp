@@ -3,7 +3,7 @@
 #include <iostream>
 
 /* Create buffer for image */
-motionDetection::motionDetection(const int frame_count, const CvSize frameSize)
+motionDetection::motionDetection(const int &frame_count, const cv::Size &frameSize)
     : frameNumber(frame_count), _count(0), _size(frameSize) {
   // create n IplImage pointer, and assign for _vec_frame
   _vec_frame.reserve((unsigned long) frameNumber);
