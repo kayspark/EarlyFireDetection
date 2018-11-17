@@ -16,17 +16,17 @@ find_package(OpenCV REQUIRED)
 include_directories(. ${OpenCV_INCLUDE_DIRS})
 
 add_executable(EarlyFireDetection
-        colorModel.cpp
-        colorModel.h
-        ds.cpp
-        ds.h
-        fireBehaviorAnalysis.cpp
-        fireBehaviorAnalysis.h
-        main.cpp
-        motionDetection.cpp
-        motionDetection.h
-        opticalFlowTool.cpp
-        opticalFlowTool.h)
+        src/colorModel.cpp
+        src/colorModel.h
+        src/ds.cpp
+        src/ds.h
+        src/fireBehaviorAnalysis.cpp
+        src/fireBehaviorAnalysis.h
+        src/main.cpp
+        src/motionDetection.cpp
+        src/motionDetection.h
+        src/opticalFlowTool.cpp
+        src/opticalFlowTool.h)
 
 
 target_link_libraries(EarlyFireDetection ${OpenCV_LIBS})
