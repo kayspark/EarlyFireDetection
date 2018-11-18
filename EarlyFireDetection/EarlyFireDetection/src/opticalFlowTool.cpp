@@ -4,10 +4,10 @@
 #include "opencv2/imgproc.hpp"
 
 void drawArrow(cv::Mat &imgDisplay,
-               const std::array<cv::Point2f, MAX_CORNER> &featuresPrev,
-               const std::array<cv::Point2f, MAX_CORNER> &featuresCurr,
-               const int cornerCount,
-               const std::array<char, MAX_CORNER> &featureFound) {
+               const std::vector<cv::Point2f> &featuresPrev,
+               const std::vector<cv::Point2f> &featuresCurr,
+               int cornerCount,
+               const std::vector<uchar> &featureFound) {
   static int i, lineThickness = 1;
   static cv::Scalar lineColor = CV_RGB(100, 200, 250);
   static double angle, hypotenuse, tmpCOS, tmpSIN;
@@ -66,12 +66,12 @@ the number of contour points
 int getContourFeatures(cv::Mat &img,
                        cv::Mat &imgDisplayFireRegion,
                        std::vector<std::vector<cv::Point>> &contours,
-                       std::vector<OFRect> &vecOFRect,
-                       const RectThrd &trd,
-                       std::array<cv::Point2f, MAX_CORNER> &featuresPrev,
+                       std::vector<OFRect> &vecOFRect, const RectThrd &trd, std::vector<cv::Point2f> &featuresPrev,
                        std::vector<cv::Vec4i> &hierachy) {
+  //TODO: seems need to reset
+  //featuresPrev.clear();
   static unsigned int countCtrP;
-  int ContourFeaturePointCount = 0, idxFeature = 0;
+  auto ContourFeaturePointCount = 0;
   /* thresholding on connected component */
   for (int index = 0; index < contours.size(); index++) {  // contours-based visiting
     /* Recting the Contour with smallest rectangle */
@@ -96,9 +96,11 @@ int getContourFeatures(cv::Mat &img,
 
       /* access points on each contours */
       // printf(" (%d,%d)\n", p->x, p->y );
-      for (const auto &p : contours[index]) {
-        featuresPrev[idxFeature].x = static_cast<float>(p.x);
-        featuresPrev[idxFeature++].y = static_cast<float>(p.y);
+
+      for (int i = 0; i < contours[index].size(); i++) {
+        //const auto &p : contours[index]) {
+        const auto &p = contours[index][i];
+        featuresPrev[i] = p;
         ++countCtrP;
         ++ContourFeaturePointCount;
       }
@@ -124,9 +126,9 @@ motion vector information)
 */
 void assignFeaturePoints(std::multimap<int, OFRect> &mulMapOFRect,
                          std::vector<OFRect> &vecOFRect,
-                         std::array<char, MAX_CORNER> &status,
-                         std::array<cv::Point2f, MAX_CORNER> &featuresPrev,
-                         std::array<cv::Point2f, MAX_CORNER> &featuresCurr) {
+                         std::vector<uchar> &status,
+                         std::vector<cv::Point2f> &featuresPrev,
+                         std::vector<cv::Point2f> &featuresCurr) {
   // visit each ofrect in vecOFRect
   for (auto &aRect : vecOFRect) {
     int i = 0;  // feature point index

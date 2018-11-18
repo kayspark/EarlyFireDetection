@@ -19,7 +19,7 @@ void checkByRGB(const cv::Mat &imgSrc, cv::Mat &mask) {
   static auto dataMask = reinterpret_cast<uchar *>(mask.data);
 
   static int i = 0, j = 0, k = 0, idx = 0;
-  for (i = 0; i < imgSrc.cols; ++i) {
+  for (i = 0; i < imgSrc.rows; ++i) {
     for (j = 0, k = 0; j < step; j += 3, ++k) {
       idx = i * step + j;
       if (dataSrc[idx + 2] > RT && dataSrc[idx + 2] >= dataSrc[idx + 1]
@@ -48,7 +48,7 @@ void checkByRGB(const cv::Mat &imgSrc, const cv::Mat &maskMotion, cv::Mat &maskR
   static auto dataMaskMotion = reinterpret_cast<uchar *>(maskMotion.data);
 
   static int i = 0, j = 0, k = 0, idx = 0;
-  for (i = 0; i < imgSrc.cols; ++i) {
+  for (i = 0; i < imgSrc.rows; ++i) {
     for (j = 0, k = 0; j < step; j += 3, ++k) {
       idx = i * step + j;
       if (dataMaskMotion[i * stepMask + k] == 255 && dataSrc[idx + 2] > RT && dataSrc[idx + 2] >= dataSrc[idx + 1]
@@ -76,25 +76,24 @@ void RGB2HSIMask(const cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB) {
   static const double DIV180PI = 180 / CV_PI;                 // (180 / PI)
 
   // Temp buffer for H S I spectrum
-  static cv::Mat imgTemp = cv::Mat(imgRGB);
-  imgTemp.convertTo(imgTemp, CV_64FC3);  // every times
+  static cv::Mat imgTemp(imgRGB.size(), CV_64FC3, cv::Scalar());  // every times
 
   static auto step = static_cast<int>(imgTemp.step / sizeof(double));
 
   static auto dataTmp = reinterpret_cast<double *>(imgTemp.data);  // for easy access tmp data
   static auto dataHSI = reinterpret_cast<double *>(imgHSI.data);  // for easy access hsi data
-  static auto dataRGB = reinterpret_cast<uchar *>(imgRGB.data);  // for easy access rgb data
+  static auto dataRGB = imgRGB.data;  // for easy access rgb data
 
   // mask
   static const int stepMaskRGB = maskRGB.step / sizeof(uchar);
-  static auto dataMaskRGB = reinterpret_cast<uchar *>(maskRGB.data);
+  static auto dataMaskRGB = maskRGB.data;
 
   // idx i, j, idx
   static int i = 0, j = 0, k = 0, idx = 0;
   static double tmp1 = 0.0, tmp2 = 0.0, x = 0.0, theta = 0.0, tmpAdd = 0.0;
 
   // normalize rgb to [0,1]
-  for (i = 0; i < imgRGB.cols; ++i) {
+  for (i = 0; i < imgRGB.rows; ++i) {
     for (j = 0, k = 0; j < step; j += 3, ++k) {  // loop times = width
       if (dataMaskRGB[i * stepMaskRGB + k] == 255) {  // if the pixel is moving object
         idx = i * step + j;
@@ -105,7 +104,7 @@ void RGB2HSIMask(const cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB) {
     }
   }
 
-  for (i = 0; i < imgRGB.cols; ++i) {
+  for (i = 0; i < imgRGB.rows; ++i) {
     for (j = 0, k = 0; j < step; j += 3, ++k) {
       if (dataMaskRGB[i * stepMaskRGB + k] == 255) {  // if the pixel is moving object
         idx = i * step + j;

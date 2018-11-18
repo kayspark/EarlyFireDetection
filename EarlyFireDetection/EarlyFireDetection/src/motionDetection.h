@@ -20,7 +20,7 @@ private:
 
   const int frameNumber;            // the number of frame for calculate background model
   int _count;
-  CvSize _size;                      // image size
+  cv::Size _size;                      // image size
 
 
   /* avoid copy & assignment */

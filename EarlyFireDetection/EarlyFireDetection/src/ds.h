@@ -25,15 +25,15 @@ CV_INLINE RectThrd rectThrd(const int rectWidth, const int rectHeight, const int
 
 /* Optical Flow feature points */
 typedef struct Feature {
-  CvPoint2D32f perv;
-  CvPoint2D32f curr;
+  cv::Point prev;
+  cv::Point curr;
 } Feature;
 
 /* for initialize Feature node */
-CV_INLINE Feature feature(const CvPoint2D32f prev, const CvPoint2D32f curr) {
+CV_INLINE Feature feature(const cv::Point &prev, const cv::Point &curr) {
   Feature fr;
 
-  fr.perv = prev;
+  fr.prev = prev;
   fr.curr = curr;
 
   return fr;
@@ -45,13 +45,13 @@ typedef struct OFRect {
   int countCtrP{};      // the pixel count of contour
   // the pixel count of contour which is only be
   // detected
-  CvRect rect;          // rect
+  cv::Rect rect;          // rect
   std::vector<Feature> vecFeature;  // optical flow feature points
 
 } OFRect;
 
 /* for initialize ofrect node */
-CV_INLINE OFRect ofRect(CvRect rect, const int countCtrP) {
+CV_INLINE OFRect ofRect(const cv::Rect &rect, const int countCtrP) {
   OFRect ofr;
 
   ofr.match = false;
@@ -64,19 +64,19 @@ CV_INLINE OFRect ofRect(CvRect rect, const int countCtrP) {
 /* marker node */
 typedef struct Centroid {
   int countFrame{};  // how many frame the centroid keeping in the region
-  CvPoint centroid;  // first detected centroid
-  std::vector<CvRect> vecRect;                // rect information
+  cv::Point centroid;  // first detected centroid
+  std::vector<cv::Rect> vecRect;                // rect information
   std::deque<std::vector<Feature> > dOFRect;  // optical flow feature points
 
 } Centroid;
 
 /* for initailize the new centroid node */
-CV_INLINE Centroid centroid(OFRect ofRect) {
+CV_INLINE Centroid centroid(const OFRect &ofRect) {
   Centroid centroid1;
 
   centroid1.countFrame = 1;  // first node
-  centroid1.centroid = cvPoint(ofRect.rect.x + (ofRect.rect.width >> 1),
-                               ofRect.rect.y + (ofRect.rect.height >> 1));  // centroid position
+  centroid1.centroid = cv::Point(ofRect.rect.x + (ofRect.rect.width >> 1),
+                                 ofRect.rect.y + (ofRect.rect.height >> 1));  // centroid position
   centroid1.vecRect.push_back(ofRect.rect);        // push rect information
   centroid1.dOFRect.push_back(ofRect.vecFeature);  // push contour optical flow feature(after optical
   // flow)

@@ -2,8 +2,8 @@
 
 #include "fireBehaviorAnalysis.h"
 /* Counting the foldback point at each directions */
-void foldbackPoint(const std::vector<CvRect> &vecRect, DirectionsCount &count) {
-  std::vector<CvRect>::const_iterator itVec;
+void foldbackPoint(const std::vector<cv::Rect> &vecRect, DirectionsCount &count) {
+  std::vector<cv::Rect>::const_iterator itVec;
 
   for (itVec = ++vecRect.begin(); (itVec + 1) != vecRect.end(); ++itVec) {
     const auto rn = std::next(itVec);
@@ -26,7 +26,7 @@ void foldbackPoint(const std::vector<CvRect> &vecRect, DirectionsCount &count) {
 }
 
 /* Analysis the rect information */
-bool judgeDirectionsMotion(const std::vector<CvRect> &vecRect, CvRect &rectFire) {
+bool judgeDirectionsMotion(const std::vector<cv::Rect> &vecRect, cv::Rect &rectFire) {
   DirectionsCount count;
   zeroCount(count);
   foldbackPoint(vecRect, count);

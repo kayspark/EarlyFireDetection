@@ -109,7 +109,7 @@ std::string mat2str(cv::Mat &mat) {
   }
 
   r += "C";
-  r += (std::to_string(chans + '0'));
+  r += (chans + '0');
 
   return r;
 }
@@ -206,14 +206,14 @@ void motionOrientationHist(std::vector<Feature> &vecFeature, vector<unsigned int
   /* each point of contour  */
   std::for_each(vecFeature.begin(), vecFeature.end(), [&orient](const Feature &feature) {
     /* orientation */
-    if (feature.perv.x >= feature.curr.x) {
-      if (feature.perv.y >= feature.curr.y) {
+    if (feature.prev.x >= feature.curr.x) {
+      if (feature.prev.y >= feature.curr.y) {
         ++orient[0];  // up-left
       } else {
         ++orient[2];  // down-left
       }
     } else {
-      if (feature.perv.y >= feature.curr.y) {
+      if (feature.prev.y >= feature.curr.y) {
         ++orient[1];  // up-right
       } else {
         ++orient[3];  // down-right
@@ -239,7 +239,7 @@ double getEnergy(std::vector<Feature> &vecFeature, unsigned int &staticCount, un
   /* each contour point */
   for_each(vecFeature.begin(), vecFeature.end(), [&staticCount, &energy, &totalPoints](const auto &feature) {
     /* energy */
-    double tmp = pow(abs(feature.curr.x - feature.perv.x), 2) + pow(abs(feature.curr.y - feature.perv.y), 2);
+    double tmp = pow(abs(feature.curr.x - feature.prev.x), 2) + pow(abs(feature.curr.y - feature.prev.y), 2);
     if (tmp < 1.0) {
       ++staticCount;
     } else if (tmp < 100.0) {
@@ -396,7 +396,7 @@ auto main(int argc, char *argv[]) -> int {
   const auto FPS = capture.get(CV_CAP_PROP_FPS);
   cout << "Video fps: " << FPS << endl;
   CascadeClassifier cascade;
-  std::string cascadeName = "./cascade2.xml";
+  std::string cascadeName = "./dataset/cascade2.xml";
   if (!cascade.load(cascadeName)) {
     cerr << "ERROR: Could not load classifier cascade" << endl;
     return -1;
@@ -449,18 +449,18 @@ auto main(int argc, char *argv[]) -> int {
   auto imgDisplay2 = cv::Mat(sizeImg, CV_8UC3);
   auto imgFireAlarm = cv::Mat(sizeImg, CV_8UC3);
   // Buffer for Pyramid image
-  CvSize sizePyr = cvSize(sizeImg.width + 8, sizeImg.height / 3);
+  cv::Size sizePyr = cvSize(sizeImg.width + 8, sizeImg.height / 3);
   auto pyrPrev = cv::Mat(sizePyr, CV_32FC1);
   auto pyrCurr = cv::Mat(sizePyr, CV_32FC1);
-  std::array<cv::Point2f, MAX_CORNER> featuresPrev;
-  std::array<cv::Point2f, MAX_CORNER> featuresCurr;
-  CvSize sizeWin = cvSize(WIN_SIZE, WIN_SIZE);
+  std::vector<cv::Point2f> featuresPrev(_max_corners);
+  std::vector<cv::Point2f> featuresCurr(_max_corners);
+  cv::Size sizeWin = cv::Size(WIN_SIZE, WIN_SIZE);
   auto imgEig = cv::Mat(sizeImg, CV_32FC1);
   auto imgTemp = cv::Mat(sizeImg, CV_32FC1);
 
-  // Pyramid Lucas-MAX_CORNER
-  std::array<char, MAX_CORNER> featureFound{};
-  std::array<float, MAX_CORNER> featureErrors{};
+  // Pyramid Lucas-_max_corners
+  std::vector<uchar> featureFound(_max_corners);
+  std::vector<float> featureErrors(_max_corners);
 
   // Go to the end of the AVI
   capture.set(CV_CAP_PROP_POS_AVI_RATIO, 1.0);
@@ -532,10 +532,10 @@ auto main(int argc, char *argv[]) -> int {
 
     /* Step2: Chromatic Filtering */
 
-    std::string ty = mat2str(imgDisplay);
-    printf("imgDisplay: %s %dx%d \n", ty.c_str(), imgDisplay.cols, imgDisplay.rows);
-    ty = mat2str(imgRGB);
-    printf("imgRGB:  %s %dx%d \n", ty.c_str(), imgRGB.cols, imgRGB.rows);
+    //std::string ty = mat2str(imgDisplay);
+    //printf("imgDisplay: %s %dx%d \n", ty.c_str(), imgDisplay.cols, imgDisplay.rows);
+    //ty = mat2str(imgRGB);
+    //printf("imgRGB:  %s %dx%d \n", ty.c_str(), imgRGB.cols, imgRGB.rows);
     /* RGB */
     imgDisplay.copyTo(imgRGB);
     checkByRGB(imgDisplay, maskMotion, maskRGB);
@@ -595,18 +595,12 @@ auto main(int argc, char *argv[]) -> int {
     auto ContourFeaturePointCount =
         getContourFeatures(imgDisplay2, imgDisplay, contours, vecOFRect, rThrd, featuresPrev, hierachy);
     // Pyramid L-K Optical Flowo
-    ty = mat2str(pyrPrev);
-    printf("pyrPrev: %s %dx%d \n", ty.c_str(), pyrPrev.cols, pyrPrev.rows);
+    //ty = mat2str(imgGray);
+    //printf("imgGray: %s %dx%d \n", ty.c_str(), imgGray.cols, imgGray.rows);
 
-    ty = mat2str(pyrCurr);
-    printf("pyrCurr: %s %dx%d \n", ty.c_str(), pyrCurr.cols, pyrCurr.rows);
-
-    cv::calcOpticalFlowPyrLK(
-
-        pyrPrev,  // pyramid tmep buffer for first frame
-        pyrCurr,  // pyramid tmep buffer for second frame
-        featuresPrev,
-        // the feature points that needed to be found(trace)
+    //ty = mat2str(imgCurr);
+    //printf("imgCurr: %s %dx%d \n", ty.c_str(), imgCurr.cols, imgCurr.rows);
+    cv::calcOpticalFlowPyrLK(imgGray, imgCurr, featuresPrev, // the feature points that needed to be found(trace)
         featuresCurr,  // the feature points that be traced
         // ContourFeaturePointCount, // the number of feature points
         featureFound,  // notify whether the feature points be traced or not
