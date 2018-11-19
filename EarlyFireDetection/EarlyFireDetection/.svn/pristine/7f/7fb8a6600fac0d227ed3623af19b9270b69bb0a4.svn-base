@@ -1,0 +1,33 @@
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  "CXX"
+  )
+# The set of files for implicit dependencies of each language:
+set(CMAKE_DEPENDS_CHECK_CXX
+  "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/colorModel.cpp" "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build/CMakeFiles/EarlyFireDetection.dir/colorModel.cpp.o"
+  "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/ds.cpp" "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build/CMakeFiles/EarlyFireDetection.dir/ds.cpp.o"
+  "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/fireBehaviorAnalysis.cpp" "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build/CMakeFiles/EarlyFireDetection.dir/fireBehaviorAnalysis.cpp.o"
+  "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/main.cpp" "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build/CMakeFiles/EarlyFireDetection.dir/main.cpp.o"
+  "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/motionDetection.cpp" "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build/CMakeFiles/EarlyFireDetection.dir/motionDetection.cpp.o"
+  "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/opticalFlowTool.cpp" "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build/CMakeFiles/EarlyFireDetection.dir/opticalFlowTool.cpp.o"
+  )
+set(CMAKE_CXX_COMPILER_ID "Clang")
+
+# Preprocessor definitions for this target.
+set(CMAKE_TARGET_DEFINITIONS_CXX
+  "BOOST_TEST_DYN_LINK"
+  )
+
+# The include file search paths:
+set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../."
+  "/usr/local/include"
+  "/usr/local/include/opencv"
+  )
+
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

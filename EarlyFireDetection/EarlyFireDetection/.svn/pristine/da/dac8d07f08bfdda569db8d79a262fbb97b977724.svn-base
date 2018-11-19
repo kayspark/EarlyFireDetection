@@ -1,0 +1,15 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/EarlyFireDetection.dir/colorModel.cpp.o"
+  "CMakeFiles/EarlyFireDetection.dir/ds.cpp.o"
+  "CMakeFiles/EarlyFireDetection.dir/fireBehaviorAnalysis.cpp.o"
+  "CMakeFiles/EarlyFireDetection.dir/main.cpp.o"
+  "CMakeFiles/EarlyFireDetection.dir/motionDetection.cpp.o"
+  "CMakeFiles/EarlyFireDetection.dir/opticalFlowTool.cpp.o"
+  "EarlyFireDetection.pdb"
+  "EarlyFireDetection"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/EarlyFireDetection.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
+    <generated>
+      <config projectName="EarlyFireDetection" targetName="clang-tidy" />
+      <config projectName="EarlyFireDetection" targetName="test_bitwise_op" />
+      <config projectName="EarlyFireDetection" targetName="EarlyFireDetection" />
+      <config projectName="EarlyFireDetection" targetName="clang-format" />
+      <config projectName="EarlyFireDetection" targetName="test_args" />
+    </generated>
+  </component>
+  <component name="CMakeSettings" AUTO_RELOAD="true">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DCMAKE_BUILD_TYPE=Debug" GENERATION_DIR="build" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ea096aaa-e724-4178-a041-31fa2d688b75" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/compile_commands.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Debug/EarlyFireDetection.ilk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Debug/EarlyFireDetection.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EarlyFireDetection.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../EarlyFireDetection.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/EarlyFir.E7E07E52.tlog/CL.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/EarlyFir.E7E07E52.tlog/CL.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/EarlyFir.E7E07E52.tlog/EarlyFireDetection.lastbuildstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/EarlyFir.E7E07E52.tlog/cl.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/EarlyFir.E7E07E52.tlog/link.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/EarlyFir.E7E07E52.tlog/link.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/EarlyFir.E7E07E52.tlog/link.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/EarlyFireDetection.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/vc120.idb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/vc120.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EarlyFireDetection.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/EarlyFireDetection.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EarlyFireDetection.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/EarlyFireDetection.vcxproj.filters" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/colorModel.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/colorModel.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/colorModel.h" beforeDir="false" afterPath="$PROJECT_DIR$/colorModel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ds.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ds.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ds.h" beforeDir="false" afterPath="$PROJECT_DIR$/ds.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileStream.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileStream.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fireBehaviorAnalysis.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fireBehaviorAnalysis.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fireBehaviorAnalysis.h" beforeDir="false" afterPath="$PROJECT_DIR$/fireBehaviorAnalysis.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/motionDetection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/motionDetection.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/motionDetection.h" beforeDir="false" afterPath="$PROJECT_DIR$/motionDetection.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opticalFlowTool.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/opticalFlowTool.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opticalFlowTool.h" beforeDir="false" afterPath="$PROJECT_DIR$/opticalFlowTool.h" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
+    <ignored path="$PROJECT_DIR$/build/" />
+    <ignored path="$PROJECT_DIR$/tests/build/" />
+    <ignored path="$PROJECT_DIR$/msbuild/" />
+    <ignored path="$PROJECT_DIR$/cbuild/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1078375893">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="39" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.1" value="4" />
+          <entry key="project.open.time.10" value="3" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.12" value="3" />
+          <entry key="project.open.time.13" value="2" />
+          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.39" value="1" />
+          <entry key="project.open.time.5" value="6" />
+          <entry key="project.open.time.6" value="4" />
+          <entry key="project.open.time.7" value="3" />
+          <entry key="project.open.time.8" value="5" />
+          <entry key="project.open.time.9" value="4" />
+          <entry key="project.opened" value="40" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="array" value="1" />
+          <entry key="cmake" value="1" />
+          <entry key="cpp" value="43" />
+          <entry key="doxygen" value="1" />
+          <entry key="filters" value="1" />
+          <entry key="h" value="24" />
+          <entry key="hpp" value="4" />
+          <entry key="json" value="6" />
+          <entry key="map" value="1" />
+          <entry key="txt" value="6" />
+          <entry key="user" value="1" />
+          <entry key="utility" value="1" />
+          <entry key="vcxproj" value="1" />
+          <entry key="xml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CMakeLists.txt" value="7" />
+          <entry key="Doxygen file" value="1" />
+          <entry key="JSON" value="6" />
+          <entry key="ObjectiveC" value="74" />
+          <entry key="PLAIN_TEXT" value="3" />
+          <entry key="XML" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="cmake" value="28" />
+          <entry key="cpp" value="13012" />
+          <entry key="h" value="72" />
+          <entry key="mm" value="14" />
+          <entry key="txt" value="334" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="CMakeLists.txt" value="344" />
+          <entry key="Doxygen file" value="1" />
+          <entry key="ObjectiveC" value="13097" />
+          <entry key="PLAIN_TEXT" value="18" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.cidr.testingFrameworks.usages">
+        <counts>
+          <entry key="Boost Test" value="13" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages" />
+    </session>
+    <session id="-1314805777">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.54" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.cidr.testingFrameworks.usages" />
+      <usages-collector id="statistics.file.types.edit" />
+      <usages-collector id="statistics.vcs.git.usages" />
+      <usages-collector id="statistics.file.types.open" />
+    </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="EarlyFireDetection" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/motionDetection.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3330">
+              <caret line="185" column="2" selection-start-line="185" selection-start-column="2" selection-end-line="185" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/colorModel.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3204">
+              <caret line="178" column="28" selection-start-line="178" selection-start-column="28" selection-end-line="178" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/motionDetection.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/opticalFlowTool.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1602">
+              <caret line="89" selection-start-line="89" selection-end-line="89" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2718">
+              <caret line="161" selection-start-line="161" selection-end-line="161" />
+              <folding>
+                <element signature="e#181#256#0" expanded="true" />
+                <element signature="e#657#673#0" expanded="true" />
+                <element signature="e#1158#1188#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/opticalFlowTool.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="34" column="42" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fireBehaviorAnalysis.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="16" column="68" selection-start-line="16" selection-start-column="68" selection-end-line="16" selection-end-column="68" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ds.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1242">
+              <caret line="69" column="50" selection-start-line="69" selection-start-column="50" selection-end-line="69" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_data_driven.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="846">
+              <caret line="47" column="51" selection-start-line="47" selection-start-column="51" selection-end-line="47" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CMakeLists.txt" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>class</find>
+      <find>.xml</find>
+      <find>cvCa</find>
+      <find>mFrame</find>
+      <find>feature</find>
+      <find>motionOrientationHist</find>
+      <find>dOFRect</find>
+      <find>judgeDirectionsMotion</find>
+      <find>judgeDire</find>
+      <find>judge</find>
+      <find>(*itCentroid)</find>
+      <find>ass</find>
+      <find>assignFeaturePoints</find>
+      <find>std::array&lt;CvPoint2D32f, 10000&gt;</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>feature</replace>
+      <replace>centeroid</replace>
+      <replace>center</replace>
+      <replace>centre</replace>
+      <replace>CORNERS</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/fireBehaviorAnalysis.h" />
+        <option value="$PROJECT_DIR$/motionDetection.h" />
+        <option value="$PROJECT_DIR$/fileStream.cpp" />
+        <option value="$PROJECT_DIR$/fileStream.h" />
+        <option value="$PROJECT_DIR$/tests/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/boost_test.cmake" />
+        <option value="$PROJECT_DIR$/tests/test_bitwise_op.cpp" />
+        <option value="$PROJECT_DIR$/tests/test_data_driven.cpp" />
+        <option value="$PROJECT_DIR$/tests/test_args.cpp" />
+        <option value="$PROJECT_DIR$/colorModel.h" />
+        <option value="$PROJECT_DIR$/colorModel.cpp" />
+        <option value="$PROJECT_DIR$/fireBehaviorAnalysis.cpp" />
+        <option value="$PROJECT_DIR$/ds.h" />
+        <option value="$PROJECT_DIR$/motionDetection.cpp" />
+        <option value="$PROJECT_DIR$/opticalFlowTool.h" />
+        <option value="$PROJECT_DIR$/opticalFlowTool.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/main.cpp" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+    <option name="x" value="-1920" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State />
+          <State>
+            <id>C/C++</id>
+          </State>
+          <State>
+            <id>GeneralC/C++</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>ClangTidyInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Source Files'; set:Project Source Files; class com.jetbrains.cidr.lang.search.scopes.ProjectSourcesScopeProvider$SourceFilesScope" proportions="" version="1">
+      <showMembers ProjectPane="true" />
+      <autoscrollFromSource ProjectPane="true" />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Source Files'; set:Project Source Files; class com.jetbrains.cidr.lang.search.scopes.ProjectSourcesScopeProvider$SourceFilesScope">
+          <expand>
+            <path>
+              <item name="EarlyFireDetection" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="EarlyFireDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EarlyFireDetection" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.EarlyFireDetection">
+    <configuration default="true" type="CMakeBoostTestRunConfigurationType" factoryName="Boost Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EarlyFireDetection" TARGET_NAME="test_args" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="EarlyFireDetection" RUN_TARGET_NAME="test_args" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test_data" type="CMakeBoostTestRunConfigurationType" factoryName="Boost Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EarlyFireDetection" TARGET_NAME="test_data_driven" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="EarlyFireDetection" RUN_TARGET_NAME="test_data_driven" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EarlyFireDetection" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="$USER_HOME$/Downloads/hanjunCV14.mov" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EarlyFireDetection" TARGET_NAME="EarlyFireDetection" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="EarlyFireDetection" RUN_TARGET_NAME="EarlyFireDetection">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="clang-format" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EarlyFireDetection" TARGET_NAME="clang-format" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="clang-tidy" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EarlyFireDetection" TARGET_NAME="clang-tidy" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Build All" />
+      <item itemvalue="Application.clang-format" />
+      <item itemvalue="Application.clang-tidy" />
+      <item itemvalue="Application.EarlyFireDetection" />
+      <item itemvalue="Boost.Test.test_data" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\kspark\AppData\Roaming\Subversion</configuration>
+    <option name="runUnderTerminal" value="true" />
+    <option name="sshConnectionType" value="PASSWORD" />
+    <option name="sshUserName" value="kspark" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ea096aaa-e724-4178-a041-31fa2d688b75" name="Default Changelist" comment="" />
+      <created>1540909921232</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1540909921232</updated>
+      <workItem from="1540909923854" duration="117000" />
+      <workItem from="1540910061895" duration="234000" />
+      <workItem from="1540910409058" duration="780000" />
+      <workItem from="1541034812140" duration="5348000" />
+      <workItem from="1541042729796" duration="14127000" />
+      <workItem from="1541143737829" duration="302000" />
+      <workItem from="1541147481710" duration="75000" />
+      <workItem from="1541224521880" duration="857000" />
+      <workItem from="1541312981916" duration="4894000" />
+      <workItem from="1541346244475" duration="73000" />
+      <workItem from="1541346338863" duration="93000" />
+      <workItem from="1541388371182" duration="1655000" />
+      <workItem from="1541390067635" duration="3144000" />
+      <workItem from="1541393921723" duration="280000" />
+      <workItem from="1541394231469" duration="702000" />
+      <workItem from="1541394963549" duration="1656000" />
+      <workItem from="1541396731494" duration="969000" />
+      <workItem from="1541398216846" duration="15722000" />
+      <workItem from="1541417531902" duration="173000" />
+      <workItem from="1541453331448" duration="330000" />
+      <workItem from="1541454853701" duration="1334000" />
+      <workItem from="1541477989137" duration="642000" />
+      <workItem from="1541493400484" duration="7882000" />
+      <workItem from="1541501561451" duration="5928000" />
+      <workItem from="1541508570532" duration="896000" />
+      <workItem from="1541509518959" duration="344000" />
+      <workItem from="1541585993159" duration="199000" />
+      <workItem from="1541589011698" duration="1845000" />
+      <workItem from="1541596259667" duration="136000" />
+      <workItem from="1541642131949" duration="1047000" />
+      <workItem from="1541643228118" duration="1102000" />
+      <workItem from="1541647293473" duration="2897000" />
+      <workItem from="1541679101905" duration="3887000" />
+      <workItem from="1541722107937" duration="2225000" />
+      <workItem from="1541732456952" duration="898000" />
+      <workItem from="1541733767929" duration="64000" />
+      <workItem from="1541733835251" duration="225000" />
+      <workItem from="1541744881965" duration="2778000" />
+      <workItem from="1541916376223" duration="537000" />
+      <workItem from="1541936122681" duration="871000" />
+      <workItem from="1541944383336" duration="2382000" />
+      <workItem from="1541980771424" duration="649000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="test_data_driven - 2018.11.05 at 18h 38m 41s.xml">
+      <configuration name="test_data_driven" configurationId="CMakeBoostTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="test_data_driven - 2018.11.05 at 18h 50m 16s.xml">
+      <configuration name="test_data_driven" configurationId="CMakeBoostTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="test_data_driven - 2018.11.05 at 18h 51m 51s.xml">
+      <configuration name="test_data_driven" configurationId="CMakeBoostTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="test_data_driven - 2018.11.05 at 18h 52m 16s.xml">
+      <configuration name="test_data_driven" configurationId="CMakeBoostTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="test_data_driven - 2018.11.05 at 18h 56m 02s.xml">
+      <configuration name="test_data_driven" configurationId="CMakeBoostTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="test_data_driven - 2018.11.05 at 18h 57m 48s.xml">
+      <configuration name="test_data_driven" configurationId="CMakeBoostTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="test_data_driven - 2018.11.05 at 19h 00m 37s.xml">
+      <configuration name="test_data_driven" configurationId="CMakeBoostTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="test_data_driven - 2018.11.05 at 19h 00m 42s.xml">
+      <configuration name="test_data_driven" configurationId="CMakeBoostTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="test_args - 2018.11.05 at 19h 08m 11s.xml">
+      <configuration name="test_args" configurationId="CMakeBoostTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="test_data - 2018.11.05 at 19h 29m 20s.xml">
+      <configuration name="test_data" configurationId="CMakeBoostTestRunConfigurationType" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="90299000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-1920" y="0" width="1920" height="1080" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4974533" side_tool="true" visible="true" weight="0.1656017" />
+      <window_info id="Structure" order="1" sideWeight="0.50254667" side_tool="true" weight="0.15654951" />
+      <window_info id="Favorites" order="2" side_tool="true" weight="0.3297568" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32826748" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.26113862" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49928468" weight="0.20420793" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32826748" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Messages" order="8" sideWeight="0.49840257" weight="0.20915842" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49893504" weight="0.32772276" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5021299" side_tool="true" weight="0.32871288" />
+      <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="CMake" order="12" weight="0.29579207" />
+      <window_info active="true" anchor="bottom" id="Inspection Results" order="13" sideWeight="0.4985694" visible="true" weight="0.32826748" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="My Favorite Code" order="4" weight="0.32960597" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="CMakeRunConfiguration">
+        <watch expression="idx" language="ObjectiveC" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>idx</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/EarlyFireDetection.vcxproj">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.vscode/settings.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file:///usr/local/include/opencv2/core/cvstd.inl.hpp" />
+    <entry file="file:///usr/local/include/opencv2/core/cvstd.hpp" />
+    <entry file="file://$PROJECT_DIR$/EarlyFireDetection.vcxproj.filters">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EarlyFireDetection.vcxproj.user">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fileStream.cpp" />
+    <entry file="file://$PROJECT_DIR$/fileStream.h" />
+    <entry file="file://$PROJECT_DIR$/tests/CMakeLists.txt" />
+    <entry file="file://$PROJECT_DIR$/tests/test_args.cpp" />
+    <entry file="file:///usr/include/string.h" />
+    <entry file="file://$PROJECT_DIR$/tests/test_bitwise_op.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cascade.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ds.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/array" />
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/utility" />
+    <entry file="file:///usr/local/include/opencv2/core.hpp" />
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/map" />
+    <entry file="file://$PROJECT_DIR$/boost_test.cmake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/colorModel.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="45" column="46" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compile_commands.json" />
+    <entry file="file://$PROJECT_DIR$/build/compile_commands.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/include/opencv2/core/mat.inl.hpp" />
+    <entry file="file://$PROJECT_DIR$/fireBehaviorAnalysis.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/motionDetection.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3330">
+          <caret line="185" column="2" selection-start-line="185" selection-start-column="2" selection-end-line="185" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/colorModel.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3204">
+          <caret line="178" column="28" selection-start-line="178" selection-start-column="28" selection-end-line="178" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/motionDetection.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/opticalFlowTool.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1602">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/opticalFlowTool.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="34" column="42" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fireBehaviorAnalysis.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="68" selection-start-line="16" selection-start-column="68" selection-end-line="16" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ds.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1242">
+          <caret line="69" column="50" selection-start-line="69" selection-start-column="50" selection-end-line="69" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_data_driven.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="846">
+          <caret line="47" column="51" selection-start-line="47" selection-start-column="51" selection-end-line="47" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2718">
+          <caret line="161" selection-start-line="161" selection-end-line="161" />
+          <folding>
+            <element signature="e#181#256#0" expanded="true" />
+            <element signature="e#657#673#0" expanded="true" />
+            <element signature="e#1158#1188#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
