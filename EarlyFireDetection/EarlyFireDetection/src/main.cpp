@@ -25,7 +25,6 @@
 
 /* Switch */
 #define ON (-1)
-#define OFF (-2)
 
 /* Debug Mode */
 #define DEBUG_MODE (ON)
@@ -548,7 +547,15 @@ auto main(int argc, char *argv[]) -> int {
 
     /* HSI */
     imgDisplay.copyTo(imgHSI);
-    // convert rgb to hsi
+    // convert rgb to hsiso
+    /*  std::string t;
+      t = mat2str(imgDisplay);
+      cout << "imgDisp: " << t <<endl;
+      t = mat2str(bufHSI);
+      cout << "HSI: " << t << endl;
+      t= mat2str(maskRGB);
+      cout << "maskrgb: " << t << endl;
+  */
     RGB2HSIMask(imgDisplay, bufHSI, maskRGB);
     checkByHSI(imgDisplay, bufHSI, maskRGB, maskHSI);
     regionMarkup(imgDisplay, imgHSI, maskHSI);

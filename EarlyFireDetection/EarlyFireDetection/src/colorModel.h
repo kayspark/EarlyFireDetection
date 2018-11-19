@@ -29,7 +29,7 @@ void checkByRGB(const cv::Mat &imgSrc, const cv::Mat &maskMotion, cv::Mat &maskR
  *		     imgHSI:     IPL_DEPTH_64F			 3
  *		     maskRGB:    IPL_DEPTH_8U			 1
  */
-void RGB2HSIMask(const cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB);
+void RGB2HSIMask(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB);
 
 /**
  *	@Purpose: check fire-like pixels by rgb model base on reference method
@@ -38,7 +38,7 @@ void RGB2HSIMask(const cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB);
  *		frame: input source image
  *		mask: output mask
  */
-void checkByHSI(const cv::Mat &imgRGB, const cv::Mat &imgHSI, cv::Mat &maskRGB, cv::Mat &maskHSI);
+void checkByHSI(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB, cv::Mat &maskHSI);
 
 /**
  *	@Function: markup the interest region based on mask
@@ -47,6 +47,6 @@ void checkByHSI(const cv::Mat &imgRGB, const cv::Mat &imgHSI, cv::Mat &maskRGB, 
  *		backup: output image (for display)
  *		mask: input mask
  */
-void regionMarkup(const cv::Mat &imgSrc, cv::Mat &imgBackup, cv::Mat &mask);
+void regionMarkup(cv::Mat &imgSrc, cv::Mat &imgBackup, cv::Mat &mask);
 
 #endif

@@ -1,7 +1,6 @@
-
+#include <opencv2/imgproc.hpp>
+#include <opencv/cv.hpp>
 #include "opticalFlowTool.h"
-#include "opencv/cv.hpp"
-#include "opencv2/imgproc.hpp"
 
 void drawArrow(cv::Mat &imgDisplay,
                const std::vector<cv::Point2f> &featuresPrev,
@@ -9,7 +8,7 @@ void drawArrow(cv::Mat &imgDisplay,
                int cornerCount,
                const std::vector<uchar> &featureFound) {
   static int i, lineThickness = 1;
-  static cv::Scalar lineColor = CV_RGB(100, 200, 250);
+  static cv::Scalar lineColor(100, 200, 250);
   static double angle, hypotenuse, tmpCOS, tmpSIN;
   static CvPoint p, q;
   static const double PI_DIV_4 = CV_PI / 4;
