@@ -548,14 +548,16 @@ auto main(int argc, char *argv[]) -> int {
     /* HSI */
     imgDisplay.copyTo(imgHSI);
     // convert rgb to hsiso
-    /*  std::string t;
-      t = mat2str(imgDisplay);
-      cout << "imgDisp: " << t <<endl;
-      t = mat2str(bufHSI);
-      cout << "HSI: " << t << endl;
-      t= mat2str(maskRGB);
-      cout << "maskrgb: " << t << endl;
-  */
+    /* std::string t;
+     t = mat2str(imgDisplay);
+     cout << "imgDisp: " << t <<endl;
+     t = mat2str(bufHSI);
+     cout << "HSI: " << t << endl;
+     t= mat2str(maskRGB);
+     cout << "maskrgb: " << t << endl;
+      t= mat2str(maskHSI);
+     cout << "maskhsi: " << t << endl;*/
+
     RGB2HSIMask(imgDisplay, bufHSI, maskRGB);
     checkByHSI(imgDisplay, bufHSI, maskRGB, maskHSI);
     regionMarkup(imgDisplay, imgHSI, maskHSI);

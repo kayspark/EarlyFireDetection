@@ -9,6 +9,9 @@ T minrgb(const T r, const T g, const T b) {
   return (r <= g && r <= b) ? r : (g < b) ? g : b;
 }
 
+typedef cv::Point3_<uint8_t> _normal_pixel;
+typedef cv::Point3_<double> _long_pixel;
+
 /**
  *	@Purpose: check fire-like pixels by rgb model base on reference method
  *			  This function will change fire-like pixels to red

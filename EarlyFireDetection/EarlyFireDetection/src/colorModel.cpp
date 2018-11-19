@@ -19,8 +19,8 @@ void checkByRGB(const cv::Mat &imgSrc, const cv::Mat &maskMotion, cv::Mat &maskR
   static auto dataMaskMotion = maskMotion.data;
 
   static int i = 0, j = 0, k = 0, idx = 0;
-  for (i = 0; i < imgSrc.rows; ++i) {
-    for (j = 0, k = 0; j < step; j += 3, ++k) {
+  for (i = 0; i < imgSrc.rows; ++ i) {
+    for (j = 0, k = 0; j < step; j += 3, ++ k) {
       idx = i * step + j;
       if (dataMaskMotion[i * stepMask + k] == 255 && dataSrc[idx + 2] > RT && dataSrc[idx + 2] >= dataSrc[idx + 1]
           && dataSrc[idx + 1] > dataSrc[idx]) {  // RGB color model determine rule
@@ -64,25 +64,18 @@ void RGB2HSIMask(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB) {
   static double tmp1 = 0.0, tmp2 = 0.0, x = 0.0, theta = 0.0, tmpAdd = 0.0;
 
   // normalize rgb to [0,1]
-  for (i = 0; i < imgRGB.rows; ++i) {
-    for (j = 0, k = 0; j < step; j += 3, ++k) {  // loop times = width
+  for (i = 0; i < imgRGB.rows; ++ i) {
+    for (j = 0, k = 0; j < step; j += 3, ++ k) {  // loop times = width
       if (dataMaskRGB[i * stepMaskRGB + k] == 255) {  // if the pixel is moving object
         idx = i * step + j;
         dataTmp[idx] = dataRGB[idx] / 255.0;  // dataTmp[ idx ] = dataRGB[ idx ] / 255.0;
         dataTmp[idx + 1] = dataRGB[idx + 1] / 255.0;  // dataTmp[ idx + 1 ] = dataRGB[ idx + 1 ] / 255.0;
         dataTmp[idx + 2] = dataRGB[idx + 2] / 255.0;
-      }
-    }
-  }
 
-  for (i = 0; i < imgRGB.rows; ++i) {
-    for (j = 0, k = 0; j < step; j += 3, ++k) {
-      if (dataMaskRGB[i * stepMaskRGB + k] == 255) {  // if the pixel is moving object
-        idx = i * step + j;
         // IF ( R = G = B ) , IN INTENSITY AXIS THERE IS NO SATURATRION ,AND NO
         // DEFINE HUE VALUE
         if (fabs(dataTmp[idx + 2] - dataTmp[idx + 1]) < EFS && fabs(dataTmp[idx + 1] - dataTmp[idx]) < EFS) {
-          dataHSI[idx] = -1.0;  // UNDEFINE
+          dataHSI[idx] = - 1.0;  // UNDEFINE
           dataHSI[idx + 1] = 0.0;
           dataHSI[idx + 2] = dataTmp[idx];
         } else {
@@ -92,8 +85,8 @@ void RGB2HSIMask(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB) {
           x = 0.5 * (tmp1 + tmp2) / (sqrt(pow(tmp1, 2) + tmp2 * (dataTmp[idx + 1] - dataTmp[idx])));
 
           // exam
-          if (x < -1.0) {
-            x = -1.0;
+          if (x < - 1.0) {
+            x = - 1.0;
           }
           if (x > 1.0) {
             x = 1.0;
@@ -112,30 +105,32 @@ void RGB2HSIMask(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB) {
     }
   }
 
-  /*
-  // normalize rgb to [0,1]
-  for (i = 0; i < imgRGB.rows; ++i) {
-    for (j = 0, k = 0; j < step; j += 3, ++k) {  // loop times = width
-      if (255 != dataMaskRGB[i * stepMaskRGB + k])
-        continue;  // if the pixel is moving object
-      idx = i * step + j;
-      dataTmp[idx] = dataRGB[idx] / 255.0;  // dataTmp[ idx ] = dataRGB[ idx ] / 255.0;
-      dataTmp[idx+1] = dataRGB[idx+1] / 255.0;  // dataTmp[ idx + 1 ] = dataRGB[ idx + 1 ] / 255.0;
-      dataTmp[idx+2] = dataRGB[idx+2 ] / 255.0;
-    }
-  }
-for (i = 0; i  < imgRGB.rows; ++i) {
-    auto * rgb = imgRGB.ptr<Pixel>(0, i);
-    auto * mask = maskRGB.ptr<Pixel>(0, i);
-    auto* temp = imgTemp.ptr<dPixel>(0,i);
-    auto* hsi = imgHSI.ptr<dPixel>(0,i);
-    const Pixel* ptr_end = rgb + imgRGB.cols;
-    for (; rgb != ptr_end; ++rgb, ++mask, ++temp, ++hsi) {
-       if (255 != mask->x)
-         continue;
 
-  }
-*/
+  /*
+   // normalize rgb to [0,1]
+   for (i = 0; i < imgRGB.rows; ++i) {
+     for (j = 0, k = 0; j < step; j += 3, ++k) {  // loop times = width
+       if (255 != dataMaskRGB[i * stepMaskRGB + k])
+         continue;  // if the pixel is moving object
+       idx = i * step + j;
+       dataTmp[idx] = dataRGB[idx] / 255.0;  // dataTmp[ idx ] = dataRGB[ idx ] / 255.0;
+       dataTmp[idx+1] = dataRGB[idx+1] / 255.0;  // dataTmp[ idx + 1 ] = dataRGB[ idx + 1 ] / 255.0;
+       dataTmp[idx+2] = dataRGB[idx+2 ] / 255.0;
+     }
+   }
+ for (i = 0; i  < imgRGB.rows; ++i) {
+     auto * rgb = imgRGB.ptr<_normal_pixel>(0, i);
+     auto * mask = maskRGB.ptr<_normal_pixel>(0, i);
+     auto* temp = imgTemp.ptr<dPixel>(0,i);
+     auto* hsi = imgHSI.ptr<dPixel>(0,i);
+     const _normal_pixel* ptr_end = rgb + imgRGB.cols;
+     for (; rgb != ptr_end; ++rgb, ++mask, ++temp, ++hsi) {
+        if (255 != mask->x)
+          continue;
+
+   }
+   */
+
   imgTemp.release();
 }
 
@@ -151,22 +146,23 @@ void checkByHSI(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB, cv::Mat &mas
   // static const int stepImgRGB = imgRGB.step / sizeof(uchar);
 
   static auto dataHSI = reinterpret_cast<double *>(imgHSI.data);
-  static auto dataSrc = reinterpret_cast<uchar *>(imgRGB.data);
+  static auto dataSrc = imgRGB.data;
 
   /* HSI threshold */
   static const int trdH = 60;
   static const double trdS = 0.003043487826087;
   static const double trdI = 0.588235294117647;
 
+  // static const int stepImgRGB = imgRGB.step / sizeof(uchar);
   // mask
-  static const int stepMask = maskRGB.step / sizeof(uchar);
+  static const int stepMask = static_cast<const int>(maskRGB.step / sizeof(uchar));
 
-  static auto dataMaskRGB = reinterpret_cast<uchar *>(maskRGB.data);
-  static auto dataMaskHSI = reinterpret_cast<uchar *>(maskHSI.data);
+  static auto dataMaskRGB = maskRGB.data;
+  static auto dataMaskHSI = maskHSI.data;
 
   static int i = 0, j = 0, k = 0, idx = 0;
-  for (i = 0; i < imgHSI.rows; ++i) {
-    for (j = 0, k = 0; j < stepImg; j += 3, ++k) {  // stepImg = imgWidth * channel
+  for (i = 0; i < imgHSI.rows; ++ i) {
+    for (j = 0, k = 0; j < stepImg; j += 3, ++ k) {  // stepImg = imgWidth * channel
       idx = i * stepImg + j;
       if (dataMaskRGB[i * stepMask + k] == 255 && dataHSI[idx] <= trdH && dataHSI[idx] >= 0 && dataHSI[idx + 2] > trdI
           && dataHSI[idx + 1] >= (255 - dataSrc[idx + 2]) * trdS) {  // HSI color model determine rule
@@ -184,22 +180,21 @@ void checkByHSI(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB, cv::Mat &mas
  *		mask: input mask
  */
 void regionMarkup(cv::Mat &imgSrc, cv::Mat &imgBackup, cv::Mat &mask) {
-  static const int step = static_cast<const int>(imgSrc.step / sizeof(uchar));
-  static auto dataBackup = imgBackup.data;
 
-  // mask
-  static auto stepMask = mask.step / sizeof(uchar);
-  static auto dataMask = mask.data;
+// mask
+  static const int stepMask = static_cast<const int>(mask.step / sizeof(uchar));
+  static uchar *dataMask = NULL;
+  dataMask = mask.data;
 
-  static auto i = 0, j = 0, k = 0, idx = 0;
-  for (i = 0; i < imgSrc.rows; ++i) {
-    for (j = 0, k = 0; j < step; j += 3, ++k) {
-      // find the roi
-      if (dataMask[i * stepMask + k] == 255) {  // check the mask
-        idx = i * step + j;
-        dataBackup[idx] = static_cast<uchar>(0);        // B
-        dataBackup[idx + 1] = static_cast<uchar>(0);    // G
-        dataBackup[idx + 2] = static_cast<uchar>(255);  // R  ; mark with red
+  for (int i = 0; i < imgSrc.rows; ++ i) {
+    auto ptr = imgSrc.ptr<_normal_pixel>(0, i);
+    auto hsi = imgBackup.ptr<_normal_pixel>(0, i);
+    const _normal_pixel *ptr_end = ptr + imgSrc.cols;
+    for (int k = 0; ptr != ptr_end; ++ ptr, ++ k, ++ hsi) {
+      if (255 == dataMask[i * stepMask + k]) {
+        hsi->x = static_cast<uint8_t>(0);
+        hsi->y = static_cast<uint8_t>(0);
+        hsi->z = static_cast<uint8_t>(255);
       }
     }
   }
