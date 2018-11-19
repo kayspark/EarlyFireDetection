@@ -9,16 +9,21 @@
  *		mask: output mask
  */
 void checkByRGB(const cv::Mat &imgSrc, const cv::Mat &maskMotion, cv::Mat &maskRGB) {
+  static const int step = static_cast<const int>(imgSrc.step / sizeof(uchar));
+  static auto dataSrc = imgSrc.data;
   static const int RT = 250;
+
   // mask
   static const int stepMask = static_cast<const int>(maskRGB.step / sizeof(uchar));
   static auto dataMask = maskRGB.data;
   static auto dataMaskMotion = maskMotion.data;
-  for (int i = 0; i < imgSrc.rows; ++ i) {
-    auto ptr = imgSrc.ptr<_normal_pixel>(0, i);
-    const _normal_pixel *ptr_end = ptr + imgSrc.cols;
-    for (int k = 0; ptr != ptr_end; ++ ptr, ++k) {
-      if (dataMaskMotion[i * stepMask + k] == 255 && ptr->z > RT && ptr->z >= ptr->y && ptr->y > ptr->x) {  // RGB color model determine rule
+
+  static int i = 0, j = 0, k = 0, idx = 0;
+  for (i = 0; i < imgSrc.rows; ++ i) {
+    for (j = 0, k = 0; j < step; j += 3, ++ k) {
+      idx = i * step + j;
+      if (dataMaskMotion[i * stepMask + k] == 255 && dataSrc[idx + 2] > RT && dataSrc[idx + 2] >= dataSrc[idx + 1]
+          && dataSrc[idx + 1] > dataSrc[idx]) {  // RGB color model determine rule
         dataMask[i * stepMask + k] = static_cast<uchar>(255);
       }
     }
