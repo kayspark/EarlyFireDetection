@@ -13,130 +13,78 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea096aaa-e724-4178-a041-31fa2d688b75" name="Default Changelist" comment="bug fixes and performance &amp; accuracy improvements">
-      <change afterPath="$PROJECT_DIR$/.idea/EarlyFireDetection.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/kspark.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace 2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/EarlyFireDetection/v15/.suo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/EarlyFireDetection/v15/Preview/Browse.VC.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/ProjectSettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/VSWorkspaceState.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/slnx.sqlite" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeCache 2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeCache 3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeCache 4.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeCache 5.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeCache.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CMakeCCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CMakeCXXCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CMakeSystem.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CMakeCCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CMakeCXXCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CMakeSystem.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/CXX.includecache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/Makefile2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/clion-environment.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/cmake.check_cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/feature_tests.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/feature_tests.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/feature_tests.cxx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/progress.marks" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CTestTestfile 2.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CTestTestfile 3.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CTestTestfile.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/EarlyFireDetection" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/EarlyFireDetection 2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/EarlyFireDetection 3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/EarlyFireDetection 4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/EarlyFireDetection 5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/EarlyFireDetection 6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/EarlyFireDetection 7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/EarlyFireDetection.cbp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/Makefile 2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/Makefile 3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/cascade2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/cmake_install 2.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/cmake_install 3.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/cmake_install.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/colorModel.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/compile_commands 2.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/compile_commands 3.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/compile_commands.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/main.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/motionDetection.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/opticalFlowTool.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/test_bitwise_op" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/test_bitwise_op 2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/test_bitwise_op 3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/test_data_driven" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/test_data_driven 2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/test_data_driven 3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildforms/.vs/ALL_BUILD/v15/.suo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/EarlyFir.E7E07E52.tlog/CL.command.1.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/EarlyFir.E7E07E52.tlog/CL.read.1.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/EarlyFir.E7E07E52.tlog/CL.write.1.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/EarlyFir.E7E07E52.tlog/EarlyFireDetection.lastbuildstate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/EarlyFir.E7E07E52.tlog/EarlyFireDetection.write.1u.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/EarlyFir.E7E07E52.tlog/link.command.1.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/EarlyFir.E7E07E52.tlog/link.read.1.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/EarlyFir.E7E07E52.tlog/link.write.1.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/EarlyFireDetection.Build.CppClean.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/EarlyFireDetection.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/vc141.idb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/vc141.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Debug/vcpkg.applocal.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Release/EarlyFir.E7E07E52.tlog/CL.command.1.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Release/EarlyFir.E7E07E52.tlog/CL.read.1.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Release/EarlyFir.E7E07E52.tlog/CL.write.1.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Release/EarlyFir.E7E07E52.tlog/EarlyFireDetection.lastbuildstate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Release/EarlyFir.E7E07E52.tlog/EarlyFireDetection.write.1u.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Release/EarlyFir.E7E07E52.tlog/link.command.1.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Release/EarlyFir.E7E07E52.tlog/link.read.1.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Release/EarlyFir.E7E07E52.tlog/link.write.1.tlog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Release/EarlyFireDetection.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Release/vc141.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x64/Release/vcpkg.applocal.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EarlyFireDetection.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/.svn/pristine/d6/d6d0cf490c56a1d3e998cc583c94b9c06cf5278a.svn-base" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EarlyFireDetection.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/.svn/pristine/fe/fec3aff43dbeaf2fc0bdaa082f6442854a58a1be.svn-base" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EarlyFireDetection.vcxproj.user" beforeDir="false" afterPath="$PROJECT_DIR$/.svn/pristine/37/37a32fc6a073eb33d970a77bec4c6cfdbe7e6463.svn-base" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EarlyFireDetection/CMakeLists.sublime-workspace" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cascade.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cascade1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cascade2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/cascade2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compile_commands 2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ds.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/.svn/pristine/12/126f7e2fdab1e838f0553f5243355ffa2988ccdf.svn-base" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/earlyfiredetection.sublime-workspace" beforeDir="false" />
+    <list default="true" id="ea096aaa-e724-4178-a041-31fa2d688b75" name="Default Changelist" comment="bug fixes and performance &amp; accuracy , code cleanup for colormodel">
+      <change afterPath="$PROJECT_DIR$/../.vs/EarlyFireDetection/v15/.suo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.vs/EarlyFireDetection/v15/Preview/Browse.VC.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.vs/EarlyFireDetection/v15/Preview/ipch/AutoPCH/4860239e698b559f/MAIN.ipch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../compiler_link.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Debug/EarlyFireDetection.ilk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Debug/EarlyFireDetection.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/EarlyFireDetection.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/kspark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.svn/pristine/13/13ffe3c5b9e81957ca24105b7637ce54dbab255c.svn-base" beforeDir="false" afterPath="$PROJECT_DIR$/../compile_commands.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/EarlyFireDetection/v15/.suo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/EarlyFireDetection/v15/Preview/Browse.VC.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/ProjectSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/VSWorkspaceState.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/slnx.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeCache.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.3/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/3.12.4/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/CMakeOutput.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/CXX.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/DependInfo.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/build.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/cmake_clean.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/depend.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/flags.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/link.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/EarlyFireDetection.dir/progress.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/Makefile.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/Makefile2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/clion-environment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/clion-log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/cmake.check_cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/feature_tests.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/feature_tests.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/feature_tests.cxx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/progress.marks" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CTestTestfile.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/EarlyFireDetection" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/EarlyFireDetection.cbp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/cascade2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/cmake_install.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/colorModel.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/compile_commands.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/main.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/motionDetection.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/opticalFlowTool.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test_bitwise_op" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test_data_driven" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/colorModel.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/colorModel.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -152,8 +100,8 @@
     <session id="-1078375893">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="70" />
-          <entry key="project.open.time.0" value="5" />
+          <entry key="project.closed" value="76" />
+          <entry key="project.open.time.0" value="9" />
           <entry key="project.open.time.1" value="7" />
           <entry key="project.open.time.10" value="5" />
           <entry key="project.open.time.11" value="2" />
@@ -161,26 +109,26 @@
           <entry key="project.open.time.13" value="3" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.39" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.5" value="8" />
+          <entry key="project.open.time.5" value="9" />
           <entry key="project.open.time.6" value="11" />
           <entry key="project.open.time.7" value="9" />
           <entry key="project.open.time.8" value="9" />
           <entry key="project.open.time.9" value="3" />
-          <entry key="project.opened" value="71" />
+          <entry key="project.opened" value="77" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="array" value="2" />
           <entry key="cmake" value="2" />
-          <entry key="cpp" value="105" />
+          <entry key="cpp" value="111" />
           <entry key="doxygen" value="2" />
           <entry key="filters" value="1" />
           <entry key="h" value="57" />
-          <entry key="hpp" value="41" />
+          <entry key="hpp" value="42" />
           <entry key="json" value="6" />
           <entry key="map" value="1" />
           <entry key="sh" value="1" />
@@ -197,7 +145,7 @@
           <entry key="CMakeLists.txt" value="11" />
           <entry key="Doxygen file" value="2" />
           <entry key="JSON" value="6" />
-          <entry key="ObjectiveC" value="207" />
+          <entry key="ObjectiveC" value="214" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="XML" value="1" />
         </counts>
@@ -205,19 +153,19 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cmake" value="28" />
-          <entry key="cpp" value="46902" />
-          <entry key="h" value="1637" />
+          <entry key="cpp" value="49162" />
+          <entry key="h" value="1672" />
           <entry key="hpp" value="92" />
-          <entry key="mm" value="196" />
-          <entry key="txt" value="543" />
+          <entry key="mm" value="200" />
+          <entry key="txt" value="597" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CMakeLists.txt" value="371" />
           <entry key="Doxygen file" value="1" />
-          <entry key="ObjectiveC" value="48826" />
-          <entry key="PLAIN_TEXT" value="200" />
+          <entry key="ObjectiveC" value="51125" />
+          <entry key="PLAIN_TEXT" value="254" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.cidr.testingFrameworks.usages">
@@ -230,74 +178,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="597">
-              <caret line="389" column="12" selection-start-line="389" selection-start-column="12" selection-end-line="389" selection-end-column="12" />
-              <folding>
-                <element signature="e#278#306#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/colorModel.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ds.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="14" selection-start-column="14" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/opticalFlowTool.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#30#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/motionDetection.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1512">
-              <caret line="84" column="40" selection-start-line="84" selection-start-column="40" selection-end-line="84" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#30#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/include/opencv2/core/types.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="26010">
-              <caret line="1445" selection-start-line="1445" selection-end-line="1445" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/colorModel.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="54" column="92" selection-start-line="54" selection-start-column="92" selection-end-line="54" selection-end-column="92" />
+            <state relative-caret-position="514">
+              <caret line="60" column="80" selection-start-line="60" selection-start-column="80" selection-end-line="60" selection-end-column="80" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -421,8 +306,6 @@
   </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="40" />
-    <option name="y" value="33" />
     <option name="width" value="1920" />
     <option name="height" value="1080" />
   </component>
@@ -457,21 +340,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="EarlyFireDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EarlyFireDetection" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EarlyFireDetection" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Source Files'; set:Project Source Files; class com.jetbrains.cidr.lang.search.scopes.ProjectSourcesScopeProvider$SourceFilesScope">
           <expand>
@@ -497,6 +365,21 @@
               <item name="EarlyFireDetection" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="tests" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="EarlyFireDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EarlyFireDetection" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EarlyFireDetection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -664,7 +547,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="40" y="33" width="1920" height="1080" extended-state="0" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" side_tool="true" visible="true" weight="0.15323855" />
@@ -685,7 +568,7 @@
       <window_info anchor="bottom" id="CMake" order="12" weight="0.2965587" />
       <window_info anchor="bottom" id="Inspection Results" order="13" sideWeight="0.4985694" weight="0.32673267" />
       <window_info anchor="bottom" id="Use Gists" order="14" weight="0.37753037" />
-      <window_info anchor="bottom" id="SVN Repositories" order="15" weight="0.32920793" />
+      <window_info active="true" anchor="bottom" id="SVN Repositories" order="15" visible="true" weight="0.32894737" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -696,6 +579,32 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -708,7 +617,9 @@
     <MESSAGE value="conversion into c++ completed&#10;bug fixes during conversion applied" />
     <MESSAGE value="bug fixes at color model and cleanup" />
     <MESSAGE value="bug fixes and performance &amp; accuracy improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fixes and performance &amp; accuracy improvements" />
+    <MESSAGE value="bug fixes and performance &amp; accuracy , code readability improvements" />
+    <MESSAGE value="bug fixes and performance &amp; accuracy , code cleanup for colormodel" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fixes and performance &amp; accuracy , code cleanup for colormodel" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -717,11 +628,17 @@
       <configuration name="CMakeRunConfiguration">
         <watch expression="mp = {cv::Point_&lt;unsigned char&gt; * | 0x117c9a000} 0x0000000117c9a000" />
         <watch expression="(*mRGB" />
+        <watch expression="step" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>step</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>pixel</expression-string>
         <language-id>ObjectiveC</language-id>
@@ -751,9 +668,7 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/EarlyFireDetection.vcxproj" />
-    <entry file="file://$PROJECT_DIR$/.vscode/settings.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/.vscode/settings.json" />
     <entry file="file:///usr/local/include/opencv2/core/cvstd.inl.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -982,17 +897,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/include/opencv2/core/mat.inl.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="1257" selection-start-line="1257" selection-end-line="1257" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="389" column="12" selection-start-line="389" selection-start-column="12" selection-end-line="389" selection-end-column="12" />
+        <state relative-caret-position="8028">
+          <caret line="446" column="7" selection-start-line="446" selection-start-column="7" selection-end-line="446" selection-end-column="7" />
           <folding>
             <element signature="e#278#306#0" expanded="true" />
           </folding>
@@ -1001,8 +909,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/colorModel.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+        <state relative-caret-position="198">
+          <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -1017,9 +925,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1027,9 +932,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1512">
           <caret line="84" column="40" selection-start-line="84" selection-start-column="40" selection-end-line="84" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1040,10 +942,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///usr/local/include/opencv2/core/mat.inl.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="965" column="18" selection-start-line="965" selection-start-column="18" selection-end-line="965" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/colorModel.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="54" column="92" selection-start-line="54" selection-start-column="92" selection-end-line="54" selection-end-column="92" />
+        <state relative-caret-position="514">
+          <caret line="60" column="80" selection-start-line="60" selection-start-column="80" selection-end-line="60" selection-end-column="80" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>

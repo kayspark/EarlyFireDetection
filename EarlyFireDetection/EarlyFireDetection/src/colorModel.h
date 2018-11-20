@@ -10,6 +10,7 @@ T minrgb(const T r, const T g, const T b) {
 }
 
 typedef cv::Point3_<uint8_t> _normal_pixel;
+typedef uint8_t _short_pixel;
 typedef cv::Point3_<double> _long_pixel;
 
 /**
