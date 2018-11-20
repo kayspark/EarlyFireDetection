@@ -313,7 +313,7 @@ void matchCentroid(cv::Mat &imgCentriod, cv::Mat &imgFireAlarm,
             cv::putText(imgFireAlarm, "Fire !!",
                         cv::Point(rectFire.x, rectFire.y), 2, 1.2, cv::Scalar(0, 0, 255));
             cout << "Alarm: " << currentFrame << endl;
-            cv::imshow("Video", imgFireAlarm);
+            //cv::imshow("Video", imgFireAlarm);
           } else {
             break;  // if not on fire go to erase it
           }

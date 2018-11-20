@@ -14,10 +14,10 @@
 class motionDetection {
 private:
   std::vector<cv::Mat> _vec_frame;
-  cv::Mat m_imgBackgroundModel;    // background model
+  cv::Mat _img_background;    // background model
 
 
-  const int frameNumber;            // the number of frame for calculate background model
+  const int _frameno;            // the number of frame for calculate background model
   int _count;
   cv::Size _size;                      // image size
 
@@ -30,7 +30,7 @@ public:
 
   /*
   * constructor
-  * frameNumber: the number of frame that want to be processing as background model
+  * _frameno: the number of frame that want to be processing as background model
   * frameSize: the size o frame
   */
   motionDetection(const int &frame_count, const cv::Size &frameSize);
