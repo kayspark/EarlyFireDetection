@@ -51,13 +51,8 @@ void motionDetection::getStandardDeviationFrame(cv::Mat &out) {
   cv::Mat tmp(_size, CV_32FC1, cv::Scalar());
   cv::Mat tmp8U(_size, CV_8UC1, cv::Scalar());
   for (int i = 0; i < frameNumber; ++i) {
-    // frame[i] <= | frame[i] - Background Model |
     cv::absdiff(_vec_frame[i], m_imgBackgroundModel, tmp8U);
-    //TODO: check later for correctness
-    //cvAbsDiff(_vec_frame[i], m_imgBackgroundModel, mTmp8U);
-    //cvConvert(mTmp8U, mTmp);j
     tmp8U.convertTo(tmp, CV_32FC1);
-    // mTmp = mTmp * mTmp
     cv::pow(tmp, 2.0, tmp);
     total += tmp;
   }
@@ -77,15 +72,10 @@ void motionDetection::getStandardDeviationFrame(cv::Mat &out) {
 /* Negative processing, convert darkest areas to lightest and lightest to
  * darkest */
 void motionDetection::maskNegative(cv::Mat &img) {
-  for (int i = 0; i < img.rows; ++i) {
-    for (int j = 0; j < img.cols; ++j) {
-      if ((img.data + i * img.step)[j] == 0) {
-        (img.data + i * img.step)[j] = 255;
-      } else {
-        (img.data + i * img.step)[j] = 0;
-      }
-    }
-  }
+  img.forEach<uint8_t>([](uint8_t &pixel, const int *position) -> void {
+    pixel = (pixel == 0 ? 255 : 0);
+  });
+
 }
 
 /* th = th * coefficient */
@@ -116,8 +106,10 @@ void motionDetection::backgroundSubtraction(const cv::Mat &imgDiff, const cv::Ma
   static uchar *dataMask = mask.data;
   static uchar *dataDiff = imgDiff.data;
   static uchar *dataThreshold = imgThreshold.data;
+  typedef uint8_t Pixel;
 
   static const auto step = static_cast<int>(mask.step / sizeof(uchar));
+
   for (int i = 0; i < imgDiff.rows; ++i) {
     for (int j = 0; j < imgDiff.cols; ++j) {
       // foreground(255)

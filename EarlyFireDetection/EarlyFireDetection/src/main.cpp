@@ -25,7 +25,6 @@
 /* Switch */
 #define ON (-1)
 /* Debug Mode */
-#define DEBUG_MODE (ON)
 /* Background Subtraction */
 #define BGS_MODE (ON)
 /* Optical Flow Motion Vector */
@@ -47,7 +46,6 @@ const int BGM_FRAME_COUNT = 0;
 #endif
 
 const int WIN_SIZE = 5;
-
 /* Processing Window Size (Frame) */
 const unsigned int PROCESSING_WINDOWS = 15;  // 15
 
@@ -78,44 +76,6 @@ namespace {
 
 }  // namespace
 
-std::string mat2str(cv::Mat &mat) {
-  std::string r;
-  int type = mat.type();
-  auto depth = static_cast<uchar>(type & CV_MAT_DEPTH_MASK);
-  auto chans = static_cast<uchar>(1 + (type >> CV_CN_SHIFT));
-
-  switch (depth) {
-    case CV_8U:
-      r = "8U";
-      break;
-    case CV_8S:
-      r = "8S";
-      break;
-    case CV_16U:
-      r = "16U";
-      break;
-    case CV_16S:
-      r = "16S";
-      break;
-    case CV_32S:
-      r = "32S";
-      break;
-    case CV_32F:
-      r = "32F";
-      break;
-    case CV_64F:
-      r = "64F";
-      break;
-    default:
-      r = "User";
-      break;
-  }
-
-  r += "C";
-  r += (chans + '0');
-
-  return r;
-}
 // detect roi
 void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale) {
   double t = 0;
@@ -393,6 +353,7 @@ void matchCentroid(cv::Mat &imgCentriod, cv::Mat &imgFireAlarm,
   /* clear up container */
   mulMapOFRect.clear();
 }
+
 auto main(int argc, char *argv[]) -> int {
   // capture from video
   cv::VideoCapture capture(argv[1]);
@@ -414,7 +375,6 @@ auto main(int argc, char *argv[]) -> int {
   // set frame size
   // TODO : check later this conversion is OK
   auto sizeImg = imgSrc.size();
-
   // Fire-like pixels count
   // unsigned int fireLikeCount = 0;
   /***Initialize BGModel & Threshold(Standard Deviation)******/
@@ -428,11 +388,9 @@ auto main(int argc, char *argv[]) -> int {
   bgs.getStandardDeviationFrame(imgStandardDeviation);
   auto img32FBackgroundModel = cv::Mat(sizeImg, CV_32FC1);
   auto img32FStandardDeviation = cv::Mat(sizeImg, CV_32FC1);
-
   /************************Motion Detection*************************/
   // gray
   cv::Mat imgGray = cv::Mat(sizeImg, CV_8UC1, cv::Scalar());
-
   // coefficient * Threshold
   bgs.coefficientThreshold(
       imgStandardDeviation,
