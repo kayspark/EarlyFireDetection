@@ -1,1 +1,0 @@
-/usr/local/opt/llvm/bin/clang++   -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/test_bitwise_op.dir/tests/test_bitwise_op.cpp.o  -o test_bitwise_op /usr/local/lib/libboost_unit_test_framework-mt.dylib 

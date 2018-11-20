@@ -1,4 +1,0 @@
-/usr/local/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -DCMAKE_CXX_COMPILER=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -G "CodeBlocks - Unix Makefiles" /Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection
--- Configuring done
--- Generating done
--- Build files have been written to: /Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build
