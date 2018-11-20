@@ -3,8 +3,10 @@ The purpose is to prevent disasters with vision algoritms.
 Current changes is to utilize latest c++ and opencv 3.4.3 and above.
 This upgrade will keep going with feedback from public, if any.
 
--------------------------------------------  below -----------------------------------
-                                VISION-BASED FIRE DETECTION USING VIDEO SEQUENCES
+---------------------------  below -----------------------------------
+
+                                
+              VISION-BASED FIRE DETECTION USING VIDEO SEQUENCES
 
 Abstract
 
