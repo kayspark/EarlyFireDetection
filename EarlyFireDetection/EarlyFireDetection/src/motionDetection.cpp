@@ -47,14 +47,13 @@ void motionDetection::getBackgroundModel(cv::VideoCapture &capture, cv::Mat &out
 void motionDetection::getStandardDeviationFrame(cv::Mat &out) {
   out.setTo(cv::Scalar::all(0));
   // Initialize
-  cv::Mat total(_size, CV_32FC1, cv::Scalar());
   cv::Mat tmp(_size, CV_32FC1, cv::Scalar());
   cv::Mat tmp8U(_size, CV_8UC1, cv::Scalar());
   for (int i = 0; i < frameNumber; ++i) {
     cv::absdiff(_vec_frame[i], m_imgBackgroundModel, tmp8U);
     tmp8U.convertTo(tmp, CV_32FC1);
     cv::pow(tmp, 2.0, tmp);
-    total += tmp;
+    out += tmp;
   }
 
   // variance: mTmp <= mSum / (frameNumber-1)
@@ -80,22 +79,15 @@ void motionDetection::maskNegative(cv::Mat &img) {
 
 /* th = th * coefficient */
 void motionDetection::coefficientThreshold(cv::Mat &imgThreshold, const int coef) {
-
-  uchar *dataThreshold = imgThreshold.data;
-  auto step = static_cast<int>(imgThreshold.step / sizeof(uchar));
-
-  for (int i = 0; i < imgThreshold.rows; ++i) {
-    for (int j = 0; j < imgThreshold.cols; ++j) {
-      auto tmp = static_cast<uchar>(dataThreshold[i * step + j] * coef);
-      if (tmp > 255) {
-        tmp = 255;
-      }
-      if (tmp < 0) {
-        tmp = 0;
-      }
-      dataThreshold[i * step + j] = tmp;
+  imgThreshold.forEach<int>([&coef](int &pixel, const int *position) -> void {
+    pixel = pixel * coef;
+    if (pixel > 255)
+      pixel = 255;
+    else {
+      if (pixel < 0)
+        pixel = 0;
     }
-  }
+  });
 }
 
 /* one channel & uchar only => imgDiff, imgThreshold, mask
@@ -106,8 +98,6 @@ void motionDetection::backgroundSubtraction(const cv::Mat &imgDiff, const cv::Ma
   static uchar *dataMask = mask.data;
   static uchar *dataDiff = imgDiff.data;
   static uchar *dataThreshold = imgThreshold.data;
-  typedef uint8_t Pixel;
-
   static const auto step = static_cast<int>(mask.step / sizeof(uchar));
 
   for (int i = 0; i < imgDiff.rows; ++i) {
