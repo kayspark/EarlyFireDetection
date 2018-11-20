@@ -1,6 +1,7 @@
-#include <opencv2/imgproc.hpp>
 #include "motionDetection.h"
 #include <iostream>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/highgui.hpp>
 
 /* Create buffer for image */
 motionDetection::motionDetection(const int &frame_count, const cv::Size &frameSize)
@@ -33,7 +34,7 @@ void motionDetection::getBackgroundModel(cv::VideoCapture &capture, cv::Mat &out
       cv::cvtColor(frame, frame, CV_BGR2GRAY);
       cv::accumulate(frame, out);
       ++_count;
-      if (cvWaitKey(10) >= 0) {
+      if (cv::waitKey(10) >= 0) {
         break;
       }
     } else {
@@ -44,6 +45,7 @@ void motionDetection::getBackgroundModel(cv::VideoCapture &capture, cv::Mat &out
 }
 
 /* Standard Deviation */
+// in 32UC1, out 8UC1
 void motionDetection::getStandardDeviationFrame(cv::Mat &out) {
   out.setTo(cv::Scalar::all(0));
   // Initialize
@@ -57,13 +59,10 @@ void motionDetection::getStandardDeviationFrame(cv::Mat &out) {
   }
 
   // variance: mTmp <= mSum / (frameNumber-1)
-  for (int i = 0; i < _size.height; ++i) {
-    for (int j = 0; j < _size.width; ++j) {
-      ((float *) (tmp.data + i * tmp.step))[j] = ((float *) (out.data + i * out.step))[j] / (frameNumber - 1);
-    }
-  }
   // standard deviation
-  cv::sqrt(tmp, out);
+  out.forEach<float>([this](float &pixel, const int *position) -> void {
+    pixel = sqrt(pixel / (frameNumber - 1));
+  });
   // float->uchar
   out.convertTo(out, CV_8UC1);
 }
@@ -72,9 +71,8 @@ void motionDetection::getStandardDeviationFrame(cv::Mat &out) {
  * darkest */
 void motionDetection::maskNegative(cv::Mat &img) {
   img.forEach<uint8_t>([](uint8_t &pixel, const int *position) -> void {
-    pixel = (pixel == 0 ? 255 : 0);
+    pixel = static_cast<uint8_t>(pixel == 0 ? 255 : 0);
   });
-
 }
 
 /* th = th * coefficient */
@@ -94,7 +92,6 @@ void motionDetection::coefficientThreshold(cv::Mat &imgThreshold, const int coef
  * the mask always needed to be reflash( cvZero(mask) ) first!!
  */
 void motionDetection::backgroundSubtraction(const cv::Mat &imgDiff, const cv::Mat &imgThreshold, cv::Mat &mask) {
-
   static uchar *dataMask = mask.data;
   static uchar *dataDiff = imgDiff.data;
   static uchar *dataThreshold = imgThreshold.data;
@@ -110,5 +107,4 @@ void motionDetection::backgroundSubtraction(const cv::Mat &imgDiff, const cv::Ma
     }
   }
 }
-
 
