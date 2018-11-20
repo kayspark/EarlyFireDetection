@@ -76,15 +76,11 @@ void motionDetection::maskNegative(cv::Mat &img) {
 }
 
 /* th = th * coefficient */
+// imgThreshhold = 32FC1, use uchar
 void motionDetection::coefficientThreshold(cv::Mat &imgThreshold, const int coef) {
-  imgThreshold.forEach<int>([&coef](int &pixel, const int *position) -> void {
+  imgThreshold.forEach<uchar>([&coef](uchar &pixel, const int *position) -> void {
     pixel = pixel * coef;
-    if (pixel > 255)
-      pixel = 255;
-    else {
-      if (pixel < 0)
-        pixel = 0;
-    }
+    pixel = static_cast<uchar>(pixel > 255 ? 255 : pixel < 0 ? 0 : pixel);
   });
 }
 
@@ -92,16 +88,14 @@ void motionDetection::coefficientThreshold(cv::Mat &imgThreshold, const int coef
  * the mask always needed to be reflash( cvZero(mask) ) first!!
  */
 void motionDetection::backgroundSubtraction(const cv::Mat &imgDiff, const cv::Mat &imgThreshold, cv::Mat &mask) {
-  static uchar *dataMask = mask.data;
-  static uchar *dataDiff = imgDiff.data;
-  static uchar *dataThreshold = imgThreshold.data;
-  static const auto step = static_cast<int>(mask.step / sizeof(uchar));
-
   for (int i = 0; i < imgDiff.rows; ++i) {
+    auto m = mask.ptr<uint8_t>(i);
+    const auto diff = imgDiff.ptr<uchar>(i);
+    const auto tr = imgThreshold.ptr<uchar>(i);
     for (int j = 0; j < imgDiff.cols; ++j) {
       // foreground(255)
-      if (dataDiff[i * step + j] > dataThreshold[i * step + j]) {
-        dataMask[i * step + j] = 255;
+      if (diff[j] > tr[j]) {
+        m[j] = 255;
       }
       // else background(0)
     }

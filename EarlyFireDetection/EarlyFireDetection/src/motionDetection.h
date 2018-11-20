@@ -1,9 +1,8 @@
 #ifndef MOTIONDETECTION_H
 #define MOTIONDETECTION_H
 
-#include "opencv/cv.h"
 #include "opencv2/videoio.hpp"
-#include "opencv/highgui.h"
+#include "opencv2/highgui.hpp"
 
 /* Motion Detection
 * purpose: For get the initialization background model and threshold(depends on standard deviation)

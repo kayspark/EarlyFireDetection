@@ -284,7 +284,7 @@ void matchCentroid(cv::Mat &imgCentriod, cv::Mat &imgFireAlarm,
                    std::list<Centroid> &listCentroid,
                    std::multimap<int, OFRect> &mulMapOFRect, int currentFrame,
                    const int thrdcp, const unsigned int pwindows) {
-  static cv::Rect rectFire = cvRect(0, 0, 0, 0);
+  static cv::Rect rectFire = cv::Rect(0, 0, 0, 0);
 
   listCentroid.remove_if([&mulMapOFRect, &pwindows, &thrdcp, &imgFireAlarm,
                           &currentFrame](Centroid &centre) {
@@ -309,11 +309,9 @@ void matchCentroid(cv::Mat &imgCentriod, cv::Mat &imgFireAlarm,
             /* recting the fire region */
             cv::rectangle(imgFireAlarm, cv::Point(rectFire.x, rectFire.y),
                           cv::Point((rectFire.x) + (rectFire.width),
-                                  (rectFire.y) + (rectFire.height)),
-                          cv::Scalar(0, 100, 255), 3);
+                                  (rectFire.y) + (rectFire.height)), cv::Scalar(255, 100, 0), 3);
             cv::putText(imgFireAlarm, "Fire !!",
-                        cv::Point(rectFire.x, rectFire.y), 2, 1.2,
-                        cv::Scalar(255, 0, 0));
+                        cv::Point(rectFire.x, rectFire.y), 2, 1.2, cv::Scalar(0, 0, 255));
             cout << "Alarm: " << currentFrame << endl;
             cv::imshow("Video", imgFireAlarm);
           } else {

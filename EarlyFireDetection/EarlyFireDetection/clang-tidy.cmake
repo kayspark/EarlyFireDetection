@@ -2,7 +2,13 @@
 # Get all project files
 file(GLOB_RECURSE
         ALL_CXX_SOURCE_FILES
-        *.[chi]pp *.[chi]xx *.cc *.hh *.ii *.[CHI]
+        ${PROJECT_SOURCE_DIR}/src/*.*
+        ${PROJECT_SOURCE_DIR}/test/*.*
+        ${PROJECT_SOURCE_DIR}/*.cpp
+        ${PROJECT_SOURCE_DIR}/*.cc
+        ${PROJECT_SOURCE_DIR}/*.c
+        ${PROJECT_SOURCE_DIR}/*.h
+        ${PROJECT_SOURCE_DIR}/*.hpp
         )
 
 # Adding clang-format target if executable is found
@@ -26,7 +32,7 @@ if (CLANG_TIDY)
             ${ALL_CXX_SOURCE_FILES}
             -config=''
             --
-            -std=c++11
+            -std=c++17
             ${INCLUDE_DIRECTORIES}
     )
 endif ()
