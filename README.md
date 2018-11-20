@@ -5,7 +5,7 @@ I am in charge of neuromorphic hardware bsed AI application development in nepes
 Please refer http://www.theneuromorphic.com
 
 
-But before applying AI technology, I need a solid baseline to be a good starting poin. The paper and codes from TCHsieh is great enough.
+But before applying AI technology, I need a solid baseline to be a good starting point. The paper and codes from TCHsieh is great enough.
 
 However, it is based on old opencv libaray, which is troublesome especially for cv::Videoio. For example, from 3.4.3, CvVideoCaputreFromAVI is not working anymore. RTP and RTSP support from latest opencv is another good execuse for this fork.
 
