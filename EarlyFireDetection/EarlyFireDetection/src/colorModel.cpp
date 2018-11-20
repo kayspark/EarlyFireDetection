@@ -31,9 +31,9 @@ void checkByRGB(const cv::Mat &imgSrc, const cv::Mat &maskMotion, cv::Mat &maskR
  *   @Parameter:       all img require same size
  *
  *                          [depth]           [channel]
- *		     imgRGB:     IPL_DEPTH_8U			 3
- *		     imgHSI:     IPL_DEPTH_64F			 3
- *		     maskRGB:    IPL_DEPTH_8U			 1
+ *		     imgRGB:     CV8UC3                  3
+ *		     imgHSI:     CV64FC3			     3
+ *		     maskRGB:    CV8UC1      			 1
  */
 void RGB2HSIMask(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB) {
   static const double EFS = 0.000000000000001;                // acceptable bias
