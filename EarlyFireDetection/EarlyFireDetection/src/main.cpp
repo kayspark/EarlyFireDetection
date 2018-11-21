@@ -62,18 +62,19 @@ const auto CONTOUR_POINTS_THRESHOLD = 12;
 
 }  // namespace
 
-// detect roi with gray img
-void detectAndDraw(Mat &grayImg, CascadeClassifier &cascade, double scale) {
+// detect roi
+void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale) {
   double timer = 0;
   vector<Rect> objects;
   const static std::array<Scalar, 8> colors = {
       Scalar(255, 0, 0), Scalar(255, 128, 0), Scalar(255, 255, 0),
       Scalar(0, 255, 0), Scalar(0, 128, 255), Scalar(0, 255, 255),
       Scalar(0, 0, 255), Scalar(255, 0, 255)};
+  cv::Mat gray, smallImg;
 
-  cv::Mat smallImg;
+  cvtColor(img, gray, COLOR_BGR2GRAY);
   double fx = 1 / scale;
-  resize(grayImg, smallImg, Size(), fx, fx, INTER_LINEAR_EXACT);
+  resize(gray, smallImg, Size(), fx, fx, INTER_LINEAR_EXACT);
   equalizeHist(smallImg, smallImg);
 
   timer = (double)getTickCount();
@@ -89,7 +90,7 @@ void detectAndDraw(Mat &grayImg, CascadeClassifier &cascade, double scale) {
   int color_code = 0;
   for (const auto &r : objects) {
     Scalar color = colors[color_code++ % 8];
-    rectangle(grayImg, Point(cvRound(r.x * scale), cvRound(r.y * scale)),
+    rectangle(img, Point(cvRound(r.x * scale), cvRound(r.y * scale)),
               Point(cvRound((r.x + r.width - 1) * scale),
                     cvRound((r.y + r.height - 1) * scale)),
               color, 3, 8, 0);
@@ -298,7 +299,7 @@ void matchCentroid(cv::Mat &imgCenteroid, cv::Mat &imgFireAlarm,
                         cv::Point(rectFire.x, rectFire.y), 2, 1.2,
                         cv::Scalar(0, 0, 255));
             cout << "Alarm: " << currentFrame << endl;
-            // cv::imshow("Video", imgFireAlarm);
+            //cv::imshow("Video", imgFireAlarm);
           } else {
             break;  // if not on fire go to erase it
           }
@@ -339,14 +340,15 @@ void matchCentroid(cv::Mat &imgCenteroid, cv::Mat &imgFireAlarm,
 
 auto main(int argc, char *argv[]) -> int {
   // input check.. capture from video and input files
-  cv::VideoCapture capture(argv[1]);
+  cv::VideoCapture capture(argv[1],cv::CAP_ANY);
   if (!capture.isOpened()) {
     cerr << "Cannot open video!\n" << endl;
     return 1;
   }
   // default size for analysis
   cv::Size sizeImg(800, 600);
-
+  cv::Mat imgSrc;
+  // capture >> imgSrc;
   const auto FPS = capture.get(CV_CAP_PROP_FPS);
   cout << "Video fps: " << FPS << endl;
   CascadeClassifier cascade;
@@ -430,35 +432,39 @@ auto main(int argc, char *argv[]) -> int {
       THRESHOLD_COEFFICIENT);  // cvShowImage( "Standard Deviation",
 
   // calculate backgournd model first
-  capture.set(cv::CAP_PROP_FRAME_WIDTH, 800);
-  capture.set(cv::CAP_PROP_FRAME_HEIGHT,
-              600);  // bgs.getBackgroundModel(capture, imgBackgroundModel);
+  //capture.set(cv::CAP_PROP_FRAME_WIDTH, 800);
+  //capture.set(cv::CAP_PROP_FRAME_HEIGHT,
+  //            600);  // bgs.getBackgroundModel(capture, imgBackgroundModel);
 
   // setup background modes with video capture
   bgs.getBackgroundModel(capture, imgBackgroundModel);
 
   while (key != 'x') {  // exit if user presses 'x'
-    // flash mask values
+    // flash
     maskRGB.setTo(cv::Scalar::all(0));
     maskHSI.setTo(cv::Scalar::all(0));
     // set frame
     capture.set(CV_CAP_PROP_POS_FRAMES, curr_frm);
-    cv::Mat imgSrc;
     capture >> imgSrc;
+
     if (imgSrc.empty()) {
       break;  // exit if unsuccessful or Reach the end of the video
     }
-    // make sure the size is from above!
-    cv::resize(imgSrc, imgSrc, cv::Size(sizeImg.width, sizeImg.height));
-    cv::cvtColor(imgSrc, imgGray, CV_BGR2GRAY);
-    detectAndDraw(imgGray, cascade, 1.2);
+    cv::resize(imgSrc, imgSrc, sizeImg);
+    detectAndDraw(imgSrc, cascade, 1.2);
     // convert rgb to gray
+    cv::cvtColor(imgSrc, imgGray, CV_BGR2GRAY);
 
     // copy for display
     imgSrc.copyTo(imgDisplay);
     imgSrc.copyTo(imgDisplay2);
     imgSrc.copyTo(imgFireAlarm);
+    capture >> imgSrc;
 
+    if (imgSrc.empty()) {
+      break;
+    }
+    cv::resize(imgSrc, imgSrc, sizeImg);
     // the second frame ( gray level )
     cv::cvtColor(imgSrc, imgCurr, CV_BGR2GRAY);
     cv::Mat imgDiff;

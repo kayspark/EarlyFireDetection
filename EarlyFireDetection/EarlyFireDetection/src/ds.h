@@ -41,7 +41,7 @@ CV_INLINE Feature feature(const cv::Point &prev, const cv::Point &curr) {
 typedef struct OFRect {
   bool match{};         // determine whether the rect is match or not
   int countCtrP{};      // the pixel count of contour
-  int countDetected; // the pixel count of contour which is only be detected
+  // the pixel count of contour which is only be detected
   cv::Rect rect;          // rect
   std::vector<Feature> vecFeature;  // optical flow feature points
 

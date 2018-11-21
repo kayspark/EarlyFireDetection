@@ -123,14 +123,12 @@ void assignFeaturePoints(std::multimap<int, OFRect> &mulMapOFRect,
                          std::vector<uchar> &status,
                          std::vector<cv::Point2f> &featuresPrev,
                          std::vector<cv::Point2f> &featuresCurr) {
-  int i = 0;  // feature point index
   // visit each ofrect in vecOFRect
   for_each(
       vecOFRect.begin(), vecOFRect.end(),
-      [&i, &mulMapOFRect, &status, &featuresPrev, &featuresCurr](auto &aRect) {
-        int foundCount = 0;
+      [&mulMapOFRect, &status, &featuresPrev, &featuresCurr](auto &aRect) {
         // contour points count
-        for (int p = 0; p < aRect.countCtrP; ++p,++i) {
+        for (int i = 0; i < aRect.countCtrP; ++i) {
           // if the feature point was be found
           if (status[i] == 0) {
             continue;
@@ -138,11 +136,9 @@ void assignFeaturePoints(std::multimap<int, OFRect> &mulMapOFRect,
             /* push feature to vector of ofrect */
             aRect.vecFeature.push_back(
                 feature(featuresPrev[i], featuresCurr[i]));
-            ++foundCount;
           }
         }
         /* insert ofrect to multimap */
-        aRect.countDetected = foundCount;
         mulMapOFRect.insert(std::pair<int, OFRect>(aRect.rect.x, aRect));
       });
 
