@@ -125,7 +125,6 @@ void checkByHSI(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB, cv::Mat &mas
  *		mask: input mask
  */
 void regionMarkup(cv::Mat &imgSrc, cv::Mat &imgBackup, cv::Mat &mask) {
-
   for (int i = 0; i < imgSrc.rows; ++ i) {
     const auto m = mask.ptr<_short_pixel>(i);
     auto hsi = imgBackup.ptr<_normal_pixel>(i);

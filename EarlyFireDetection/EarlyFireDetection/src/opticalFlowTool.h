@@ -30,7 +30,7 @@ the number of contour points:
 int getContourFeatures(cv::Mat &img,
                        cv::Mat &imgDisplayFireRegion,
                        std::vector<std::vector<cv::Point>> &contours,
-                       std::vector<OFRect> &vecOFRect, const RectThrd &trd, std::vector<cv::Point2f> &featuresPrev,
+                       std::vector<OFRect> &vecOFRect, const RectThresh &trd, std::vector<cv::Point2f> &featuresPrev,
                        std::vector<cv::Vec4i> &hierachy);
 
 /* assign feature points to fire-like obj and then push to multimap

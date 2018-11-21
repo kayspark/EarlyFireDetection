@@ -1,6 +1,4 @@
-
-#ifndef DS_H
-#define DS_H
+#pragma once
 
 #include <iostream> /* C-PlusPlus library */
 #include "opencv/cv.h"
@@ -10,11 +8,11 @@ typedef struct RectThrd {
   int rectHeight;
   int cntrArea;
 
-} RectThrd;
+} RectThresh;
 
 /* for initialize rectThrd node */
-CV_INLINE RectThrd rectThrd(const int rectWidth, const int rectHeight, const int cntrArea) {
-  RectThrd rt;
+CV_INLINE RectThresh rectThrd(const int rectWidth, const int rectHeight, const int cntrArea) {
+  RectThresh rt;
 
   rt.rectWidth = rectWidth;
   rt.rectHeight = rectHeight;
@@ -43,8 +41,7 @@ CV_INLINE Feature feature(const cv::Point &prev, const cv::Point &curr) {
 typedef struct OFRect {
   bool match{};         // determine whether the rect is match or not
   int countCtrP{};      // the pixel count of contour
-  // the pixel count of contour which is only be
-  // detected
+  int countDetected; // the pixel count of contour which is only be detected
   cv::Rect rect;          // rect
   std::vector<Feature> vecFeature;  // optical flow feature points
 
@@ -96,4 +93,3 @@ CV_INLINE void zeroCount(DirectionsCount &count) {
   count.countDown = count.countLeft = count.countRight = count.countUp = 0;
 }
 
-#endif

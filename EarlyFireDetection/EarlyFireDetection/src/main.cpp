@@ -62,36 +62,22 @@ const auto CONTOUR_POINTS_THRESHOLD = 12;
 
 }  // namespace
 
-/* File Path (Resource and Results ) */
-namespace {
-
-// const char* InputVideoPath = "test.mp4";
-// const char *InputVideoPath = "Y:\\Downloads\\02.mp4";
-// const char *InputVideoPath = "Y:\\Downloads\\04.mp4";
-// const char *InputVideoPath = "Y:\\Downloads\\hanjun_C_2.0V 14.mov";
-// const char *InputVideoPath = "Y:\\Downloads\\hanjun_B_2.0V 4.mov";
-// const char *InputVideoPath = "Y:\\Downloads\\hanjun_22.mov";
-// const char *InputVideoPath = "/Users/kspark/Downloads/hanjun_22.mov";
-// const char *InputVideoPath = "/Users/kspark/Downloads/02.mp4";
-
-}  // namespace
-
 // detect roi
 void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale) {
-  double t = 0;
+  double timer = 0;
   vector<Rect> objects;
   const static std::array<Scalar, 8> colors = {
       Scalar(255, 0, 0), Scalar(255, 128, 0), Scalar(255, 255, 0),
       Scalar(0, 255, 0), Scalar(0, 128, 255), Scalar(0, 255, 255),
       Scalar(0, 0, 255), Scalar(255, 0, 255)};
-  Mat gray, smallImg;
+  cv::Mat gray, smallImg;
 
   cvtColor(img, gray, COLOR_BGR2GRAY);
   double fx = 1 / scale;
   resize(gray, smallImg, Size(), fx, fx, INTER_LINEAR_EXACT);
   equalizeHist(smallImg, smallImg);
 
-  t = (double)getTickCount();
+  timer = (double)getTickCount();
   cascade.detectMultiScale(smallImg, objects, 1.1, 2,
                            0
                                //|CASCADE_FIND_BIGGEST_OBJECT
@@ -99,8 +85,8 @@ void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale) {
                                | CASCADE_SCALE_IMAGE,
                            Size(24, 24));
 
-  t = (double)getTickCount() - t;
-  printf("detection time = %g ms\n", t * 1000 / getTickFrequency());
+  timer = (double)getTickCount() - timer;
+  printf("detection time = %g ms\n", timer * 1000 / getTickFrequency());
   int color_code = 0;
   for (const auto &r : objects) {
     Scalar color = colors[color_code++ % 8];
@@ -138,8 +124,6 @@ deque< vector<feature> >
 |   |  fj  |   |
 |   |------|   |
 ----------------
-.
-.
 .
 */
 
@@ -280,7 +264,7 @@ imgDisplay  :	boxing the alarm region
 listCentroid:	candidate fire-like obj those matching with mulMapOFRect's obj
 
 */
-void matchCentroid(cv::Mat &imgCentriod, cv::Mat &imgFireAlarm,
+void matchCentroid(cv::Mat &imgCenteroid, cv::Mat &imgFireAlarm,
                    std::list<Centroid> &listCentroid,
                    std::multimap<int, OFRect> &mulMapOFRect, int currentFrame,
                    const int thrdcp, const unsigned int pwindows) {
@@ -342,9 +326,9 @@ void matchCentroid(cv::Mat &imgCentriod, cv::Mat &imgFireAlarm,
   /* check the list node with image */
   std::for_each(
       listCentroid.begin(), listCentroid.end(),
-      [&imgCentriod](const auto &centre) {
+      [&imgCenteroid](const auto &centre) {
         cv::rectangle(
-            imgCentriod, cv::Point(centre.centroid.x, centre.centroid.y),
+            imgCenteroid, cv::Point(centre.centroid.x, centre.centroid.y),
             cv::Point((centre.centroid.x) + 2, (centre.centroid.y) + 2),
             cv::Scalar(0, 0, 0), 3);
       });
@@ -359,46 +343,27 @@ auto main(int argc, char *argv[]) -> int {
     cerr << "Cannot open video!\n" << endl;
     return 1;
   }
-  cv::Mat imgSrc;
-  capture >> imgSrc;
-  // Get the fps
+  // default size for analysis
+  cv::Size sizeImg(800,600);
+
   const auto FPS = capture.get(CV_CAP_PROP_FPS);
   cout << "Video fps: " << FPS << endl;
   CascadeClassifier cascade;
   std::string cascadeName = "./dataset/cascade2.xml";
-  if (!cascade.load(cascadeName)) {
+  if (!cascade.load(cascadeName) ) {
     cerr << "ERROR: Could not load classifier cascade" << endl;
     return -1;
   }
-  // set frame size
-  // TODO : check later this conversion is OK
-  auto sizeImg = imgSrc.size();
-  // Fire-like pixels count
-  // unsigned int fireLikeCount = 0;
-  /***Initialize BGModel & Threshold(Standard Deviation)******/
-  // create motionDetection object
-  motionDetection bgs(BGM_FRAME_COUNT, sizeImg);
-  // get background model
-  cv::Mat imgBackgroundModel(sizeImg, CV_32FC1, cv::Scalar());
-  bgs.getBackgroundModel(capture, imgBackgroundModel);
-  // get standard deviation
-  cv::Mat imgStandardDeviation(sizeImg, CV_32FC1, cv::Scalar());
-  bgs.getStandardDeviationFrame(imgStandardDeviation);
-  auto img32FBackgroundModel = cv::Mat(sizeImg, CV_32FC1);
-  auto img32FStandardDeviation = cv::Mat(sizeImg, CV_32FC1);
+
   /************************Motion Detection*************************/
   // gray
   cv::Mat imgGray = cv::Mat(sizeImg, CV_8UC1, cv::Scalar());
-  // coefficient * Threshold
-  bgs.coefficientThreshold(
-      imgStandardDeviation,
-      THRESHOLD_COEFFICIENT);  // cvShowImage( "Standard Deviation",
   // mask motion
   auto maskMotion = cv::Mat(sizeImg, CV_8UC1);
   // for rgb image display copy from src
   auto imgRGB = cv::Mat(sizeImg, CV_8UC3);
   auto imgHSI = cv::Mat(sizeImg, CV_8UC3);
-
+  
   // mask rgb
   auto maskRGB = cv::Mat(sizeImg, CV_8UC1);
   // mask hsi
@@ -434,7 +399,7 @@ auto main(int argc, char *argv[]) -> int {
   capture.set(CV_CAP_PROP_POS_FRAMES, 0.0);
   cout << NumberOfFrames << endl;
   // notify the current frame
-  unsigned long currentFrame = 0;
+  unsigned long curr_frm = 0;
   auto maskMorphology = cv::getStructuringElement(
       cv::MORPH_RECT, cv::Size(3, 5), cv::Point(1, 2));
   /* Rect Motion */
@@ -442,22 +407,45 @@ auto main(int argc, char *argv[]) -> int {
   std::vector<OFRect> vecOFRect;            // tmp container for ofrect
   std::multimap<int, OFRect> mulMapOFRect;  // BRect container
 
-  RectThrd rThrd = rectThrd(RECT_WIDTH_THRESHOLD, RECT_HEIGHT_THRESHOLD,
+  RectThresh rThrd = rectThrd(RECT_WIDTH_THRESHOLD, RECT_HEIGHT_THRESHOLD,
                             CONTOUR_AREA_THRESHOLD);
   int key = 0;
   std::vector<vector<cv::Point>> contours;
   std::vector<cv::Vec4i> hierachy;
+
+  // create motionDetection object
+  motionDetection bgs(BGM_FRAME_COUNT, sizeImg);
+  // get background model
+  cv::Mat imgBackgroundModel(sizeImg, CV_32FC1, cv::Scalar());
+  // get standard deviation
+  cv::Mat imgStandardDeviation(sizeImg, CV_32FC1, cv::Scalar());
+  bgs.getStandardDeviationFrame(imgStandardDeviation);
+  auto img32FBackgroundModel = cv::Mat(sizeImg, CV_32FC1);
+  auto img32FStandardDeviation = cv::Mat(sizeImg, CV_32FC1);
+
+  // coefficient * Threshold
+  bgs.coefficientThreshold(
+      imgStandardDeviation,
+      THRESHOLD_COEFFICIENT);  // cvShowImage( "Standard Deviation",
+      
+ // calculate backgournd model first     
+  capture.set(cv::CAP_PROP_FRAME_WIDTH, 800);
+  capture.set(cv::CAP_PROP_FRAME_HEIGHT, 600); // bgs.getBackgroundModel(capture, imgBackgroundModel);
+
+  bgs.getBackgroundModel(capture, imgBackgroundModel);
+  
   while (key != 'x') {  // exit if user presses 'x'
     // flash
     maskRGB.setTo(cv::Scalar::all(0));
     maskHSI.setTo(cv::Scalar::all(0));
     // set frame
-    capture.set(CV_CAP_PROP_POS_FRAMES, currentFrame);
+    capture.set(CV_CAP_PROP_POS_FRAMES, curr_frm);
+    cv::Mat imgSrc;
     capture >> imgSrc;
-
     if (imgSrc.empty()) {
       break;  // exit if unsuccessful or Reach the end of the video
     }
+    cv::resize(imgSrc,imgSrc, cv::Size(sizeImg.width, sizeImg.height));
     detectAndDraw(imgSrc, cascade, 1.2);
     // convert rgb to gray
     cv::cvtColor(imgSrc, imgGray, CV_BGR2GRAY);
@@ -466,18 +454,14 @@ auto main(int argc, char *argv[]) -> int {
     imgSrc.copyTo(imgDisplay);
     imgSrc.copyTo(imgDisplay2);
     imgSrc.copyTo(imgFireAlarm);
-    capture >> imgSrc;
 
-    if (imgSrc.empty()) {
-      break;
-    }
     // the second frame ( gray level )
     cv::cvtColor(imgSrc, imgCurr, CV_BGR2GRAY);
     cv::Mat imgDiff;
 
     imgBackgroundModel.convertTo(imgBackgroundModel, CV_8UC1);
     cv::absdiff(imgGray, imgBackgroundModel,
-                imgDiff);  //      cvShowImage( "cvAbsDiff", imgDiff );
+                imgDiff);  
     // imgDiff > standarDeviationx
     bgs.backgroundSubtraction(
         imgDiff, imgStandardDeviation,
@@ -541,14 +525,14 @@ auto main(int argc, char *argv[]) -> int {
     /* compare the mulMapOFRect space with listCentroid space, if matching
      * insert to listCentroid space as candidate fire-like obj */
     matchCentroid(imgDisplay, imgFireAlarm, listCentroid, mulMapOFRect,
-                  static_cast<int>(currentFrame++), CONTOUR_POINTS_THRESHOLD,
+                  static_cast<int>(curr_frm++), CONTOUR_POINTS_THRESHOLD,
                   PROCESSING_WINDOWS);
     cv::imshow("Fire Alarm", imgFireAlarm);
     // cvWriteFrame(writer, imgFireAlarm);
     // cout << "< Frame >: " << currentFrame++ << endl;
     key = cv::waitKey(5);
     /* Don't run past the end of the AVI. */
-    if (currentFrame == NumberOfFrames) {
+    if (curr_frm == NumberOfFrames) {
       break;
     }
   }

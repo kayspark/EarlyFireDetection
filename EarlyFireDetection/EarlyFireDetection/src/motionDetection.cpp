@@ -22,15 +22,18 @@ motionDetection::~motionDetection() {
   }
 }
 /* Calculate Background Model */
-void motionDetection::getBackgroundModel(cv::VideoCapture &capture, cv::Mat &out) {
+void motionDetection::getBackgroundModel(cv::VideoCapture &cap, cv::Mat &out) {
   // accumulate frame from video
+
   while (_count != _frameno) {
     cv::Mat frame;
-    if (capture.isOpened()) {
-      capture >> frame;
+    if (cap.isOpened()) {
+
+      cap >> frame;
       // convert rgb to gray
       if (frame.empty())
         continue;
+      cv::resize(frame, frame, cv::Size(out.cols, out.rows));
       cv::cvtColor(frame, frame, CV_BGR2GRAY);
       cv::accumulate(frame, out);
       ++_count;
@@ -103,4 +106,3 @@ void motionDetection::backgroundSubtraction(const cv::Mat &imgDiff, const cv::Ma
     }
   }
 }
-
