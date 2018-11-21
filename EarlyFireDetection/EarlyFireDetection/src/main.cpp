@@ -62,19 +62,18 @@ const auto CONTOUR_POINTS_THRESHOLD = 12;
 
 }  // namespace
 
-// detect roi
-void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale) {
+// detect roi with gray img
+void detectAndDraw(Mat &grayImg, CascadeClassifier &cascade, double scale) {
   double timer = 0;
   vector<Rect> objects;
   const static std::array<Scalar, 8> colors = {
       Scalar(255, 0, 0), Scalar(255, 128, 0), Scalar(255, 255, 0),
       Scalar(0, 255, 0), Scalar(0, 128, 255), Scalar(0, 255, 255),
       Scalar(0, 0, 255), Scalar(255, 0, 255)};
-  cv::Mat gray, smallImg;
 
-  cvtColor(img, gray, COLOR_BGR2GRAY);
+  cv::Mat smallImg;
   double fx = 1 / scale;
-  resize(gray, smallImg, Size(), fx, fx, INTER_LINEAR_EXACT);
+  resize(grayImg, smallImg, Size(), fx, fx, INTER_LINEAR_EXACT);
   equalizeHist(smallImg, smallImg);
 
   timer = (double)getTickCount();
@@ -90,7 +89,7 @@ void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale) {
   int color_code = 0;
   for (const auto &r : objects) {
     Scalar color = colors[color_code++ % 8];
-    rectangle(img, Point(cvRound(r.x * scale), cvRound(r.y * scale)),
+    rectangle(grayImg, Point(cvRound(r.x * scale), cvRound(r.y * scale)),
               Point(cvRound((r.x + r.width - 1) * scale),
                     cvRound((r.y + r.height - 1) * scale)),
               color, 3, 8, 0);
@@ -293,11 +292,13 @@ void matchCentroid(cv::Mat &imgCenteroid, cv::Mat &imgFireAlarm,
             /* recting the fire region */
             cv::rectangle(imgFireAlarm, cv::Point(rectFire.x, rectFire.y),
                           cv::Point((rectFire.x) + (rectFire.width),
-                                  (rectFire.y) + (rectFire.height)), cv::Scalar(255, 100, 0), 3);
+                                    (rectFire.y) + (rectFire.height)),
+                          cv::Scalar(255, 100, 0), 3);
             cv::putText(imgFireAlarm, "Fire !!",
-                        cv::Point(rectFire.x, rectFire.y), 2, 1.2, cv::Scalar(0, 0, 255));
+                        cv::Point(rectFire.x, rectFire.y), 2, 1.2,
+                        cv::Scalar(0, 0, 255));
             cout << "Alarm: " << currentFrame << endl;
-            //cv::imshow("Video", imgFireAlarm);
+            // cv::imshow("Video", imgFireAlarm);
           } else {
             break;  // if not on fire go to erase it
           }
@@ -337,20 +338,20 @@ void matchCentroid(cv::Mat &imgCenteroid, cv::Mat &imgFireAlarm,
 }
 
 auto main(int argc, char *argv[]) -> int {
-  // capture from video
+  // input check.. capture from video and input files
   cv::VideoCapture capture(argv[1]);
   if (!capture.isOpened()) {
     cerr << "Cannot open video!\n" << endl;
     return 1;
   }
   // default size for analysis
-  cv::Size sizeImg(800,600);
+  cv::Size sizeImg(800, 600);
 
   const auto FPS = capture.get(CV_CAP_PROP_FPS);
   cout << "Video fps: " << FPS << endl;
   CascadeClassifier cascade;
   std::string cascadeName = "./dataset/cascade2.xml";
-  if (!cascade.load(cascadeName) ) {
+  if (!cascade.load(cascadeName)) {
     cerr << "ERROR: Could not load classifier cascade" << endl;
     return -1;
   }
@@ -363,7 +364,7 @@ auto main(int argc, char *argv[]) -> int {
   // for rgb image display copy from src
   auto imgRGB = cv::Mat(sizeImg, CV_8UC3);
   auto imgHSI = cv::Mat(sizeImg, CV_8UC3);
-  
+
   // mask rgb
   auto maskRGB = cv::Mat(sizeImg, CV_8UC1);
   // mask hsi
@@ -408,7 +409,7 @@ auto main(int argc, char *argv[]) -> int {
   std::multimap<int, OFRect> mulMapOFRect;  // BRect container
 
   RectThresh rThrd = rectThrd(RECT_WIDTH_THRESHOLD, RECT_HEIGHT_THRESHOLD,
-                            CONTOUR_AREA_THRESHOLD);
+                              CONTOUR_AREA_THRESHOLD);
   int key = 0;
   std::vector<vector<cv::Point>> contours;
   std::vector<cv::Vec4i> hierachy;
@@ -427,15 +428,17 @@ auto main(int argc, char *argv[]) -> int {
   bgs.coefficientThreshold(
       imgStandardDeviation,
       THRESHOLD_COEFFICIENT);  // cvShowImage( "Standard Deviation",
-      
- // calculate backgournd model first     
-  capture.set(cv::CAP_PROP_FRAME_WIDTH, 800);
-  capture.set(cv::CAP_PROP_FRAME_HEIGHT, 600); // bgs.getBackgroundModel(capture, imgBackgroundModel);
 
+  // calculate backgournd model first
+  capture.set(cv::CAP_PROP_FRAME_WIDTH, 800);
+  capture.set(cv::CAP_PROP_FRAME_HEIGHT,
+              600);  // bgs.getBackgroundModel(capture, imgBackgroundModel);
+
+  // setup background modes with video capture
   bgs.getBackgroundModel(capture, imgBackgroundModel);
-  
+
   while (key != 'x') {  // exit if user presses 'x'
-    // flash
+    // flash mask values
     maskRGB.setTo(cv::Scalar::all(0));
     maskHSI.setTo(cv::Scalar::all(0));
     // set frame
@@ -445,10 +448,11 @@ auto main(int argc, char *argv[]) -> int {
     if (imgSrc.empty()) {
       break;  // exit if unsuccessful or Reach the end of the video
     }
-    cv::resize(imgSrc,imgSrc, cv::Size(sizeImg.width, sizeImg.height));
-    detectAndDraw(imgSrc, cascade, 1.2);
-    // convert rgb to gray
+    // make sure the size is from above!
+    cv::resize(imgSrc, imgSrc, cv::Size(sizeImg.width, sizeImg.height));
     cv::cvtColor(imgSrc, imgGray, CV_BGR2GRAY);
+    detectAndDraw(imgGray, cascade, 1.2);
+    // convert rgb to gray
 
     // copy for display
     imgSrc.copyTo(imgDisplay);
@@ -460,8 +464,7 @@ auto main(int argc, char *argv[]) -> int {
     cv::Mat imgDiff;
 
     imgBackgroundModel.convertTo(imgBackgroundModel, CV_8UC1);
-    cv::absdiff(imgGray, imgBackgroundModel,
-                imgDiff);  
+    cv::absdiff(imgGray, imgBackgroundModel, imgDiff);
     // imgDiff > standarDeviationx
     bgs.backgroundSubtraction(
         imgDiff, imgStandardDeviation,
@@ -537,6 +540,7 @@ auto main(int argc, char *argv[]) -> int {
     }
   }
   // release memory
+  capture.release();
   imgFireAlarm.release();
   imgTemp.release();
   imgEig.release();
@@ -556,7 +560,5 @@ auto main(int argc, char *argv[]) -> int {
   img32FBackgroundModel.release();
   img32FStandardDeviation.release();
   maskMorphology.release();
-  cvDestroyAllWindows();
-  capture.release();
   return 0;
 }
