@@ -349,7 +349,7 @@ auto main(int argc, char *argv[]) -> int {
   cv::Size sizeImg(800, 600);
   cv::Mat imgSrc;
   // capture >> imgSrc;
-  const auto FPS = capture.get(CV_CAP_PROP_FPS);
+  const auto FPS = capture.get(cv::CAP_PROP_FPS);
   cout << "Video fps: " << FPS << endl;
   CascadeClassifier cascade;
   std::string cascadeName = "./dataset/cascade2.xml";
@@ -360,47 +360,42 @@ auto main(int argc, char *argv[]) -> int {
 
   /************************Motion Detection*************************/
   // gray
-  cv::Mat imgGray = cv::Mat(sizeImg, CV_8UC1, cv::Scalar());
+  auto imgGray = cv::Mat(sizeImg, CV_8UC1, cv::Scalar());
   // mask motion
   auto maskMotion = cv::Mat(sizeImg, CV_8UC1);
   // for rgb image display copy from src
   auto imgRGB = cv::Mat(sizeImg, CV_8UC3);
   auto imgHSI = cv::Mat(sizeImg, CV_8UC3);
-
   // mask rgb
   auto maskRGB = cv::Mat(sizeImg, CV_8UC1);
   // mask hsi
   auto maskHSI = cv::Mat(sizeImg, CV_8UC1);
   auto bufHSI = cv::Mat(sizeImg, CV_64FC3);
-
   // Optical FLow
-  auto imgPrev = cv::Mat(sizeImg, CV_8UC1);
   auto imgCurr = cv::Mat(sizeImg, CV_8UC1);
   auto imgDisplay = cv::Mat(sizeImg, CV_8UC3);
   auto imgDisplay2 = cv::Mat(sizeImg, CV_8UC3);
   auto imgFireAlarm = cv::Mat(sizeImg, CV_8UC3);
   // Buffer for Pyramid image
-  cv::Size sizePyr = cvSize(sizeImg.width + 8, sizeImg.height / 3);
+  cv::Size sizePyr = cv::Size(sizeImg.width + 8, sizeImg.height / 3);
   auto pyrPrev = cv::Mat(sizePyr, CV_32FC1);
   auto pyrCurr = cv::Mat(sizePyr, CV_32FC1);
   std::vector<cv::Point2f> featuresPrev(_max_corners);
   std::vector<cv::Point2f> featuresCurr(_max_corners);
   cv::Size sizeWin = cv::Size(WIN_SIZE, WIN_SIZE);
-  auto imgEig = cv::Mat(sizeImg, CV_32FC1);
-  auto imgTemp = cv::Mat(sizeImg, CV_32FC1);
 
   // Pyramid Lucas-_max_corners
   std::vector<uchar> featureFound(_max_corners);
   std::vector<float> featureErrors(_max_corners);
 
   // Go to the end of the AVI
-  capture.set(CV_CAP_PROP_POS_AVI_RATIO, 1.0);
+  capture.set(cv::CAP_PROP_POS_AVI_RATIO, 1.0);
   // Now that we're at the end, read the AVI position in frames
-  long NumberOfFrames =
-      static_cast<int>(capture.get(CV_CAP_PROP_POS_FRAMES) - 1);
+  long frame_count =
+      static_cast<int>(capture.get(cv::CAP_PROP_POS_FRAMES) - 1);
   // Return to the beginning
-  capture.set(CV_CAP_PROP_POS_FRAMES, 0.0);
-  cout << NumberOfFrames << endl;
+  capture.set(cv::CAP_PROP_POS_FRAMES, 0.0);
+  cout << frame_count << endl;
   // notify the current frame
   unsigned long curr_frm = 0;
   auto maskMorphology = cv::getStructuringElement(
@@ -425,28 +420,19 @@ auto main(int argc, char *argv[]) -> int {
   bgs.getStandardDeviationFrame(imgStandardDeviation);
   auto img32FBackgroundModel = cv::Mat(sizeImg, CV_32FC1);
   auto img32FStandardDeviation = cv::Mat(sizeImg, CV_32FC1);
-
   // coefficient * Threshold
   bgs.coefficientThreshold(
       imgStandardDeviation,
       THRESHOLD_COEFFICIENT);  // cvShowImage( "Standard Deviation",
-
-  // calculate backgournd model first
-  //capture.set(cv::CAP_PROP_FRAME_WIDTH, 800);
-  //capture.set(cv::CAP_PROP_FRAME_HEIGHT,
-  //            600);  // bgs.getBackgroundModel(capture, imgBackgroundModel);
-
   // setup background modes with video capture
   bgs.getBackgroundModel(capture, imgBackgroundModel);
-
   while (key != 'x') {  // exit if user presses 'x'
     // flash
     maskRGB.setTo(cv::Scalar::all(0));
     maskHSI.setTo(cv::Scalar::all(0));
     // set frame
-    capture.set(CV_CAP_PROP_POS_FRAMES, curr_frm);
+    capture.set(cv::CAP_PROP_POS_FRAMES, curr_frm);
     capture >> imgSrc;
-
     if (imgSrc.empty()) {
       break;  // exit if unsuccessful or Reach the end of the video
     }
@@ -454,16 +440,15 @@ auto main(int argc, char *argv[]) -> int {
     detectAndDraw(imgSrc, cascade, 1.2);
     // convert rgb to gray
     cv::cvtColor(imgSrc, imgGray, CV_BGR2GRAY);
-
     // copy for display
     imgSrc.copyTo(imgDisplay);
     imgSrc.copyTo(imgDisplay2);
     imgSrc.copyTo(imgFireAlarm);
     capture >> imgSrc;
-
     if (imgSrc.empty()) {
       break;
     }
+  // caution is needed
     cv::resize(imgSrc, imgSrc, sizeImg);
     // the second frame ( gray level )
     cv::cvtColor(imgSrc, imgCurr, CV_BGR2GRAY);
@@ -541,16 +526,13 @@ auto main(int argc, char *argv[]) -> int {
     // cout << "< Frame >: " << currentFrame++ << endl;
     key = cv::waitKey(5);
     /* Don't run past the end of the AVI. */
-    if (curr_frm == NumberOfFrames) {
+    if (curr_frm == frame_count) {
       break;
     }
   }
   // release memory
   capture.release();
   imgFireAlarm.release();
-  imgTemp.release();
-  imgEig.release();
-  imgPrev.release();
   imgCurr.release();
   imgDisplay.release();
   imgDisplay2.release();
