@@ -23,7 +23,7 @@ motionDetection::~motionDetection() {
   }
 }
 /* Calculate Background Model */
-void motionDetection::getBackgroundModel(vlc_capture &cap, cv::Mat &out) {
+void motionDetection::getBackgroundModel(cv::VideoCapture &cap, cv::Mat &out) {
   // accumulate frame from video
 
   while (_count != _frameno) {

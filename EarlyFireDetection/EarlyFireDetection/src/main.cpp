@@ -342,19 +342,19 @@ void matchCentroid(cv::Mat &imgCenteroid, cv::Mat &imgFireAlarm,
 
 auto main(int argc, char *argv[]) -> int {
   // input check.. capture from video and input files
-  // cv::VideoCapture capture(argv[1]);
+   cv::VideoCapture capture(argv[1]);
   // bool bFire = atoi(argv[1]) > 0 ? true : false ;
 
-  vlc_capture capture("RV24", 800, 600);
-
-  capture.open(argv[1]);
-  if (!capture.isOpened()) {
-    cerr << "Cannot open video!\n" << endl;
-    return 1;
-  }
+  //vlc_capture capture("RV24", 800, 600);
+ 
+  //capture.open(argv[1]);
+  // if (!capture.isOpened()) {
+  //   cerr << "Cannot open video!\n" << endl;
+  //   return 1;
+  // }
   // default size for analysis
-  // cv::Size sizeImg(800, 600);
-  cv::Size sizeImg = capture.get_size();
+  cv::Size sizeImg(800, 600);
+  //cv::Size sizeImg = capture.get_size();
   cv::Mat imgSrc; //(sizeImg, CV_8UC3); //capture.read(imgSrc);
 
   // capture >> imgSrc;

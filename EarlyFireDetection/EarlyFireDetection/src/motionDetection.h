@@ -32,7 +32,7 @@ public:
   /* destructor */
   ~motionDetection();
   /* Need pass capture  ptr */
-  void getBackgroundModel(vlc_capture &cap, cv::Mat &out);
+  void getBackgroundModel(cv::VideoCapture &cap, cv::Mat &out);
   void getStandardDeviationFrame(cv::Mat &out);
   /* one channel & uchar only => imgDiff, imgThreshold, mask
    * the mask always needed to be reflash( cvZero(mask) ) first!!
