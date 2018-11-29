@@ -1,17 +1,16 @@
 #ifndef OPTFLOWTOOL_H
 #define OPTFLOWTOOL_H
 
-#include <map>
 #include "ds.h"
 #include "opencv/cv.h"
 #include "opencv/highgui.h"
+#include <map>
 /* Optical Flow Parameters */
 #define _max_corners 10000
 /* Drawing Arrow for Optical Flow */
 void drawArrow(cv::Mat &imgDisplay,
                const std::vector<cv::Point2f> &featuresPrev,
-               const std::vector<cv::Point2f> &featuresCurr,
-               int cornerCount,
+               const std::vector<cv::Point2f> &featuresCurr, int cornerCount,
                const std::vector<uchar> &featureFound);
 
 /* get the feature points from contour
@@ -27,10 +26,10 @@ featuresCurr        : current contours points
 return:
 the number of contour points:
 */
-int getContourFeatures(cv::Mat &img,
-                       cv::Mat &imgDisplayFireRegion,
+int getContourFeatures(cv::Mat &img, cv::Mat &imgDisplayFireRegion,
                        std::vector<std::vector<cv::Point>> &contours,
-                       std::vector<OFRect> &vecOFRect, const RectThresh &trd, std::vector<cv::Point2f> &featuresPrev,
+                       std::vector<OFRect> &vecOFRect, const RectThresh &trd,
+                       std::vector<cv::Point2f> &featuresPrev,
                        std::vector<cv::Vec4i> &hierachy);
 
 /* assign feature points to fire-like obj and then push to multimap

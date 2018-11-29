@@ -9,7 +9,7 @@ void drawArrow(cv::Mat &imgDisplay,
   static int i, lineThickness = 1;
   static cv::Scalar lineColor(100, 200, 250);
   static double angle, hypotenuse, tmpCOS, tmpSIN;
-  static CvPoint p, q;
+  static cv::Point p, q;
   static const double PI_DIV_4 = CV_PI / 4;
 
   // Draw the flow field
@@ -71,22 +71,22 @@ int getContourFeatures(cv::Mat &img, cv::Mat &imgDisplayFireRegion,
   auto ContourFeaturePointCount = 0;
   /* thresholding on connected component */
   for (int index = 0; index < contours.size();
-       index++) {  // contours-based visiting
+       index++) { // contours-based visiting
     /* Recting the Contour with smallest rectangle */
     cv::Rect rect_ = cv::boundingRect(contours[index]);
     /* checking the area */
     if (((rect_.width > trd.rectWidth) && (rect_.height > trd.rectHeight)) &&
         (fabs(cv::contourArea(contours[index])) > trd.cntrArea)) {
       /* Drawing the Contours */
-      cv::drawContours(img, contours, index, cv::Scalar(250, 0, 0),  // Red
-                       2,             // Vary max_level and compare results
-                       8, hierachy);  // line type
+      cv::drawContours(img, contours, index, cv::Scalar(250, 0, 0), // Red
+                       2,            // Vary max_level and compare results
+                       8, hierachy); // line type
       cv::imshow("Fire-like Contours", img);
       /* Drawing the region */
       cv::rectangle(
-          imgDisplayFireRegion, cvPoint(rect_.x, rect_.y),
+          imgDisplayFireRegion, cv::Point(rect_.x, rect_.y),
           cv::Point((rect_.x) + (rect_.width), (rect_.y) + (rect_.height)),
-          CV_RGB(255, 10, 0), 2);
+          cv::Scalar(0, 10, 255), 2);
       /* for each contours pixel count	*/
       countCtrP = 0;
       /* access points on each contours */
@@ -124,25 +124,23 @@ void assignFeaturePoints(std::multimap<int, OFRect> &mulMapOFRect,
                          std::vector<cv::Point2f> &featuresPrev,
                          std::vector<cv::Point2f> &featuresCurr) {
   // visit each ofrect in vecOFRect
-  for_each(
-      vecOFRect.begin(), vecOFRect.end(),
-      [&mulMapOFRect, &status, &featuresPrev, &featuresCurr](auto &aRect) {
-        // contour points count
-        for (int i = 0; i < aRect.countCtrP; ++i) {
-          // if the feature point was be found
-          if (status[i] == 0) {
-            continue;
-          } else {
-            /* push feature to vector of ofrect */
-            aRect.vecFeature.push_back(
-                feature(featuresPrev[i], featuresCurr[i]));
-          }
-        }
-        /* insert ofrect to multimap */
-        mulMapOFRect.insert(std::pair<int, OFRect>(aRect.rect.x, aRect));
-      });
+  for_each(vecOFRect.begin(), vecOFRect.end(),
+           [&mulMapOFRect, &status, &featuresPrev, &featuresCurr](auto &aRect) {
+             // contour points count
+             for (int i = 0; i < aRect.countCtrP; ++i) {
+               // if the feature point was be found
+               if (status[i] == 0) {
+                 continue;
+               } else {
+                 /* push feature to vector of ofrect */
+                 aRect.vecFeature.push_back(
+                     feature(featuresPrev[i], featuresCurr[i]));
+               }
+             }
+             /* insert ofrect to multimap */
+             mulMapOFRect.insert(std::pair<int, OFRect>(aRect.rect.x, aRect));
+           });
 
   /* clear up container */
   vecOFRect.clear();
 }
-

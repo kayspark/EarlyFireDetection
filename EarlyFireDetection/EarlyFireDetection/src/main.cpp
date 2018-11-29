@@ -17,6 +17,7 @@
 #include "fireBehaviorAnalysis.h"
 #include "motionDetection.h"
 #include "opticalFlowTool.h"
+#include "vlccap.h"
 
 /* C-PlusPlus Library */
 
@@ -37,7 +38,6 @@ using namespace cv;
 
 /* Non-named namespace, global constants */
 namespace {
-
 /* Background Mode */
 #if defined(BGS_MODE) && (BGS_MODE == ON)
 const int BGM_FRAME_COUNT = 20;
@@ -47,7 +47,7 @@ const int BGM_FRAME_COUNT = 0;
 
 const int WIN_SIZE = 5;
 /* Processing Window Size (Frame) */
-const unsigned int PROCESSING_WINDOWS = 15;  // 15
+const unsigned int PROCESSING_WINDOWS = 15; // 15
 
 /* Background Model Update Coefficients */
 const auto ACCUMULATE_WEIGHTED_ALPHA_BGM = 0.1;
@@ -59,8 +59,7 @@ const auto RECT_WIDTH_THRESHOLD = 5;
 const auto RECT_HEIGHT_THRESHOLD = 5;
 const auto CONTOUR_AREA_THRESHOLD = 12;
 const auto CONTOUR_POINTS_THRESHOLD = 12;
-
-}  // namespace
+} // namespace
 
 // detect roi
 void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale) {
@@ -83,10 +82,11 @@ void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale) {
                                //|CASCADE_FIND_BIGGEST_OBJECT
                                //|CASCADE_DO_ROUGH_SEARCH
                                | CASCADE_SCALE_IMAGE,
-                           Size(24, 24));
+                           Size(24, 24), Size(350, 350));
 
   timer = (double)getTickCount() - timer;
-  printf("detection time = %g ms\n", timer * 1000 / getTickFrequency());
+  printf("suspicious object: %zd,  detection time = %g ms\n", objects.size(),
+         timer * 1000 / getTickFrequency());
   int color_code = 0;
   for (const auto &r : objects) {
     Scalar color = colors[color_code++ % 8];
@@ -100,7 +100,7 @@ void detectAndDraw(Mat &img, CascadeClassifier &cascade, double scale) {
 /*
 deque< vector<feature> >
 ----------------
-|   --------   |
+//|   --------   |
 |   |  f1  |   |
 |   |------|   |
 |   |  f2  |   |   <===   frame 1
@@ -134,7 +134,7 @@ not）
 */
 bool checkContourPoints(Centroid &ctrd, const int thrdcp,
                         const unsigned int pwindows) {
-  long countFrame =
+  unsigned int countFrame =
       // contour points of each frame
       std::count_if(
           ctrd.dOFRect.begin(), ctrd.dOFRect.end(),
@@ -159,15 +159,15 @@ void motionOrientationHist(std::vector<Feature> &vecFeature,
                   /* orientation */
                   if (feature.prev.x >= feature.curr.x) {
                     if (feature.prev.y >= feature.curr.y) {
-                      ++orient[0];  // up-left
+                      ++orient[0]; // up-left
                     } else {
-                      ++orient[2];  // down-left
+                      ++orient[2]; // down-left
                     }
                   } else {
                     if (feature.prev.y >= feature.curr.y) {
-                      ++orient[1];  // up-right
+                      ++orient[1]; // up-right
                     } else {
-                      ++orient[3];  // down-right
+                      ++orient[3]; // down-right
                     }
                   }
                 });
@@ -249,7 +249,8 @@ bool checkContourEnergy(Centroid &ctrd, const unsigned int pwindows) {
   bool out = staticFrame < thrdStaticFrame
                  ? passFrame > thrdPassFrame && orientFrame < thrdOrienFrame
                  : false;
-  if (out) std::cout << "energy is likely " << std::endl;
+  if (out)
+    std::cout << "energy is likely " << std::endl;
   return out;
 }
 
@@ -287,7 +288,8 @@ void matchCentroid(cv::Mat &imgCenteroid, cv::Mat &imgFireAlarm,
         /* Update countFrame and judge the threshold of it */
         if (++(centre.countFrame) == pwindows) {
           /* GO TO PROCEESING DIRECTION MOTION */
-          if (!judgeDirectionsMotion(centre.vecRect, rectFire)) break;
+          if (!judgeDirectionsMotion(centre.vecRect, rectFire))
+            break;
           if (checkContourPoints(centre, thrdcp, pwindows) &&
               checkContourEnergy(centre, pwindows)) {
             /* recting the fire region */
@@ -299,19 +301,19 @@ void matchCentroid(cv::Mat &imgCenteroid, cv::Mat &imgFireAlarm,
                         cv::Point(rectFire.x, rectFire.y), 2, 1.2,
                         cv::Scalar(0, 0, 255));
             cout << "Alarm: " << currentFrame << endl;
-            //cv::imshow("Video", imgFireAlarm);
+            cv::imshow("Video", imgFireAlarm);
           } else {
-            break;  // if not on fire go to erase it
+            break; // if not on fire go to erase it
           }
           /* mark this rect as matched */
         }
         aRect.second.match = true;
         out = true;
         // ++itCentroid;
-        break;  // if matched break the inner loop
+        break; // if matched break the inner loop
       }
       // if ended the map rect and not matched anyone go to erase it
-    }  // for (multimapBRect)
+    } // for (multimapBRect)
     return !out;
   });
   /* push new rect to listCentroid */
@@ -326,33 +328,40 @@ void matchCentroid(cv::Mat &imgCenteroid, cv::Mat &imgFireAlarm,
                 });
   // cout <<"after list count: "<< listCentroid.size() << endl;
   /* check the list node with image */
-  std::for_each(
-      listCentroid.begin(), listCentroid.end(),
-      [&imgCenteroid](const auto &centre) {
-        cv::rectangle(
-            imgCenteroid, cv::Point(centre.centroid.x, centre.centroid.y),
-            cv::Point((centre.centroid.x) + 2, (centre.centroid.y) + 2),
-            cv::Scalar(0, 0, 0), 3);
-      });
+  std::for_each(listCentroid.begin(), listCentroid.end(),
+                [&imgCenteroid](const auto &centre) {
+                  cv::rectangle(imgCenteroid,
+                                cv::Point(centre.centroid.x, centre.centroid.y),
+                                cv::Point((centre.centroid.x) + 2,
+                                          (centre.centroid.y) + 2),
+                                cv::Scalar(0, 0, 0), 3);
+                });
   /* clear up container */
   mulMapOFRect.clear();
 }
 
 auto main(int argc, char *argv[]) -> int {
   // input check.. capture from video and input files
-  cv::VideoCapture capture(argv[1],cv::CAP_ANY);
+  // cv::VideoCapture capture(argv[1]);
+  // bool bFire = atoi(argv[1]) > 0 ? true : false ;
+
+  vlc_capture capture("RV24", 800, 600);
+
+  capture.open(argv[1]);
   if (!capture.isOpened()) {
     cerr << "Cannot open video!\n" << endl;
     return 1;
   }
   // default size for analysis
-  cv::Size sizeImg(800, 600);
-  cv::Mat imgSrc;
+  // cv::Size sizeImg(800, 600);
+  cv::Size sizeImg = capture.get_size();
+  cv::Mat imgSrc; //(sizeImg, CV_8UC3); //capture.read(imgSrc);
+
   // capture >> imgSrc;
-  const auto FPS = capture.get(cv::CAP_PROP_FPS);
-  cout << "Video fps: " << FPS << endl;
+  // const auto FPS = capture.get(cv::CAP_PROP_FPS);
+  // cout << "Video fps: " << FPS << endl;
   CascadeClassifier cascade;
-  std::string cascadeName = "./dataset/cascade2.xml";
+  std::string cascadeName = "./dataset/cascade.xml";
   if (!cascade.load(cascadeName)) {
     cerr << "ERROR: Could not load classifier cascade" << endl;
     return -1;
@@ -383,27 +392,28 @@ auto main(int argc, char *argv[]) -> int {
   std::vector<cv::Point2f> featuresPrev(_max_corners);
   std::vector<cv::Point2f> featuresCurr(_max_corners);
   cv::Size sizeWin = cv::Size(WIN_SIZE, WIN_SIZE);
+  auto imgTemp = cv::Mat(sizeImg, CV_32FC1);
 
   // Pyramid Lucas-_max_corners
   std::vector<uchar> featureFound(_max_corners);
   std::vector<float> featureErrors(_max_corners);
 
   // Go to the end of the AVI
-  capture.set(cv::CAP_PROP_POS_AVI_RATIO, 1.0);
+  // capture.set(cv::CAP_PROP_POS_AVI_RATIO, 1.0);
   // Now that we're at the end, read the AVI position in frames
-  long frame_count =
-      static_cast<int>(capture.get(cv::CAP_PROP_POS_FRAMES) - 1);
+  // long frame_count =
+  //    static_cast<int>(capture.get(cv::CAP_PROP_POS_FRAMES) - 1);
   // Return to the beginning
-  capture.set(cv::CAP_PROP_POS_FRAMES, 0.0);
-  cout << frame_count << endl;
+  // capture.set(cv::CAP_PROP_POS_FRAMES, 0.0);
+  // cout << frame_count << endl;
   // notify the current frame
   unsigned long curr_frm = 0;
   auto maskMorphology = cv::getStructuringElement(
       cv::MORPH_RECT, cv::Size(3, 5), cv::Point(1, 2));
   /* Rect Motion */
-  std::list<Centroid> listCentroid;         // Centroid container
-  std::vector<OFRect> vecOFRect;            // tmp container for ofrect
-  std::multimap<int, OFRect> mulMapOFRect;  // BRect container
+  std::list<Centroid> listCentroid;        // Centroid container
+  std::vector<OFRect> vecOFRect;           // tmp container for ofrect
+  std::multimap<int, OFRect> mulMapOFRect; // BRect container
 
   RectThresh rThrd = rectThrd(RECT_WIDTH_THRESHOLD, RECT_HEIGHT_THRESHOLD,
                               CONTOUR_AREA_THRESHOLD);
@@ -423,34 +433,40 @@ auto main(int argc, char *argv[]) -> int {
   // coefficient * Threshold
   bgs.coefficientThreshold(
       imgStandardDeviation,
-      THRESHOLD_COEFFICIENT);  // cvShowImage( "Standard Deviation",
+      THRESHOLD_COEFFICIENT); // cvShowImage( "Standard Deviation",
   // setup background modes with video capture
   bgs.getBackgroundModel(capture, imgBackgroundModel);
-  while (key != 'x') {  // exit if user presses 'x'
+  while (key != 'x') { // exit if user presses 'x'
     // flash
     maskRGB.setTo(cv::Scalar::all(0));
     maskHSI.setTo(cv::Scalar::all(0));
     // set frame
-    capture.set(cv::CAP_PROP_POS_FRAMES, curr_frm);
-    capture >> imgSrc;
+    // capture.set(cv::CAP_PROP_POS_FRAMES, curr_frm);
+    // capture >> imgSrc;
+    capture.read(imgSrc);
+
     if (imgSrc.empty()) {
-      break;  // exit if unsuccessful or Reach the end of the video
+      continue;
     }
-    cv::resize(imgSrc, imgSrc, sizeImg);
-    detectAndDraw(imgSrc, cascade, 1.2);
+    // cv::resize(imgSrc, imgSrc, sizeImg);
+    // cv::cvtColor(yuv_frame,imgSrc, cv::COLOR_YUV2BGR_YV12,3);
+    detectAndDraw(imgSrc, cascade, 0.8);
     // convert rgb to gray
     cv::cvtColor(imgSrc, imgGray, CV_BGR2GRAY);
     // copy for display
     imgSrc.copyTo(imgDisplay);
     imgSrc.copyTo(imgDisplay2);
     imgSrc.copyTo(imgFireAlarm);
-    capture >> imgSrc;
+    capture.read(imgSrc);
+    // capture >> imgSrc;
     if (imgSrc.empty()) {
       break;
     }
-  // caution is needed
-    cv::resize(imgSrc, imgSrc, sizeImg);
+    // caution is needed
+    // cv::resize(imgSrc, imgSrc, sizeImg);
     // the second frame ( gray level )
+
+    // cv::cvtColor(yuv_frame,imgSrc, cv::COLOR_YUV2BGR_YV12,3);
     cv::cvtColor(imgSrc, imgCurr, CV_BGR2GRAY);
     cv::Mat imgDiff;
 
@@ -459,7 +475,7 @@ auto main(int argc, char *argv[]) -> int {
     // imgDiff > standarDeviationx
     bgs.backgroundSubtraction(
         imgDiff, imgStandardDeviation,
-        maskMotion);  // cvShowImage( "maskMotion", maskMotion );
+        maskMotion); // cvShowImage( "maskMotion", maskMotion );
     imgDisplay.copyTo(imgRGB);
     checkByRGB(imgDisplay, maskMotion, maskRGB);
     // markup the fire-like region
@@ -498,21 +514,22 @@ auto main(int argc, char *argv[]) -> int {
                            featuresPrev, hierachy);
     cv::calcOpticalFlowPyrLK(
         imgGray, imgCurr,
-        featuresPrev,  // the feature points that needed to be found(trace)
-        featuresCurr,  // the feature points that be traced
+        featuresPrev, // the feature points that needed to be found(trace)
+        featuresCurr, // the feature points that be traced
         // ContourFeaturePointCount, // the number of feature points
-        featureFound,  // notify whether the feature points be traced or not
-        featureErrors, sizeWin,  // searching window size
-        2,                       // using pyramid layer 2: will be 3 layers
+        featureFound, // notify whether the feature points be traced or not
+        featureErrors, sizeWin, // searching window size
+        2,                      // using pyramid layer 2: will be 3 layers
         TermCriteria(CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 20,
-                     0.3)  // iteration criteria
+                     0.3) // iteration criteria
     );
     // Display the flow field
-#if defined(OFMV_DISPLAY) && (OFMV_DISPLAY == ON)
-    drawArrow(imgDisplay2, featuresPrev, featuresCurr, ContourFeaturePointCount,
-              featureFound);
+    //#if defined(OFMV_DISPLAY) && (OFMV_DISPLAY == ON)
+    //  drawArrow(imgDisplay2, featuresPrev, featuresCurr,
+    //  ContourFeaturePointCount,
+    //            featureFound);
     // cvShowImage("Optical Flow", imgDisplay2);
-#endif
+    //#endif
     /* assign feature points to fire-like obj and then push to multimap */
     assignFeaturePoints(mulMapOFRect, vecOFRect, featureFound, featuresPrev,
                         featuresCurr);
@@ -521,18 +538,18 @@ auto main(int argc, char *argv[]) -> int {
     matchCentroid(imgDisplay, imgFireAlarm, listCentroid, mulMapOFRect,
                   static_cast<int>(curr_frm++), CONTOUR_POINTS_THRESHOLD,
                   PROCESSING_WINDOWS);
-    cv::imshow("Fire Alarm", imgFireAlarm);
+    // cv::imshow("Fire Alarm", imgFireAlarm);
     // cvWriteFrame(writer, imgFireAlarm);
     // cout << "< Frame >: " << currentFrame++ << endl;
     key = cv::waitKey(5);
     /* Don't run past the end of the AVI. */
-    if (curr_frm == frame_count) {
-      break;
-    }
+    // if (curr_frm == frame_count) {
+    //   break;
+    // }
   }
-  // release memory
-  capture.release();
+  // release memory  capture.release();
   imgFireAlarm.release();
+  imgTemp.release();
   imgCurr.release();
   imgDisplay.release();
   imgDisplay2.release();

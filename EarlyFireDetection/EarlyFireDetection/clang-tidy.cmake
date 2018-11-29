@@ -10,10 +10,31 @@ file(GLOB_RECURSE
         ${PROJECT_SOURCE_DIR}/*.h
         ${PROJECT_SOURCE_DIR}/*.hpp
         )
-
+if (win32)
 # Adding clang-format target if executable is found
 find_program(CLANG_FORMAT "clang-format")
-if (CLANG_FORMAT)
+    add_custom_target(
+            clang-format
+            COMMAND "C:/Program Files/LLVM/bin/clang-format.exe" 
+            -i
+            -style=file
+            ${ALL_CXX_SOURCE_FILES}
+    )
+
+# Adding clang-tidy target if executable is found
+find_program(CLANG_TIDY "clang-tidy")
+    add_custom_target(
+            clang-tidy
+            COMMAND "C:/Program Files/LLVM/bin/clang-tidy.exe" 
+            ${ALL_CXX_SOURCE_FILES}
+            -config=''
+            --
+            -std=c++17
+            ${INCLUDE_DIRECTORIES}
+    )
+elseif(APPLE)
+# Adding clang-format target if executable is found
+find_program(CLANG_FORMAT "clang-format")
     add_custom_target(
             clang-format
             COMMAND /usr/local/opt/llvm/bin/clang-format
@@ -21,11 +42,9 @@ if (CLANG_FORMAT)
             -style=file
             ${ALL_CXX_SOURCE_FILES}
     )
-endif ()
 
 # Adding clang-tidy target if executable is found
 find_program(CLANG_TIDY "clang-tidy")
-if (CLANG_TIDY)
     add_custom_target(
             clang-tidy
             COMMAND /usr/local/opt/llvm/bin/clang-tidy
@@ -35,4 +54,4 @@ if (CLANG_TIDY)
             -std=c++17
             ${INCLUDE_DIRECTORIES}
     )
-endif ()
+endif()

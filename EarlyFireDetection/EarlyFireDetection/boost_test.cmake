@@ -2,7 +2,7 @@
 enable_testing()
 
 #Prep ourselves for compiling boost
-find_package(Boost)
+find_package(Boost COMPONENTS system unit_test_framework )
 include_directories(${Boost_INCLUDE_DIRS})
 add_definitions(-DBOOST_TEST_DYN_LINK)
 

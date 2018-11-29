@@ -1,61 +1,22 @@
-//
-// Created by 박기수 on 05/11/2018.
-//
+#define BOOST_TEST_MODULE Suites
+#include <boost/test/unit_test.hpp>
 
-#define BOOST_TEST_MODULE test_datadriven
-#include <boost/test/data/monomorphic.hpp>
-#include <boost/test/data/test_case.hpp>
-#include <boost/test/included/unit_test.hpp>
-#include <sstream>
+int add(int i, int j) { return i + j; }
 
-namespace bdata = boost::unit_test::data;
+BOOST_AUTO_TEST_SUITE(Math)
 
-// Dataset generating a Fibonacci sequence
-class fibonacci_dataset {
-public:
-  // Samples type is int
-  using sample = int;
-  enum { arity = 1 };
+BOOST_AUTO_TEST_CASE(universeInOrder) { BOOST_CHECK(add(2, 2) == 4); }
 
-  struct iterator {
+BOOST_AUTO_TEST_SUITE_END()
 
-    iterator() : a(1), b(1) {}
+BOOST_AUTO_TEST_SUITE(Physics)
 
-    int operator*() const { return b; }
-    void operator++() {
-      a = a + b;
-      std::swap(a, b);
-    }
+BOOST_AUTO_TEST_CASE(specialTheory) {
+  int e = 32;
+  int m = 2;
+  int c = 4;
 
-  private:
-    int a;
-    int b; // b is the output
-  };
-
-  fibonacci_dataset() {}
-
-  // size is infinite
-  bdata::size_t size() const { return bdata::BOOST_TEST_DS_INFINITE_SIZE; }
-
-  // iterator
-  iterator begin() const { return iterator(); }
-};
-
-namespace boost {
-namespace unit_test {
-namespace data {
-namespace monomorphic {
-// registering fibonacci_dataset as a proper dataset
-template<> struct is_dataset<fibonacci_dataset> : boost::mpl::true_ {};
-} // namespace monomorphic
-} // namespace data
-} // namespace unit_test
-} // namespace boost
-
-// Creating a test-driven dataset
-BOOST_DATA_TEST_CASE(test_datadriven,
-                     fibonacci_dataset() ^ bdata::make({1, 2, 3, 5, 8, 13, 21, 35, 56}),
-                     fib_sample,
-                     exp) {
-  BOOST_TEST(fib_sample == exp);
+  BOOST_CHECK(e == m * c * c);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

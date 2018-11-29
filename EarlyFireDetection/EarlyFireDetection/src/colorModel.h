@@ -4,8 +4,7 @@
 #include "opencv/cxcore.h"
 
 /* Find the minimal value of R G B */
-template <typename T>
-T minrgb(const T r, const T g, const T b) {
+template <typename T> T minrgb(const T r, const T g, const T b) {
   return (r <= g && r <= b) ? r : (g < b) ? g : b;
 }
 
@@ -20,7 +19,8 @@ typedef cv::Point3_<double> _long_pixel;
  *		frame: input source image
  *		mask: output mask
  */
-void checkByRGB(const cv::Mat &imgSrc, const cv::Mat &maskMotion, cv::Mat &maskRGB);
+void checkByRGB(const cv::Mat &imgSrc, const cv::Mat &maskMotion,
+                cv::Mat &maskRGB);
 
 /**
  *   @ Function: Convert RGB to HSI
@@ -42,7 +42,8 @@ void RGB2HSIMask(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB);
  *		frame: input source image
  *		mask: output mask
  */
-void checkByHSI(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB, cv::Mat &maskHSI);
+void checkByHSI(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB,
+                cv::Mat &maskHSI);
 
 /**
  *	@Function: markup the interest region based on mask
