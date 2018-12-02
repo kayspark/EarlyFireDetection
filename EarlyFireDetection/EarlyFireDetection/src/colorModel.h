@@ -1,6 +1,4 @@
-#ifndef COLORMODEL_H
-#define COLORMODEL_H
-
+#pragma once
 #include "opencv/cxcore.h"
 
 /* Find the minimal value of R G B */
@@ -54,4 +52,3 @@ void checkByHSI(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB,
  */
 void regionMarkup(cv::Mat &imgSrc, cv::Mat &imgBackup, cv::Mat &mask);
 
-#endif //COLORMODEL_H

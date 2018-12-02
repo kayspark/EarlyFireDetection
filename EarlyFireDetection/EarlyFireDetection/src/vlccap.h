@@ -1,5 +1,4 @@
-#ifndef VLCCAP_H
-#define VLCCAP_H
+#pragma once
 
 #include "vlc/vlc.h"
 #include <atomic>
@@ -44,4 +43,3 @@ private:
   cv::Size _size;
 };
 
-#endif // VLCCAP_H
