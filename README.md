@@ -1,13 +1,7 @@
 
 The purpose of this project is to prevent disasters with AI technologies.
 
-I am in charge of neuromorphic hardware bsed AI application development in nepes.
-Please refer http://www.theneuromorphic.com
-
-
 But before applying AI technology, I need a solid baseline to be a good starting point. The paper and codes from TCHsieh is great enough.
-
-However, it is based on old opencv libaray, which is troublesome especially for cv::Videoio. For example, from 3.4.3, CvVideoCaputreFromAVI is not working anymore. RTP and RTSP support from latest opencv is another good execuse for this fork.
 
 To use this,
 - CMake latest version
@@ -15,10 +9,10 @@ To use this,
 - opencv 3.4.3 or higher is recommended
 - boost test is optional
 
-And I will apply improvements frequently. if you needs some help, let me know with below email 
+Please refer below paper for the science behind.
+And this is still under heavy POC stage. if you needs some help, let me know with below email 
 
-kspark at nepes dot co dot kr
-or wfms123 at gmail dot com
+wfms123 at gmail dot com
 
 ------  below ----------
 
