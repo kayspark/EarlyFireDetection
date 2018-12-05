@@ -2,9 +2,9 @@
 #define OPTFLOWTOOL_H
 
 #include "ds.h"
-#include "opencv/cv.h"
-#include "opencv/highgui.h"
 #include <map>
+#include <opencv2/highgui.hpp>
+#include <opencv2/opencv.hpp>
 /* Optical Flow Parameters */
 #define _max_corners 10000
 /* Drawing Arrow for Optical Flow */
@@ -26,7 +26,7 @@ featuresCurr        : current contours points
 return:
 the number of contour points:
 */
-int getContourFeatures(cv::Mat &img, cv::Mat &imgDisplayFireRegion,
+int getContourFeatures(cv::Mat &img, cv::Mat &display,
                        std::vector<std::vector<cv::Point>> &contours,
                        std::vector<OFRect> &vecOFRect, const RectThresh &trd,
                        std::vector<cv::Point2f> &featuresPrev,

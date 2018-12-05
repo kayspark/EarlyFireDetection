@@ -1,6 +1,4 @@
-#ifndef MOTIONDETECTION_H
-#define MOTIONDETECTION_H
-
+#pragma once
 #include "opencv2/highgui.hpp"
 #include "opencv2/videoio.hpp"
 #include "vlccap.h"
@@ -19,8 +17,8 @@ private:
   int _count;
   cv::Size _size; // image size
   /* avoid copy & assignment */
-  motionDetection(const motionDetection &bgs);
-  void operator=(const motionDetection &bgs);
+  motionDetection(const motionDetection &bgs) = delete;
+  void operator=(const motionDetection &bgs) = delete;
 
 public:
   /*
@@ -28,10 +26,11 @@ public:
    * _frameno: the number of frame that want to be processing as background
    * model frameSize: the size o frame
    */
-  motionDetection(const int &frame_count, const cv::Size &frameSize);
+  motionDetection(const int &frame_count, cv::Size frameSize);
   /* destructor */
   ~motionDetection();
   /* Need pass capture  ptr */
+  void getBackgroundModel(vlc_capture &cap, cv::Mat &out);
   void getBackgroundModel(cv::VideoCapture &cap, cv::Mat &out);
   void getStandardDeviationFrame(cv::Mat &out);
   /* one channel & uchar only => imgDiff, imgThreshold, mask
@@ -45,5 +44,3 @@ public:
    * darkest */
   void maskNegative(cv::Mat &img);
 };
-
-#endif

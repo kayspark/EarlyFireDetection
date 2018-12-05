@@ -42,24 +42,24 @@ void vlc_capture::open(const char *url) {
 
   if (_vlc_instance) {
     libvlc_media_t *media = nullptr;
-        media = libvlc_media_new_location(_vlc_instance, _url.c_str());
-        if (media) {
-          _media_player = libvlc_media_player_new_from_media(media);
-          if (_media_player) {
-            libvlc_media_release(media);
-            libvlc_video_set_callbacks(_media_player, locker, unlocker, nullptr, this);
-            libvlc_video_set_format_callbacks(_media_player, formater, nullptr);
+    media = libvlc_media_new_location(_vlc_instance, _url.c_str());
+    if (media) {
+      _media_player = libvlc_media_player_new_from_media(media);
+      if (_media_player) {
+        libvlc_media_release(media);
+        libvlc_video_set_callbacks(_media_player, locker, unlocker, nullptr,
+                                   this);
+        libvlc_video_set_format_callbacks(_media_player, formater, nullptr);
 
-            int resp = libvlc_media_player_play(_media_player);
-            if (resp == 0) {
-              _is_open = true;
-            } else {
-              release();
-            }
-          }
+        int resp = libvlc_media_player_play(_media_player);
+        if (resp == 0) {
+          _is_open = true;
+        } else {
+          release();
         }
-  }
-  else {
+      }
+    }
+  } else {
     std::cout << "why??" << std::endl;
   }
 }
@@ -95,7 +95,7 @@ bool vlc_capture::read(cv::Mat &outFrame) {
   {
     std::lock_guard<std::mutex> guard(_mutex);
     if ("J420" == _chroma)
-      cv::cvtColor(_source_frame, _rgb, CV_YUV420p2BGR);
+      cv::cvtColor(_source_frame, _rgb, cv::COLOR_YUV420p2BGR);
     outFrame = _rgb.clone();
     _has_frame = false;
   }
@@ -132,7 +132,7 @@ void *vlc_capture::lock(void **p_pixels) {
   // cout << "vlc_capture::lock" << endl;
   _mutex.lock();
   *p_pixels = (unsigned char *)_rgb.data;
-  return NULL;
+  return nullptr;
 }
 
 void vlc_capture::unlock(void *id, void *const *p_pixels) {

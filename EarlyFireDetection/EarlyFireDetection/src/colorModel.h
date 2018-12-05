@@ -1,14 +1,14 @@
 #pragma once
-#include "opencv/cxcore.h"
+#include <opencv2/opencv.hpp>
 
 /* Find the minimal value of R G B */
 template <typename T> T minrgb(const T r, const T g, const T b) {
   return (r <= g && r <= b) ? r : (g < b) ? g : b;
 }
 
-typedef cv::Point3_<uint8_t> _normal_pixel;
-typedef uint8_t _short_pixel;
-typedef cv::Point3_<double> _long_pixel;
+using _normal_pixel = cv::Point3_<uint8_t>;
+using _short_pixel = uint8_t;
+using _long_pixel = cv::Point3_<double>;
 
 /**
  *	@Purpose: check fire-like pixels by rgb model base on reference method
@@ -51,4 +51,3 @@ void checkByHSI(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB,
  *		mask: input mask
  */
 void regionMarkup(cv::Mat &imgSrc, cv::Mat &imgBackup, cv::Mat &mask);
-

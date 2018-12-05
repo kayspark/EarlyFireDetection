@@ -41,7 +41,6 @@ void RGB2HSIMask(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB) {
   static const double div13_ = 0.333333333333333333333333333; // 1/3
   static const double div180PI = 180 / CV_PI;                 // (180 / PI)
 
-  // Temp buffer for H S I spectrum
   static cv::Mat imgTemp;
   imgTemp.create(imgRGB.size(), CV_64FC3); // every times
   static double tmp1 = 0.0, tmp2 = 0.0, x = 0.0, theta = 0.0, tmpAdd = 0.0;
@@ -56,7 +55,6 @@ void RGB2HSIMask(cv::Mat &imgRGB, cv::Mat &imgHSI, cv::Mat &maskRGB) {
         tmp[j].x = img[j].x / 255.0;        // tmp[ k ] = img[ k ] / 255.0;
         tmp[j].y = img[j].y / 255.0; // tmp[ k + 1 ] = img[ k + 1 ] / 255.0;
         tmp[j].z = img[j].z / 255.0;
-
         // IF ( R = G = B ) , IN INTENSITY AXIS THERE IS NO SATURATRION ,AND NO
         // DEFINE HUE VALUE
         if (fabs(tmp[j].z - tmp[j].y) < efs_ &&

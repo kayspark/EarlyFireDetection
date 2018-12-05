@@ -32,7 +32,7 @@ find_program(CLANG_TIDY "clang-tidy")
             -std=c++17
             ${INCLUDE_DIRECTORIES}
     )
-elseif(APPLE)
+else()
 # Adding clang-format target if executable is found
 find_program(CLANG_FORMAT "clang-format")
     add_custom_target(
@@ -44,14 +44,16 @@ find_program(CLANG_FORMAT "clang-format")
     )
 
 # Adding clang-tidy target if executable is found
-find_program(CLANG_TIDY "clang-tidy")
-    add_custom_target(
-            clang-tidy
-            COMMAND /usr/local/opt/llvm/bin/clang-tidy
-            ${ALL_CXX_SOURCE_FILES}
-            -config=''
-            --
-            -std=c++17
-            ${INCLUDE_DIRECTORIES}
-    )
+if (ENABLE_CLANG_TIDY)
+    find_program (CLANG_TIDY_EXE NAMES "clang-tidy" PATHS /usr/local/opt/llvm/bin )
+    if (CLANG_TIDY_EXE)
+      message(STATUS "clang-tidy found: ${CLANG_TIDY_EXE}")
+      set(CLANG_TIDY_CHECKS "bugprone-*, modernize-*")
+      set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE};-checks=${CLANG_TIDY_CHECKS};-header-filter='${ALL_CXX_SOURCE_FILES}'"
+        CACHE STRING "" FORCE)
+    else()
+      message(AUTHOR_WARNING "clang-tidy not found!")
+      set(CMAKE_CXX_CLANG_TIDY "" CACHE STRING "" FORCE) # delete it
+    endif()
+endif()
 endif()

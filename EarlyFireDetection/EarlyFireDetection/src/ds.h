@@ -1,7 +1,6 @@
 #pragma once
-
-#include "opencv/cv.h"
-#include <iostream> /* C-PlusPlus library */
+#include <iostream>
+#include <opencv2/opencv.hpp>
 
 typedef struct RectThrd {
   int rectWidth;

@@ -2,7 +2,7 @@
 #define FIREBEHAVIORANALYSIS_H
 
 #include "ds.h"
-#include "opencv/cv.h"
+#include <opencv2/opencv.hpp>
 #include <vector>
 
 /* Counting the foldback point at each directions */

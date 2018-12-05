@@ -1,6 +1,6 @@
 #include "opticalFlowTool.h"
-#include <opencv/cv.hpp>
 #include <opencv2/imgproc.hpp>
+#include <opencv2/opencv.hpp>
 
 void drawArrow(cv::Mat &imgDisplay,
                const std::vector<cv::Point2f> &featuresPrev,
@@ -32,7 +32,7 @@ void drawArrow(cv::Mat &imgDisplay,
     q.y = static_cast<int>(p.y - 10 * hypotenuse * sin(angle));
 
     // '|'
-    cv::line(imgDisplay, p, q, lineColor, lineThickness, CV_AA, 0);
+    cv::line(imgDisplay, p, q, lineColor, lineThickness, cv::LINE_AA, 0);
 
     tmpCOS = 3 * cos(angle + PI_DIV_4);
     tmpSIN = 3 * sin(angle + PI_DIV_4);
@@ -40,12 +40,14 @@ void drawArrow(cv::Mat &imgDisplay,
     p.x = static_cast<int>(q.x + tmpCOS);
     p.y = static_cast<int>(q.y + tmpSIN);
     // '/'
-    cv::line(imgDisplay, p, q, CV_RGB(255, 0, 0), lineThickness, CV_AA, 0);
+    cv::line(imgDisplay, p, q, CV_RGB(255, 0, 0), lineThickness, cv::LINE_AA,
+             0);
 
     p.x = static_cast<int>(q.x + tmpCOS);
     p.y = static_cast<int>(q.y + tmpSIN);
     // '\'
-    cv::line(imgDisplay, p, q, CV_RGB(255, 0, 0), lineThickness, CV_AA, 0);
+    cv::line(imgDisplay, p, q, CV_RGB(255, 0, 0), lineThickness, cv::LINE_AA,
+             0);
   }
 }
 
@@ -62,7 +64,7 @@ featuresCurr        : current contours points
 return:
 the number of contour points
 */
-int getContourFeatures(cv::Mat &img, cv::Mat &imgDisplayFireRegion,
+int getContourFeatures(cv::Mat &img, cv::Mat &display,
                        std::vector<std::vector<cv::Point>> &contours,
                        std::vector<OFRect> &vecOFRect, const RectThresh &trd,
                        std::vector<cv::Point2f> &featuresPrev,
@@ -81,12 +83,8 @@ int getContourFeatures(cv::Mat &img, cv::Mat &imgDisplayFireRegion,
       cv::drawContours(img, contours, index, cv::Scalar(250, 0, 0), // Red
                        2,            // Vary max_level and compare results
                        8, hierachy); // line type
-      cv::imshow("Fire-like Contours", img);
       /* Drawing the region */
-      cv::rectangle(
-          imgDisplayFireRegion, cv::Point(rect_.x, rect_.y),
-          cv::Point((rect_.x) + (rect_.width), (rect_.y) + (rect_.height)),
-          cv::Scalar(0, 10, 255), 2);
+      cv::rectangle(display, rect_, cv::Scalar(0, 0, 255), 1);
       /* for each contours pixel count	*/
       countCtrP = 0;
       /* access points on each contours */

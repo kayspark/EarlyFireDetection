@@ -2,11 +2,12 @@
 #include <iostream>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+#include <utility>
 
 /* Create buffer for image */
 motionDetection::motionDetection(const int &frame_count,
-                                 const cv::Size &frameSize)
-    : _frameno(frame_count), _count(0), _size(frameSize) {
+                                 cv::Size frameSize)
+    : _frameno(frame_count), _count(0), _size(std::move(frameSize)) {
   // create n IplImage pointer, and assign for _vec_frame
   _vec_frame.reserve((unsigned long)_frameno);
   for (int i = 0; i < _frameno; ++i) {
@@ -36,7 +37,32 @@ void motionDetection::getBackgroundModel(cv::VideoCapture &cap, cv::Mat &out) {
         continue;
       //  cv::resize(frame, frame, cv::Size(out.cols, out.rows));
       // cv::cvtColor(frame,frame, cv::COLOR_YUV2BGR_YV12,3);
-      cv::cvtColor(frame, frame, CV_BGR2GRAY);
+      cv::cvtColor(frame, frame, cv::COLOR_BGR2GRAY);
+      cv::accumulate(frame, out);
+      ++_count;
+      if (cv::waitKey(10) >= 0) {
+        break;
+      }
+    } else {
+      break;
+    }
+  }
+  // average the frame series as background model
+}
+void motionDetection::getBackgroundModel(vlc_capture &cap, cv::Mat &out) {
+  // accumulate frame from video
+
+  while (_count != _frameno) {
+    cv::Mat frame;
+    if (cap.isOpened()) {
+      cap.read(frame);
+      // cap >> frame;
+      // convert rgb to gray
+      if (frame.empty())
+        continue;
+      //  cv::resize(frame, frame, cv::Size(out.cols, out.rows));
+      // cv::cvtColor(frame,frame, cv::COLOR_YUV2BGR_YV12,3);
+      cv::cvtColor(frame, frame, cv::COLOR_BGR2GRAY);
       cv::accumulate(frame, out);
       ++_count;
       if (cv::waitKey(10) >= 0) {
