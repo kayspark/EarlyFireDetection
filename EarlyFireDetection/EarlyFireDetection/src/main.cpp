@@ -240,8 +240,8 @@ bool checkContourEnergy(Centroid &ctrd, const unsigned int pwindows) {
   bool out = staticFrame < thrdStaticFrame
                  ? passFrame > thrdPassFrame && orientFrame < thrdOrienFrame
                  : false;
-  if (out)
-    std::cout << "energy is likely " << std::endl;
+  /*   if (out)
+      std::cout << "energy is likely " << std::endl; */
   return out;
 }
 
@@ -286,8 +286,8 @@ cv::Rect matchCentroid(cv::Mat &imgCenteroid, cv::Mat &img,
               checkContourEnergy(centre, pwindows)) {
             /* recting the fire region */
             // cv::rectangle(img, rectFire, cv::Scalar(255, 100, 0), 3);
-            cv::putText(img, "Fire !!", rectFire.tl(), 2, 1.2,
-                        cv::Scalar(0, 0, 255));
+            //        cv::putText(img, "Fire !!", rectFire.tl(), 2, 1.2,
+            //                    cv::Scalar(0, 0, 255));
             cout << "Alarm: " << currentFrame << endl;
             ret = rectFire;
             //            cv::imshow("Video", imgFireAlarm);
@@ -356,12 +356,13 @@ cv::Ptr<cv::Tracker> createTrackerByName(cv::String name) {
 }
 
 auto main(int argc, char *argv[]) -> int {
-  std::string tracker_algorithm = "TLD";
+  std::string tracker_algorithm = "MEDIAN_FLOW";
   cv::Ptr<Tracker> tracker = createTrackerByName(tracker_algorithm);
   if (tracker.empty()) {
     cout << "***Error in the instantiation of the tracker...***\n";
     return -1;
   }
+  bool initialized_tracker = false;
   cv::Rect2d fire_area(0, 0, 0, 0);
   cv::VideoCapture capture(CAP_ANY);
   // capture.set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('H', '2', '6',
@@ -454,11 +455,26 @@ auto main(int argc, char *argv[]) -> int {
       continue;
     }
     cv::cvtColor(imgSrc, imgGray, CV_BGR2GRAY);
-    detectAndDraw(imgSrc, imgDisplay, cascade, 0.8);
+    detectAndDraw(imgSrc, imgDisplay, cascade, 1.1);
     imgSrc.copyTo(imgDisplay);
 
-    if (!fire_area.empty() && tracker->update(imgDisplay, fire_area)) {
-      cv::rectangle(imgDisplay, fire_area, cv::Scalar(0, 255, 0), 3);
+    if (!fire_area.empty()) {
+      if (initialized_tracker == false) {
+        // initializes the tracker
+        if (!tracker->init(imgDisplay, fire_area)) {
+          cout << "***Could not initialize tracker...***\n";
+          return -1;
+        }
+        initialized_tracker = true;
+      } else {
+        if (tracker->update(imgDisplay, fire_area))
+          cv::rectangle(imgDisplay, fire_area, cv::Scalar(0, 0, 255), 3);
+        else {
+          fire_area = cv::Rect2d(0, 0, 0, 0);
+          tracker = createTrackerByName(tracker_algorithm);
+          initialized_tracker = false;
+        }
+      }
     } else {
       capture.read(imgSrc);
       cv::cvtColor(imgSrc, imgCurr, CV_BGR2GRAY);

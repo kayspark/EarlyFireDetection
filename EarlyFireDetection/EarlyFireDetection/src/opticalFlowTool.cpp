@@ -80,11 +80,11 @@ int getContourFeatures(cv::Mat &img, cv::Mat &display,
     if (((rect_.width > trd.rectWidth) && (rect_.height > trd.rectHeight)) &&
         (fabs(cv::contourArea(contours[index])) > trd.cntrArea)) {
       /* Drawing the Contours */
-      cv::drawContours(img, contours, index, cv::Scalar(250, 0, 0), // Red
-                       2,            // Vary max_level and compare results
-                       8, hierachy); // line type
+      /*    cv::drawContours(img, contours, index, cv::Scalar(250, 0, 0), // Red
+                          2,            // Vary max_level and compare results
+                          8, hierachy); // line type */
       /* Drawing the region */
-      cv::rectangle(display, rect_, cv::Scalar(0, 0, 255), 1);
+      cv::rectangle(display, rect_, cv::Scalar(255, 0, 0), 1);
       /* for each contours pixel count	*/
       countCtrP = 0;
       /* access points on each contours */

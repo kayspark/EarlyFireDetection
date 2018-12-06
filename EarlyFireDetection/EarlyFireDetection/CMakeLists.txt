@@ -5,7 +5,7 @@ project(EarlyFireDetection)
 
 SET(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(ENABLE_CLANG_TIDY ON CACHE BOOL " add clang-tidy automatically")
+set(ENABLE_CLANG_TIDY OFF CACHE BOOL " add clang-tidy automatically")
 #find_package(llvm)
 
 if (win32)
