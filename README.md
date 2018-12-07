@@ -43,9 +43,6 @@ And I will apply improvements frequently. if you needs some help, let me know wi
 
 wfms123 at gmail dot com
 
-PS: I am in charge of neuromorphic hardware bsed AI application development in nepes.
-Please refer http://www.theneuromorphic.com
-
 
                                 
               VISION-BASED FIRE DETECTION USING VIDEO SEQUENCES
