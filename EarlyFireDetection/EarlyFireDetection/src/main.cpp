@@ -81,10 +81,10 @@ void detectAndDraw(Mat &gray, Mat &display, CascadeClassifier &cascade,
   int color_code = 0;
   for (const auto &r : objects) {
     Scalar color = colors[color_code++ % 8];
-    /*  rectangle(display, Point(cvRound(r.x * scale), cvRound(r.y * scale)),
-               Point(cvRound((r.x + r.width - 1) * scale),
-                     cvRound((r.y + r.height - 1) * scale)),
-               color, 3, 8, 0); */
+    rectangle(display, Point(cvRound(r.x * scale), cvRound(r.y * scale)),
+              Point(cvRound((r.x + r.width - 1) * scale),
+                    cvRound((r.y + r.height - 1) * scale)),
+              color, 3, 8, 0);
   }
   // imshow( "result", img );
 }

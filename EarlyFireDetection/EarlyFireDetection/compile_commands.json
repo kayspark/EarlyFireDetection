@@ -1,0 +1,55 @@
+[
+{
+  "directory": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build",
+  "command": "/usr/local/opt/llvm/bin/clang++  -DBOOST_TEST_DYN_LINK -I../. -I/Applications/VLC.app/Contents/MacOS/include/vlc -I/usr/local/include/opencv4 -I/usr/local/include  -g   -std=gnu++17 -o CMakeFiles/test_data_driven.dir/tests/test_data_driven.cpp.o -c /Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/tests/test_data_driven.cpp",
+  "file": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/tests/test_data_driven.cpp"
+},
+
+{
+  "directory": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build",
+  "command": "/usr/local/opt/llvm/bin/clang++  -DBOOST_TEST_DYN_LINK -I../. -I/Applications/VLC.app/Contents/MacOS/include/vlc -I/usr/local/include/opencv4 -I/usr/local/include  -g   -std=gnu++17 -o CMakeFiles/test_bitwise_op.dir/tests/test_bitwise_op.cpp.o -c /Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/tests/test_bitwise_op.cpp",
+  "file": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/tests/test_bitwise_op.cpp"
+},
+
+{
+  "directory": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build",
+  "command": "/usr/local/opt/llvm/bin/clang++  -DBOOST_TEST_DYN_LINK -I../. -I/Applications/VLC.app/Contents/MacOS/include/vlc -I/usr/local/include -isystem /usr/local/include/opencv4  -g   -std=gnu++17 -o CMakeFiles/EarlyFireDetection.dir/src/colorModel.cpp.o -c /Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/colorModel.cpp",
+  "file": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/colorModel.cpp"
+},
+
+{
+  "directory": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build",
+  "command": "/usr/local/opt/llvm/bin/clang++  -DBOOST_TEST_DYN_LINK -I../. -I/Applications/VLC.app/Contents/MacOS/include/vlc -I/usr/local/include -isystem /usr/local/include/opencv4  -g   -std=gnu++17 -o CMakeFiles/EarlyFireDetection.dir/src/ds.cpp.o -c /Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/ds.cpp",
+  "file": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/ds.cpp"
+},
+
+{
+  "directory": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build",
+  "command": "/usr/local/opt/llvm/bin/clang++  -DBOOST_TEST_DYN_LINK -I../. -I/Applications/VLC.app/Contents/MacOS/include/vlc -I/usr/local/include -isystem /usr/local/include/opencv4  -g   -std=gnu++17 -o CMakeFiles/EarlyFireDetection.dir/src/fireBehaviorAnalysis.cpp.o -c /Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/fireBehaviorAnalysis.cpp",
+  "file": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/fireBehaviorAnalysis.cpp"
+},
+
+{
+  "directory": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build",
+  "command": "/usr/local/opt/llvm/bin/clang++  -DBOOST_TEST_DYN_LINK -I../. -I/Applications/VLC.app/Contents/MacOS/include/vlc -I/usr/local/include -isystem /usr/local/include/opencv4  -g   -std=gnu++17 -o CMakeFiles/EarlyFireDetection.dir/src/main.cpp.o -c /Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/main.cpp",
+  "file": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/main.cpp"
+},
+
+{
+  "directory": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build",
+  "command": "/usr/local/opt/llvm/bin/clang++  -DBOOST_TEST_DYN_LINK -I../. -I/Applications/VLC.app/Contents/MacOS/include/vlc -I/usr/local/include -isystem /usr/local/include/opencv4  -g   -std=gnu++17 -o CMakeFiles/EarlyFireDetection.dir/src/motionDetection.cpp.o -c /Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/motionDetection.cpp",
+  "file": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/motionDetection.cpp"
+},
+
+{
+  "directory": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build",
+  "command": "/usr/local/opt/llvm/bin/clang++  -DBOOST_TEST_DYN_LINK -I../. -I/Applications/VLC.app/Contents/MacOS/include/vlc -I/usr/local/include -isystem /usr/local/include/opencv4  -g   -std=gnu++17 -o CMakeFiles/EarlyFireDetection.dir/src/vlccap.cpp.o -c /Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/vlccap.cpp",
+  "file": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/vlccap.cpp"
+},
+
+{
+  "directory": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/build",
+  "command": "/usr/local/opt/llvm/bin/clang++  -DBOOST_TEST_DYN_LINK -I../. -I/Applications/VLC.app/Contents/MacOS/include/vlc -I/usr/local/include -isystem /usr/local/include/opencv4  -g   -std=gnu++17 -o CMakeFiles/EarlyFireDetection.dir/src/opticalFlowTool.cpp.o -c /Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/opticalFlowTool.cpp",
+  "file": "/Users/kspark/Documents/GitHub/EarlyFireDetection/EarlyFireDetection/EarlyFireDetection/src/opticalFlowTool.cpp"
+}
+]
