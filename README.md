@@ -1,8 +1,4 @@
-
 The purpose of this project is to prevent disasters with AI technologies.
-
-I am in charge of neuromorphic hardware bsed AI application development in nepes.
-Please refer http://www.theneuromorphic.com
 
 
 But before applying AI technology, I need a solid baseline to be a good starting point. The paper and codes from TCHsieh is great enough.
@@ -11,16 +7,45 @@ However, it is based on old opencv libaray, which is troublesome especially for 
 
 To use this,
 - CMake latest version
-- C++ compiler. currently I am testing on llvm 7 , apple latest clang,and MS visual studio 2017 15.9XX
+- C++ compiler. currently I am testing on llvm 7 and MS visual studio 2017 15.9XX
 - opencv 3.4.3 or higher is recommended
+- vlc sdk : can be downloaded from here https://nightlies.videolan.org/build/
 - boost test is optional
 
-And I will apply improvements frequently. if you needs some help, let me know with below email 
+For fire detection wise, tried to keep below paper model which has below process
+-  background substraction 
+-  color model 
+-  contour shape detection
+-  optical flow analysis 
+-  motion analysis
 
-kspark at nepes dot co dot kr
-or wfms123 at gmail dot com
+Implementation changes by myself are
+-  modernizing : most of clang-tidy advices are adopted.
+-  simplifying with standard stl algorithms and range based process.
+-  opencv libraries are upgraded and tested with 4.0
 
-------  below ----------
+works to be done
+- main.cpp need to be refactored to be object oriented way.
+- parallel processing will be revisited with opencv or with cpp-taksflow
+
+ 
+For efficiency wise,
+-  tracking algorithms are introduced.
+-  once fire is detected, just track it with median flow tracker in opencv tracker algorithms. 
+
+For usability on generic purpose wise,
+- cascade classifier will be replaced with
+  : motion detection & multi tracking algorithms.
+  : in between motion detection and tracking, hardwware accelerated SVM will be introduced.
+
+
+And I will apply improvements frequently. if you needs some help, let me know with below email.
+
+wfms123 at gmail dot com
+
+PS: I am in charge of neuromorphic hardware bsed AI application development in nepes.
+Please refer http://www.theneuromorphic.com
+
 
                                 
               VISION-BASED FIRE DETECTION USING VIDEO SEQUENCES

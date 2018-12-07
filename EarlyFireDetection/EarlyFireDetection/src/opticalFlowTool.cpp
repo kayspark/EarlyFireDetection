@@ -97,7 +97,7 @@ int getContourFeatures(cv::Mat &img, cv::Mat &display,
         ++ContourFeaturePointCount;
       }
       /* push to tmp vector for quick access ofrect node */
-      vecOFRect.push_back(ofRect(rect_, countCtrP));
+      vecOFRect.emplace_back(ofRect(rect_, countCtrP));
     }
   }
 
@@ -131,7 +131,7 @@ void assignFeaturePoints(std::multimap<int, OFRect> &mulMapOFRect,
                  continue;
                } else {
                  /* push feature to vector of ofrect */
-                 aRect.vecFeature.push_back(
+                 aRect.vecFeature.emplace_back(
                      feature(featuresPrev[i], featuresCurr[i]));
                }
              }

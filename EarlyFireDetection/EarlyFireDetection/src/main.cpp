@@ -483,9 +483,8 @@ auto main(int argc, char *argv[]) -> int {
       imgBackgroundModel.convertTo(imgBackgroundModel, CV_8UC1);
       cv::absdiff(imgGray, imgBackgroundModel, imgDiff);
       // imgDiff > standarDeviationx
-      bgs.backgroundSubtraction(
-          imgDiff, imgStandardDeviation,
-          maskMotion); // cvShowImage( "maskMotion", maskMotion );
+      bgs.backgroundSubtraction(imgDiff, imgStandardDeviation, maskMotion);
+      // cv::imshow("maskMotion", maskMotion);
       imgDisplay.copyTo(imgRGB);
       checkByRGB(imgDisplay, maskMotion, maskRGB);
       // markup the fire-like region
