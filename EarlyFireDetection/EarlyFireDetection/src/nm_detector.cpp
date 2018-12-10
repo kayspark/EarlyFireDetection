@@ -4,25 +4,57 @@
 using namespace cv;
 using namespace std;
 
-nm_detector::nm_detector(std::string &cascade) {
+/*
+cv::Ptr<cv::Tracker> createTrackerByName(cv::String name) {
+  cv::Ptr<cv::Tracker> tracker;
+
+  if (name == "KCF")
+    tracker = cv::TrackerKCF::create();
+  else if (name == "TLD")
+    tracker = cv::TrackerTLD::create();
+  else if (name == "BOOSTING")
+    tracker = cv::TrackerBoosting::create();
+  else if (name == "MEDIAN_FLOW")
+    tracker = cv::TrackerMedianFlow::create();
+  else if (name == "MIL")
+    tracker = cv::TrackerMIL::create();
+  else if (name == "GOTURN")
+    tracker = cv::TrackerGOTURN::create();
+  else if (name == "MOSSE")
+    tracker = cv::TrackerMOSSE::create();
+  else if (name == "CSRT")
+    tracker = cv::TrackerCSRT::create();
+  else
+    CV_Error(cv::Error::StsBadArg, "Invalid tracking algorithm name\n");
+
+  return tracker;
+}
+*/
+nm_detector::nm_detector(std::string &cascade)
+    :
+    scale(1.1),
+    objects(std::vector<cv::Rect>()),
+    colors(std::array<cv::Scalar, 8>() =
+               {cv::Scalar(255, 0, 0), cv::Scalar(255, 128, 0), cv::Scalar(255, 255, 0),
+                cv::Scalar(0, 255, 0), cv::Scalar(0, 128, 255), cv::Scalar(0, 255, 255),
+                cv::Scalar(0, 0, 255), cv::Scalar(255, 0, 255)
+               }
+
+    ) {
   if (cascade.empty())
     cascade = "./dataset/cascade.xml";
   if (!_cascade.load(cascade)) {
     std::cerr << "ERROR: Could not load classifier cascade" << std::endl;
     return;
   }
+
 }
 
 nm_detector::~nm_detector() {
 }
 // detect roi
-void nm_detector::detectAndDraw(cv::Mat &gray, cv::Mat &display, double scale) {
+void nm_detector::detect_objects(cv::Mat &gray, cv::Mat &display) {
   double timer = 0;
-  std::vector<Rect> objects;
-  const static std::array<cv::Scalar, 8> colors = {
-      Scalar(255, 0, 0), Scalar(255, 128, 0), Scalar(255, 255, 0),
-      Scalar(0, 255, 0), Scalar(0, 128, 255), Scalar(0, 255, 255),
-      Scalar(0, 0, 255), Scalar(255, 0, 255)};
   cv::Mat smallImg;
 
   // cvtColor(img, gray, COLOR_BGR2GRAY);
@@ -31,7 +63,7 @@ void nm_detector::detectAndDraw(cv::Mat &gray, cv::Mat &display, double scale) {
   // equalizeHist(smallImg, smallImg);
 
   timer = (double) cv::getTickCount();
-  _cascade.detectMultiScale(smallImg, objects, 1.1, 2,
+  _cascade.detectMultiScale(smallImg, objects, scale, 2,
                             0
                                 //|CASCADE_FIND_BIGGEST_OBJECT
                                 //|CASCADE_DO_ROUGH_SEARCH
@@ -42,6 +74,11 @@ void nm_detector::detectAndDraw(cv::Mat &gray, cv::Mat &display, double scale) {
   std::cout << "suspicious object: " << objects.size()
             << " , time: " << timer * 1000 / getTickFrequency() << std::endl;
   int color_code = 0;
+  draw_objects(display, color_code);
+  // imshow( "result", img );
+}
+void nm_detector::draw_objects(const Mat &display,
+                               int color_code) const {
   for (const auto &r : objects) {
     Scalar color = colors[color_code++ % 8];
     rectangle(display, Point(cvRound(r.x * scale), cvRound(r.y * scale)),
@@ -49,5 +86,4 @@ void nm_detector::detectAndDraw(cv::Mat &gray, cv::Mat &display, double scale) {
                     cvRound((r.y + r.height - 1) * scale)),
               color, 3, 8, 0);
   }
-  // imshow( "result", img );
 }

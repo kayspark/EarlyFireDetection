@@ -14,45 +14,12 @@
 using namespace std;
 using namespace cv;
 
-cv::Ptr<cv::Tracker> createTrackerByName(cv::String name) {
-  cv::Ptr<cv::Tracker> tracker;
-
-  if (name == "KCF")
-    tracker = cv::TrackerKCF::create();
-  else if (name == "TLD")
-    tracker = cv::TrackerTLD::create();
-  else if (name == "BOOSTING")
-    tracker = cv::TrackerBoosting::create();
-  else if (name == "MEDIAN_FLOW")
-    tracker = cv::TrackerMedianFlow::create();
-  else if (name == "MIL")
-    tracker = cv::TrackerMIL::create();
-  else if (name == "GOTURN")
-    tracker = cv::TrackerGOTURN::create();
-  else if (name == "MOSSE")
-    tracker = cv::TrackerMOSSE::create();
-  else if (name == "CSRT")
-    tracker = cv::TrackerCSRT::create();
-  else
-    CV_Error(cv::Error::StsBadArg, "Invalid tracking algorithm name\n");
-
-  return tracker;
-}
 
 auto main(int argc, char *argv[]) -> int {
-  std::string tracker_algorithm = "MEDIAN_FLOW";
   std::string data_file("./dataset/cascade.xml");
   nm_detector detector(data_file);
   fire_detector fireDetector;
 
-  cv::Ptr<Tracker> tracker = createTrackerByName(tracker_algorithm);
-
-  if (tracker.empty()) {
-    cout << "***Error in the instantiation of the tracker...***\n";
-    return -1;
-  }
-  bool initialized_tracker = false;
-  cv::Rect2d fire_area(0, 0, 0, 0);
   cv::VideoCapture capture(CAP_ANY);
 
   // vlc_capture capture("RV24", 800, 600);
@@ -120,26 +87,9 @@ auto main(int argc, char *argv[]) -> int {
     }
     cv::cvtColor(imgSrc, imgGray, CV_BGR2GRAY);
     imgSrc.copyTo(imgDisplay);
-    detector.detectAndDraw(imgSrc, imgDisplay, 1.1);
+    detector.detect_objects(imgSrc, imgDisplay);
 
-    if (!fire_area.empty()) {
-      if (initialized_tracker) {
-        if (tracker->update(imgDisplay, fire_area))
-          cv::rectangle(imgDisplay, fire_area, cv::Scalar(0, 0, 255), 3);
-        else {
-          fire_area = cv::Rect2d(0, 0, 0, 0);
-          tracker = createTrackerByName(tracker_algorithm);
-          initialized_tracker = false;
-        }
-      } else {
-        // initializes the tracker
-        if (!tracker->init(imgDisplay, fire_area)) {
-          cout << "***Could not initialize tracker...***\n";
-          return -1;
-        }
-        initialized_tracker = true;
-      }
-    } else {
+    if (!fireDetector.update_tracker(imgDisplay)) {
       capture.read(imgSrc);
       cv::cvtColor(imgSrc, imgCurr, CV_BGR2GRAY);
       cv::Mat imgDiff;
@@ -183,7 +133,8 @@ auto main(int argc, char *argv[]) -> int {
       fireDetector.getContourFeatures(imgDisplay, imgDisplay);
       fireDetector.calcOpticalFlow(imgGray, imgCurr);
       fireDetector.assignFeaturePoints();
-      fire_area = fireDetector.matchCentroid(imgSrc, imgDisplay, static_cast<int>(curr_frm++));
+      fireDetector.matchCentroid(imgSrc, imgDisplay, static_cast<int>(curr_frm++));
+    } else {
     }
     cv::imshow("Display", imgDisplay);
     key = cv::waitKey(5);

@@ -6,6 +6,7 @@
 #define EARLYFIREDETECTION_FIRE_DETECTOR_H
 #define _max_corners 10000
 #include <opencv2/opencv.hpp>
+#include <opencv2/tracking.hpp>
 #include "ds.h"
 
 using _normal_pixel = cv::Point3_<uint8_t>;
@@ -33,8 +34,11 @@ public:
     return THRESHOLD_COEFFICIENT;
   }
 private:
+  cv::Ptr<cv::Tracker> tracker;
   const int BGM_FRAME_COUNT = 0;
   cv::Size sizeWin;
+  bool initialized_tracker;
+  cv::Rect2d detected_area;
 private:
   RectThrd _rect_thresh;
 
@@ -67,6 +71,7 @@ private:
 
   cv::Mat maskMorphology;
 public:
+  bool update_tracker(cv::Mat &img);
   void dilate(cv::Mat &mask);
   void findContours(cv::Mat &mask);
   bool checkContourPoints(Centroid &ctrd, const int thrdcp,
@@ -79,8 +84,8 @@ public:
 
   bool checkContourEnergy(Centroid &ctrd, const unsigned int pwindows);
 
-  cv::Rect matchCentroid(cv::Mat &imgCenteroid, cv::Mat &img,
-                         int currentFrame);
+  void matchCentroid(cv::Mat &imgCenteroid, cv::Mat &img,
+                     int currentFrame);
 /* get the feature points from contour
 input:
 imgDisplayCntr      : img for display contours

@@ -8,6 +8,9 @@
 
 fire_detector::fire_detector()
     :
+    tracker(cv::TrackerMedianFlow::create()),
+    initialized_tracker(false),
+    detected_area(cv::Rect2d(0, 0, 0, 0)),
     BGM_FRAME_COUNT(0),
     _win_size(5),
     RECT_WIDTH_THRESHOLD(5),
@@ -16,24 +19,47 @@ fire_detector::fire_detector()
     CONTOUR_AREA_THRESHOLD(12),
     ACCUMULATE_WEIGHTED_ALPHA_BGM(0.1),
     ACCUMULATE_WEIGHTED_ALPHA_THRESHOLD(0.05),
-    THRESHOLD_COEFFICIENT(5) {
-
-  /* Rect Motion */
-  listCentroid = std::list<Centroid>();        // Centroid container
-  vecOFRect = std::vector<OFRect>();           // tmp container for ofrect
-  mulMapOFRect = std::multimap<int, OFRect>(); // BRect container
-  maskMorphology = cv::getStructuringElement(
-      cv::MORPH_RECT, cv::Size(3, 5), cv::Point(1, 2));
-  featuresPrev = std::vector<cv::Point2f>(_max_corners);
-  featuresCurr = std::vector<cv::Point2f>(_max_corners);
-  featureFound = std::vector<uchar>(_max_corners);
-  featureErrors = std::vector<float>(_max_corners);
-  contours = std::vector<std::vector<cv::Point>>();
-  hierachy = std::vector<cv::Vec4i>();
-
+    THRESHOLD_COEFFICIENT(5),
+    listCentroid(std::list<Centroid>()),
+    vecOFRect(std::vector<OFRect>()),
+    mulMapOFRect(std::multimap<int, OFRect>()),
+    maskMorphology(cv::getStructuringElement(
+        cv::MORPH_RECT, cv::Size(3, 5), cv::Point(1, 2))),
+    featuresPrev(std::vector<cv::Point2f>(_max_corners)),
+    featuresCurr(std::vector<cv::Point2f>(_max_corners)),
+    featureFound(std::vector<uchar>(_max_corners)),
+    featureErrors(std::vector<float>(_max_corners)),
+    contours(std::vector<std::vector<cv::Point>>()),
+    hierachy(std::vector<cv::Vec4i>()) {
   sizeWin = cv::Size(_win_size, _win_size);
   _rect_thresh = rectThrd(RECT_WIDTH_THRESHOLD, RECT_HEIGHT_THRESHOLD,
                           CONTOUR_AREA_THRESHOLD);
+
+  /* Rect Motion */
+
+}
+
+bool fire_detector::update_tracker(cv::Mat &img) {
+
+  if (initialized_tracker) {
+    if (tracker->update(img, detected_area))
+      cv::rectangle(img, detected_area, cv::Scalar(0, 0, 255), 3);
+    else {
+      detected_area = cv::Rect2d(0, 0, 0, 0);
+      tracker = cv::TrackerMedianFlow::create();
+      initialized_tracker = false;
+    }
+  } else {
+    // initializes the tracker
+    if (!tracker->init(img, detected_area)) {
+      std::cout << "***Could not initialize tracker...***\n";
+      return false;
+    }
+    initialized_tracker = true;
+  }
+  // true if not empty
+  return !detected_area.empty();
+
 }
 bool fire_detector::checkContourPoints(Centroid &ctrd, const int thrdcp,
                                        const unsigned int pwindows) {
@@ -168,8 +194,8 @@ imgDisplay  :	boxing the alarm region
 listCentroid:	candidate fire-like obj those matching with mulMapOFRect's obj
 
 */
-cv::Rect fire_detector::matchCentroid(cv::Mat &imgCenteroid, cv::Mat &img,
-                                      int currentFrame) {
+void fire_detector::matchCentroid(cv::Mat &imgCenteroid, cv::Mat &img,
+                                  int currentFrame) {
   static cv::Rect rectFire = cv::Rect(0, 0, 0, 0);
   static cv::Rect ret(rectFire);
   listCentroid.remove_if([this, &img,
@@ -198,7 +224,7 @@ cv::Rect fire_detector::matchCentroid(cv::Mat &imgCenteroid, cv::Mat &img,
             //        cv::putText(img, "Fire !!", rectFire.tl(), 2, 1.2,
             //                    cv::Scalar(0, 0, 255));
             std::cout << "Alarm: " << currentFrame << std::endl;
-            ret = rectFire;
+            detected_area = rectFire;
             //            cv::imshow("Video", imgFireAlarm);
           } else {
             break; // if not on fire go to erase it
@@ -236,7 +262,6 @@ cv::Rect fire_detector::matchCentroid(cv::Mat &imgCenteroid, cv::Mat &img,
                 });
   /* clear up container */
   mulMapOFRect.clear();
-  return ret;
 }
 
 /* get the feature points from contour
