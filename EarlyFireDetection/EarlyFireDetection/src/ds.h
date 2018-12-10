@@ -72,8 +72,8 @@ CV_INLINE Centroid centroid(const OFRect &ofRect) {
   centroid1.centroid =
       cv::Point(ofRect.rect.x + (ofRect.rect.width >> 1),
                 ofRect.rect.y + (ofRect.rect.height >> 1)); // centroid position
-  centroid1.vecRect.push_back(ofRect.rect); // push rect information
-  centroid1.dOFRect.push_back(
+  centroid1.vecRect.emplace_back(ofRect.rect); // push rect information
+  centroid1.dOFRect.emplace_back(
       ofRect.vecFeature); // push contour optical flow feature(after optical
   // flow)
 

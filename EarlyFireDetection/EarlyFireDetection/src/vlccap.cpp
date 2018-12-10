@@ -82,7 +82,7 @@ bool vlc_capture::isOpened() {
 
   libvlc_state_t state = libvlc_media_player_get_state(_media_player);
   return (state != libvlc_Paused && state != libvlc_Stopped &&
-          state != libvlc_Ended && state != libvlc_Error);
+      state != libvlc_Ended && state != libvlc_Error);
 }
 
 bool vlc_capture::read(cv::Mat &outFrame) {
@@ -131,7 +131,7 @@ unsigned vlc_capture::format(char *chroma, unsigned *width, unsigned *height,
 void *vlc_capture::lock(void **p_pixels) {
   // cout << "vlc_capture::lock" << endl;
   _mutex.lock();
-  *p_pixels = (unsigned char *)_rgb.data;
+  *p_pixels = (unsigned char *) _rgb.data;
   return nullptr;
 }
 

@@ -9,7 +9,7 @@ motionDetection::motionDetection(const int &frame_count,
                                  cv::Size frameSize)
     : _frameno(frame_count), _count(0), _size(std::move(frameSize)) {
   // create n IplImage pointer, and assign for _vec_frame
-  _vec_frame.reserve((unsigned long)_frameno);
+  _vec_frame.reserve((unsigned long) _frameno);
   for (int i = 0; i < _frameno; ++i) {
     _vec_frame.emplace_back(cv::Mat(_size, CV_8UC1));
   }
