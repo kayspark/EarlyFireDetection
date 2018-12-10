@@ -1,8 +1,4 @@
 #include "motionDetection.h"
-#include <iostream>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
-#include <utility>
 
 /* Create buffer for image */
 motionDetection::motionDetection(const int &frame_count,

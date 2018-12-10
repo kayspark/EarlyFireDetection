@@ -1,8 +1,8 @@
 #pragma once
-#include "opencv2/highgui.hpp"
-#include "opencv2/videoio.hpp"
-#include "vlccap.h"
+#include <opencv2/highgui.hpp>
+#include <opencv2/videoio.hpp>
 #include <opencv2/core.hpp>
+#include "vlccap.h"
 /* Motion Detection
  * purpose: For get the initialization background model and threshold(depends on
  * standard deviation) support: backgroundSubtraction(): | imgDiff | >

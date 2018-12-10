@@ -1,15 +1,9 @@
 // opencv libarary
 #include <opencv2/opencv.hpp>
 #include <opencv2/tracking.hpp>
-/* Self-Developed Library */
-#include "ds.h"
-//#include "fileStream.h"
 #include "motionDetection.h"
 #include "nm_detector.h"
-#include "vlccap.h"
 #include "fire_detector.h"
-
-#include <list>
 
 using namespace std;
 using namespace cv;
