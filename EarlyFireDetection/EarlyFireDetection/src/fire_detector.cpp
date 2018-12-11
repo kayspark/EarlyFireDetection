@@ -2,11 +2,12 @@
 // Created by 박기수 on 2018-12-10.
 //
 
+#include "motionDetection.h"
 #include <opencv2/core/types_c.h>
 #include <opencv2/imgproc/types_c.h>
 #include "fire_detector.h"
 
-fire_detector::fire_detector()
+fire_detector::fire_detector(cv::Size &imgSize)
     :
     tracker(cv::TrackerMedianFlow::create()),
     initialized_tracker(false),
@@ -30,7 +31,13 @@ fire_detector::fire_detector()
     featureFound(std::vector<uchar>(_max_corners)),
     featureErrors(std::vector<float>(_max_corners)),
     contours(std::vector<std::vector<cv::Point>>()),
-    hierachy(std::vector<cv::Vec4i>()) {
+    hierachy(std::vector<cv::Vec4i>()),
+    bufHSI(cv::Mat(imgSize, CV_64FC3)),
+    imgRGB(cv::Mat(imgSize, CV_8UC3)),
+    imgHSI(cv::Mat(imgSize, CV_8UC3)),
+    maskRGB(cv::Mat(imgSize, CV_8UC1)),
+    maskHSI(cv::Mat(imgSize, CV_8UC1)) {
+
   sizeWin = cv::Size(_win_size, _win_size);
   _rect_thresh = rectThrd(RECT_WIDTH_THRESHOLD, RECT_HEIGHT_THRESHOLD,
                           CONTOUR_AREA_THRESHOLD);
@@ -39,26 +46,31 @@ fire_detector::fire_detector()
 
 }
 
+//TODO: verfiy logics
 bool fire_detector::update_tracker(cv::Mat &img) {
-
+  bool ret = !detected_area.empty();
+  //initialized already
   if (initialized_tracker) {
     if (tracker->update(img, detected_area))
       cv::rectangle(img, detected_area, cv::Scalar(0, 0, 255), 3);
-    else {
+    else { //if cannot find
       detected_area = cv::Rect2d(0, 0, 0, 0);
       tracker = cv::TrackerMedianFlow::create();
       initialized_tracker = false;
     }
   } else {
-    // initializes the tracker
-    if (!tracker->init(img, detected_area)) {
-      std::cout << "***Could not initialize tracker...***\n";
-      return false;
+    if (ret) {// detected area
+      // initializes the tracker
+      if (!tracker->init(img, detected_area)) {
+        std::cout << "***Could not initialize tracker...***\n";
+        return ret;
+      }
+      initialized_tracker = true;
     }
-    initialized_tracker = true;
   }
+
   // true if not empty
-  return !detected_area.empty();
+  return ret;
 
 }
 bool fire_detector::checkContourPoints(Centroid &ctrd, const int thrdcp,
@@ -194,16 +206,13 @@ imgDisplay  :	boxing the alarm region
 listCentroid:	candidate fire-like obj those matching with mulMapOFRect's obj
 
 */
-void fire_detector::matchCentroid(cv::Mat &imgCenteroid, cv::Mat &img,
-                                  int currentFrame) {
-  static cv::Rect rectFire = cv::Rect(0, 0, 0, 0);
-  static cv::Rect ret(rectFire);
-  listCentroid.remove_if([this, &img,
-                             &currentFrame](Centroid &centre) {
+void fire_detector::matchCentroid(cv::Mat &imgCenteroid, cv::Mat &img) {
+  listCentroid.remove_if([this, &img](Centroid &centre) {
     bool out = false;
     /* visit mulMapOFRect between range [itlow,itup) */
     for (auto &aRect : mulMapOFRect) {
       const cv::Rect &rect = (aRect).second.rect;
+      cv::Rect rectFire = cv::Rect(0, 0, 0, 0);
       /* matched */
       if (centre.centroid.y >= rect.y &&
           (rect.x + rect.width) >= centre.centroid.x &&
@@ -223,7 +232,7 @@ void fire_detector::matchCentroid(cv::Mat &imgCenteroid, cv::Mat &img,
             // cv::rectangle(img, rectFire, cv::Scalar(255, 100, 0), 3);
             //        cv::putText(img, "Fire !!", rectFire.tl(), 2, 1.2,
             //                    cv::Scalar(0, 0, 255));
-            std::cout << "Alarm: " << currentFrame << std::endl;
+            std::cout << "Fire Alarm: " << std::endl;
             detected_area = rectFire;
             //            cv::imshow("Video", imgFireAlarm);
           } else {
@@ -549,4 +558,70 @@ void fire_detector::regionMarkup(cv::Mat &imgSrc, cv::Mat &imgBackup, cv::Mat &m
       }
     }
   }
+}
+void fire_detector::detectFire(
+    cv::Mat &maskMotion,
+    motionDetection &bgs,
+    cv::Mat &imgBackgroundModel,
+    cv::Mat &imgStandardDeviation,
+    cv::Mat &img32FBackgroundModel,
+    cv::Mat &img32FStandardDeviation,
+    cv::Mat &imgSrc,
+    cv::Mat &imgGray,
+    cv::Mat &imgDisplay) {
+  if (imgSrc.empty())
+    return;
+  // flash
+  maskRGB.setTo(cv::Scalar::all(0));
+  maskHSI.setTo(cv::Scalar::all(0));
+
+  // Optical FLow
+  auto imgCurr = cv::Mat(imgSrc.size(), CV_8UC1);
+  cvtColor(imgSrc, imgCurr, CV_BGR2GRAY);
+  cv::Mat imgDiff;
+
+  imgBackgroundModel.convertTo(imgBackgroundModel, CV_8UC1);
+  absdiff(imgGray, imgBackgroundModel, imgDiff);
+  // imgDiff > standarDeviationx
+  bgs.backgroundSubtraction(imgDiff, imgStandardDeviation, maskMotion);
+  setup_motion_model(maskMotion, imgDisplay);
+  // flip maskMotion 0 => 255, 255 => 0
+  bgs.maskNegative(maskMotion);
+  /* Background update */
+  // 8U -> 32F
+  imgBackgroundModel.convertTo(img32FBackgroundModel, CV_32FC1);
+  accumulateWeighted(imgGray, img32FBackgroundModel,
+                     get_accumulate_weighted_alpha_bgm(),
+                     maskMotion);
+  // 32F -> 8U
+  img32FBackgroundModel.convertTo(imgBackgroundModel, CV_8UC1);
+  /* Threshold update */
+  // 8U -> 32F
+  imgStandardDeviation.convertTo(img32FStandardDeviation, CV_32FC1);
+  // T( x, y; t+1 ) = ( 1-alpha )T( x, y; t ) + ( alpha ) | Src( x, y; t )/
+// - B( x, y; t ) |, if the pixel is stationary
+  accumulateWeighted(imgDiff, img32FStandardDeviation,
+                     get_accumulate_weighted_alpha_threshold(),
+                     maskMotion);
+  // 32F -> 8U
+  img32FStandardDeviation.convertTo(imgStandardDeviation, CV_8UC1);
+  /* Step4: Morphology */
+  dilate(maskHSI);
+  findContours(maskHSI);
+  getContourFeatures(imgDisplay, imgDisplay);
+  calcOpticalFlow(imgGray, imgCurr);
+  assignFeaturePoints();
+  matchCentroid(imgSrc, imgDisplay);
+}
+void fire_detector::setup_motion_model(const cv::Mat &maskMotion, cv::Mat &imgDisplay) {
+  imgDisplay.copyTo(imgRGB);
+  checkByRGB(imgDisplay, maskMotion, maskRGB);
+  // markup the fire-like region
+  regionMarkup(imgDisplay, imgRGB, maskRGB);
+  /* HSI */
+  imgDisplay.copyTo(imgHSI);
+  RGB2HSIMask(imgDisplay, bufHSI, maskRGB);
+  checkByHSI(imgDisplay, bufHSI, maskRGB, maskHSI);
+  regionMarkup(imgDisplay, imgHSI, maskHSI);
+  maskHSI.copyTo(maskRGB);
 }

@@ -8,6 +8,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/tracking.hpp>
 #include "ds.h"
+#include "motionDetection.h"
 
 using _normal_pixel = cv::Point3_<uint8_t>;
 using _short_pixel = uint8_t;
@@ -20,7 +21,7 @@ template<typename T> T minrgb(const T r, const T g, const T b) {
 class fire_detector {
 
 public:
-  fire_detector();
+  explicit fire_detector(cv::Size &imgSize);
   const int get_bgm_frame_count() const {
     return BGM_FRAME_COUNT;
   }
@@ -70,7 +71,24 @@ private:
   std::vector<cv::Vec4i> hierachy;
 
   cv::Mat maskMorphology;
+  // for rgb image display copy from src
+  cv::Mat imgRGB;
+  cv::Mat imgHSI;
+  cv::Mat bufHSI;
+  // mask rgb
+  cv::Mat maskRGB;
+  cv::Mat maskHSI;
+
 public:
+  void detectFire(cv::Mat &maskMotion,
+                  motionDetection &bgs,
+                  cv::Mat &imgBackgroundModel,
+                  cv::Mat &imgStandardDeviation,
+                  cv::Mat &img32FBackgroundModel,
+                  cv::Mat &img32FStandardDeviation,
+                  cv::Mat &imgSrc,
+                  cv::Mat &imgGray,
+                  cv::Mat &imgDisplay);
   bool update_tracker(cv::Mat &img);
   void dilate(cv::Mat &mask);
   void findContours(cv::Mat &mask);
@@ -84,8 +102,7 @@ public:
 
   bool checkContourEnergy(Centroid &ctrd, const unsigned int pwindows);
 
-  void matchCentroid(cv::Mat &imgCenteroid, cv::Mat &img,
-                     int currentFrame);
+  void matchCentroid(cv::Mat &imgCenteroid, cv::Mat &img);
 /* get the feature points from contour
 input:
 imgDisplayCntr      : img for display contours
@@ -158,6 +175,7 @@ motion vector information)
  *		mask: input mask
  */
   void regionMarkup(cv::Mat &imgSrc, cv::Mat &imgBackup, cv::Mat &mask);
+  void setup_motion_model(const cv::Mat &maskMotion, cv::Mat &imgDisplay);
 };
 
 #endif //EARLYFIREDETECTION_FIRE_DETECTOR_H
